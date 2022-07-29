@@ -1,4 +1,4 @@
-% CUBE_DIFF solve Poisson problem in unit cube domain
+% CUBE_DIFF solves Poisson problem in unit cube domain
 % IFISS scriptfile: DJS; 29 July 2022.
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 

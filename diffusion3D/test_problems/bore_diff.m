@@ -1,4 +1,4 @@
-% BORE_DIFF solve Poisson problem in bore hole domain
+% BORE_DIFF solves Poisson problem on a borehole domain
 % IFISS scriptfile: DJS; 29 July 2022.
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 

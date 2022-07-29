@@ -1,5 +1,5 @@
 function f = specific_rhs3D(x,y,z,nel,ngpt)
-% RHS forcing function f(x,y,z)
+% RHS forcing function
 %   f = specific_rhs3D(x,y,z,nel)
 %   input
 %          x          x coordinate vector

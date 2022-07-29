@@ -6,9 +6,9 @@ function [jac,invjac,phi,dphidx,dphidy,dphidz] = deriv3D(s,t,l,xl,yl,zl)
 %          t         reference element y coordinate
 %          l         reference element z coordinate
 
-%          xl        physical element x vertex coordinates
-%          yl        physical element y vertex coordinates
-%          zl        physical element z vertex coordinates
+%          xl        physical element vertex x coordinates
+%          yl        physical element vertex y coordinates
+%          zl        physical element vertex z coordinates
 %   output
 %          jac       elementwise jacobian (evaluated at (s,t,l))
 %          invjac    elementwise inverse of jacobian

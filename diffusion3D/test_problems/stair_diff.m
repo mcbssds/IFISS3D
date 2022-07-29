@@ -1,4 +1,4 @@
-% STAIR_DIFF solve Poisson problem in stair-shaped domain
+% STAIR_DIFF solves Poisson problem on stair-shaped domain
 % IFISS scriptfile: DJS; 29 July 2022.
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 
@@ -19,7 +19,7 @@ else
     [A,M,f] = femq1_diff3D(xyz,ev);
 end
 
-%------ boundary conditions
+%------ apply boundary conditions
 [Agal,fgal] = nonzerobc3D(A,f,xyz,bound3D);
 
 %------ save resulting system

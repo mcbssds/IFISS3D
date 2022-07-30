@@ -1,5 +1,5 @@
 function [s,t,l,w]=gausspoints_threed(oneg,onew) 
-%GAUSSPOINTS_THREED constructs tensor product Gaussian quadrature rule
+%GAUSSPOINTS_THREED constructs 3D tensor product Gaussian quadrature rule
 % [s,t,l,w] = gausspoints_threed(oneg,onew);
 %  inputs:
 %       oneg    Gauss points for 1D rule in (-1,1)

@@ -36,15 +36,15 @@ save -v7.3 borehole_diff.mat qmethod Agal M fgal xyz x y z
 lin_system_choice = default('Choose between direct or iterative solver 1/0 (direct/iterative) (default 1)',1);
 tic
 if lin_system_choice
-    fprintf('solving linear system using direct solver... \n')
+    fprintf('\nSolving linear system using direct solver... \n')
     x_it=Agal\fgal;
 else
-    fprintf('solving linear system using iterative solver...  ')
+    fprintf('\nSolving linear system using iterative solver...  ')
     solve_it
 end
 etoc=toc; fprintf('Galerkin system solved in %8.3e seconds\n\n',etoc)
 
-% compute a posteriori error estimate and plot solution
+% compute a posteriori error estimate (Q1 only) and plot solution
 if qmethod==1,
     diffpost3D
     errplot3D(x_it,error_tot,ev,xyz,x,y,z,99),

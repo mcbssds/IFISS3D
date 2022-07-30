@@ -17,7 +17,7 @@ if Dmax<0.1 || Dmax ==0
     error('domain is too small, try again.')
 end
 
-left =-Dmax;
+left = -Dmax;
 nnx  = 5*nc;
 
 % compute (x,y) coordinates of vertices

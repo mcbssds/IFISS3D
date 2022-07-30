@@ -2,7 +2,7 @@ function cube_domain(Dmax,nc)
 %CUBE_DOMAIN cube domain Q2-element grid generator
 %    cube_domain(Dmax,nc);
 %    inputs:
-%    Dmax    limit of domain   [-Dmax, Dmax] 
+%    Dmax    limits of domain   [-Dmax, Dmax] 
 %    nc      grid parameter    2^nc x 2^nc x 2^nc cube
 %
 % grid defining data is saved to the file: cube_grid.mat
@@ -127,19 +127,19 @@ macro_element = size(mv,1);
 % down face: z=-Dmax
 k1=find( xyz(:,3)==left );
 e1=[];
-% x=Dmax
+% right face: x=Dmax
 k2=find( xyz(:,1)==Dmax & xyz(:,2)<Dmax & xyz(:,2) >left & xyz(:,3)>left & xyz(:,3) <Dmax);
 e2=[];
-% front face: z=Dmax
+% top face: z=Dmax
 k3=find( xyz(:,3)==Dmax);% & xyz(:,2)>-Dmax & xyz(:,2)<=Dmax & xyz(:,1)>-Dmax & xyz(:,1)<Dmax);
 e3=[];
-% x=-Dmax
+% left face: x=-Dmax
 k4=find( xyz(:,1)==left & xyz(:,2)<Dmax  & xyz(:,2) >left  & xyz(:,3)<Dmax   & xyz(:,3) >left );
 e4=[];
 % front face: y=-Dmax
 k5=find( xyz(:,2)==left & xyz(:,3)>left & xyz(:,3)<Dmax & xyz(:,1)<=Dmax  & xyz(:,1) >=left );
 e5=[];
-% y=Dmax
+% back face: y=Dmax
 k6=find( xyz(:,2)==Dmax & xyz(:,3)<Dmax   & xyz(:,3) >left & xyz(:,1)<=Dmax  & xyz(:,1) >=left);
 e6=[];
 

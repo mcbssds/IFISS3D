@@ -1,15 +1,15 @@
 function bore_domain(Dmax,nc)
 %BORE_DOMAIN borehole domain Q2-element grid generator
-%    bore_domain(Dmax,nc);
-%    input: 
-%    Dmax: limit of domain   [-Dmax, Dmax] 
-%    nc  : grid parameter 15*nc x 15*nc x 15*nc stretched grid
+%   bore_domain(Dmax,nc);
+%   inputs: 
+%   Dmax   limits of domain [-Dmax, Dmax] 
+%   nc     grid parameter 15*nc x 15*nc x 15*nc stretched grid
 %
 % grid defining data is saved to the file: bore_grid.mat
 % IFISS function: DJS; 29 July 2022
 % Copyright (c) G. Papanikos, C.E. Powell, D.J. Silvester
 
-bd = 1e-2; % bore hole semi-width
+bd = 1e-2; % borehole semi-width
 if nc<1,
     error('illegal parameter choice, try again.'),
 end
@@ -20,15 +20,15 @@ end
 left =-Dmax;
 nnx  = 5*nc;
 
-%--------------- compute (x,y) coordinates of vertices
+% compute (x,y) coordinates of vertices
 x_pos = subint_expand(Dmax,Dmax/2,bd,2*nnx,nnx); 
 x_neg = -x_pos;
 x = [x_neg(end:-1:1);0;x_pos];
 
-% ----- plot to illustrate bore hole resolution
+% plot to illustrate borehole resolution
 figure
 plot(x,0*x,'bo'), axis('equal')
-title('Location of points in each direction')
+title('Location of mesh points in each direction')
 
 nx = 6*nnx+3;
 nz = nx;
@@ -75,7 +75,7 @@ nvv(:,5) = mref(:)+2*n+2;
 nvv(:,7) = mref2(:)+2*n+4;
 nvv(:,8) = mref2(:)+2*n+2;
 
-%face front
+% front face
 nvv(:,9) =  mref(:)+1;
 nvv(:,10)=  mref(:)+n+3;
 nvv(:,11) = mref(:)+2*n+3;
@@ -104,7 +104,6 @@ mv(macro_element,1:27)=nvv(:,1:27);
 %
 macro_element = size(mv,1);
 
-%--------------------------------------------------
 % down face  z = -Dmax
 k1=find( abs(xyz(:,3)-left)<10*eps );
 e1=[];
@@ -124,7 +123,7 @@ e5=[];
 k6=find( abs(xyz(:,2)-Dmax)<10*eps & xyz(:,3)<Dmax   & xyz(:,3) >left & xyz(:,1)<=Dmax  & xyz(:,1) >=left);
 e6=[];
 
-%--------Bore hole values -----------------------
+% Borehole values 
 k7=find( abs(xyz(:,3)-bd)<10*eps & xyz(:,1)>-bd &  xyz(:,1)<bd & xyz(:,2)<Dmax &  xyz(:,2)>=0);
 e7=[];
 k8=find( abs(xyz(:,1)-bd)<10*eps & xyz(:,2)<Dmax &  xyz(:,2)>=0 & xyz(:,3)>-bd & xyz(:,3)< bd);

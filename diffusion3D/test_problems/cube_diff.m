@@ -38,7 +38,7 @@ if lin_system_choice
     fprintf('\nSolving linear system using direct solver... \n')
     x_it=Agal\fgal;
 else
-    fprintf('\nSsolving linear system using iterative solver...  ')
+    fprintf('\nSolving linear system using iterative solver...  ')
     solve_it
 end
 etoc=toc; fprintf('Galerkin system solved in %8.3e seconds\n\n',etoc)

@@ -1,9 +1,9 @@
 function cube_domain(Dmax,nc)
-%CUBE_DOMAIN cubic domain Q2 grid generator
+%CUBE_DOMAIN cube domain Q2-element grid generator
 %    cube_domain(Dmax,nc);
-%    Input
-%    Dmax: limit of domain   [-Dmax, Dmax] 
-%    nc  : grid parameter    2^nc x 2^nc x 2^nc cube
+%    inputs:
+%    Dmax    limit of domain   [-Dmax, Dmax] 
+%    nc      grid parameter    2^nc x 2^nc x 2^nc cube
 %
 % grid defining data is saved to the file: cube_grid.mat
 % IFISS function: DJS; 29 July 2022
@@ -20,7 +20,7 @@ grid_type=default('uniform/stretched grid (1/2) (default is uniform)',1);
 n=2^nc;
 np=n/(Dmax*2);
 
-%--------------- compute (x,y) coordinates of vertices
+% compute (x,y,z) coordinates of vertices
 % y-direction
 if grid_type==2
     hmax=Dmax*nc/(2^(nc+1));
@@ -49,13 +49,11 @@ if grid_type==2
     x=y;
     z=y;
 else
-    
     yy=[1/np:1/np:Dmax];
     ypos=[0,yy];
     yneg=-yy(length(yy):-1:1);
     y=[yneg,ypos]';
     left=-Dmax;
-    
     x=y;
     z=y;
     
@@ -96,7 +94,7 @@ nvv(:,5) = mref(:)+2*n+2;
 nvv(:,7) = mref2(:)+2*n+4;
 nvv(:,8) = mref2(:)+2*n+2;
 
-%face front
+% front face
 nvv(:,9) =  mref(:)+1;
 nvv(:,10)=  mref(:)+n+3;
 nvv(:,11) = mref(:)+2*n+3;
@@ -125,23 +123,23 @@ mv(macro_element,1:27)=nvv(:,1:27);
 %
 macro_element = size(mv,1);
 
-%---------------------------------------------------
-% down face  z=-Dmax
+%
+% down face: z=-Dmax
 k1=find( xyz(:,3)==left );
 e1=[];
 % x=Dmax
 k2=find( xyz(:,1)==Dmax & xyz(:,2)<Dmax & xyz(:,2) >left & xyz(:,3)>left & xyz(:,3) <Dmax);
 e2=[];
-% front face  z=Dmax
+% front face: z=Dmax
 k3=find( xyz(:,3)==Dmax);% & xyz(:,2)>-Dmax & xyz(:,2)<=Dmax & xyz(:,1)>-Dmax & xyz(:,1)<Dmax);
 e3=[];
 % x=-Dmax
 k4=find( xyz(:,1)==left & xyz(:,2)<Dmax  & xyz(:,2) >left  & xyz(:,3)<Dmax   & xyz(:,3) >left );
 e4=[];
-% front face  y=-1
+% front face: y=-Dmax
 k5=find( xyz(:,2)==left & xyz(:,3)>left & xyz(:,3)<Dmax & xyz(:,1)<=Dmax  & xyz(:,1) >=left );
 e5=[];
-% y =Dmax
+% y=Dmax
 k6=find( xyz(:,2)==Dmax & xyz(:,3)<Dmax   & xyz(:,3) >left & xyz(:,1)<=Dmax  & xyz(:,1) >=left);
 e6=[];
 
@@ -172,7 +170,7 @@ for k=1:macro_element
     end
     
 end
-ef1=  ones(size(e1));
+ef1=ones(size(e1));
 ef2=2*ones(size(e2));
 ef3=3*ones(size(e3));
 ef4=4*ones(size(e4));

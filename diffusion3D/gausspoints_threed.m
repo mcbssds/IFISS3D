@@ -1,14 +1,14 @@
 function [s,t,l,w]=gausspoints_threed(oneg,onew) 
-%GAUSSPOINTS_THREED constructs tensor product Gauss Point Rule
+%GAUSSPOINTS_THREED constructs tensor product Gaussian quadrature rule
 % [s,t,l,w] = gausspoints_threed(oneg,onew);
-%  input
-%   oneg    1D Gaussian Points in (-1,1)
-%   onew    Weights in 1D
-%  output
-%   s       x-coordinate of the Gaussian Points
-%   t       y-coordinate of the Gaussian Points
-%   l       z-coordinate of the Gaussian Points
-%   w       weights in 3D
+%  inputs:
+%       oneg    Gauss points for 1D rule in (-1,1)
+%       onew    weights of 1D rule
+%  outputs:
+%       s       x-coordinates of the 3D Gauss points
+%       t       y-coordinates of the 3D Gauss points
+%       l       z-coordinates of the 3D Gauss points
+%       w       weights of the tensor product 3D rule
 % IFISS scriptfile: GP; 9 June 2022.
 % Copyright (c)  2022  G.Papanikos,  C.E. Powell, D.J. Silvester
 

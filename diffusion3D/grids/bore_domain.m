@@ -20,7 +20,7 @@ end
 left = -Dmax;
 nnx  = 5*nc;
 
-% compute (x,y) coordinates of vertices
+% compute (x,y,z) coordinates of vertices
 x_pos = subint_expand(Dmax,Dmax/2,bd,2*nnx,nnx); 
 x_neg = -x_pos;
 x = [x_neg(end:-1:1);0;x_pos];

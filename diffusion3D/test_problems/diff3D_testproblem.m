@@ -25,8 +25,8 @@ cube_diff
     
 energy_norm_squared_approx = x_it'*Agal*x_it;
 energy_norm_squared_ref   = 0.645391924647045;
-fprintf('Energy norm squared of the approximation is %4.4f\n', energy_norm_squared_approx);
-fprintf('Energy norm squared of the reference solution is %4.4f\n', energy_norm_squared_ref);
+fprintf('Energy norm squared of approximation is %4.4f\n', energy_norm_squared_approx);
+fprintf('Energy norm squared of reference solution is %4.4f\n', energy_norm_squared_ref);
 e = sqrt(energy_norm_squared_ref - energy_norm_squared_approx);
 fprintf('  ||u_{ref}-u_{FEM}||_{A} = %6.3e\n',e);
     if qmethod == 1
@@ -41,8 +41,8 @@ stair_diff
   
 energy_norm_squared_approx = x_it'*Agal*x_it;
 energy_norm_squared_ref = 0.296720625256252;  % energy norm of the reference solution
-fprintf('Energy norm squared of the approximation is %4.4f\n', energy_norm_squared_approx);
-fprintf('Energy norm squared of the reference solution is %4.4f\n', energy_norm_squared_ref);
+fprintf('Energy norm squared of approximation is %4.4f\n', energy_norm_squared_approx);
+fprintf('Energy norm squared of reference solution is %4.4f\n', energy_norm_squared_ref);
 e = sqrt(energy_norm_squared_ref - energy_norm_squared_approx);
 fprintf('  ||u_{ref}-u_{FEM}||_{A} = %6.3e\n',e);
     if qmethod == 1
@@ -61,9 +61,9 @@ system('/bin/cp ./diffusion3D/test_problems/trilinear_bc.m ./diffusion3D/specifi
 cube_diff
     
 energy_norm_squared_approx = x_it'*A*x_it;
-fprintf('Energy norm squared of the approximation is  %4.4f\n', energy_norm_squared_approx);
+fprintf('Energy norm squared of approximation is  %4.4f\n', energy_norm_squared_approx);
 true_energy_norm_squared = 128/3;
-fprintf('Energy norm squared of the exact solution is %4.4f\n', true_energy_norm_squared);
+fprintf('Energy norm squared of exact solution is %4.4f\n', true_energy_norm_squared);
 if qmethod == 1
     e = energy_norm_error(xyz,ev,x_it,sn,qmethod);
    else
@@ -77,9 +77,9 @@ system('/bin/cp ./diffusion3D/test_problems/zero_bc3D.m ./diffusion3D/specific_b
 cube_diff
         
 energy_norm_squared_approx = x_it'*Agal*x_it;
-fprintf('Energy norm squared of the approximation is %4.4f\n', energy_norm_squared_approx);
+fprintf('Energy norm squared of approximation is %4.4f\n', energy_norm_squared_approx);
 true_energy_norm_squared = 2048/225;
-fprintf('Energy norm squared of the exact solution is %4.4f\n', true_energy_norm_squared);
+fprintf('Energy norm squared of exact solution is %4.4f\n', true_energy_norm_squared);
 e = sqrt(true_energy_norm_squared - energy_norm_squared_approx);
 fprintf('  ||u_{ref}-u_{FEM}||_{A} = %6.3e\n',e);
     if qmethod == 1
@@ -92,9 +92,9 @@ system('/bin/cp ./diffusion3D/test_problems/tricubic_rhs.m ./diffusion3D/specifi
 system('/bin/cp ./diffusion3D/test_problems/zero_bc3D.m ./diffusion3D/specific_bc3D.m');
 cube_diff
 energy_norm_squared_approx = x_it'*A*x_it;
-fprintf('energy norm squared of the approximation is %4.4f\n', energy_norm_squared_approx);
+fprintf('energy norm squared of approximation is %4.4f\n', energy_norm_squared_approx);
 true_energy_norm_squared = 2048/18375;
-fprintf('energy norm squared of the exact solution is %4.4f\n', true_energy_norm_squared);
+fprintf('energy norm squared of exact solution is %4.4f\n', true_energy_norm_squared);
 e = sqrt(true_energy_norm_squared - energy_norm_squared_approx);
 fprintf('  ||u_{ref}-u_{FEM}||_{A} = %6.3e\n',e);
     if qmethod == 1

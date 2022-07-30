@@ -2,12 +2,12 @@
 % IFISS scriptfile: DJS; 29 July 2022.
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 
-%------ define geometry
+% define geometry
 pde=1; domain=2;
 stair_domain
 load stair_grid.mat
 
-%------ set up matrices
+% set up matrices
 qmethod=default('Q1/Q2 approximation 1/2? (default Q1)',1);
 % reference grid switch
 savesol=default('save results for reference 1/0 (yes/no)? (default no)',0);
@@ -19,27 +19,27 @@ else
     [A,M,f] = femq1_diff3D(xyz,ev);
 end
 
-%------ apply boundary conditions
+% apply boundary conditions
 [Agal,fgal] = nonzerobc3D(A,f,xyz,bound3D);
 
-%------ save resulting system
+% save resulting system
 fprintf('system saved in stair_diff.mat ...\n')
 gohome
 cd datafiles
 save -v7.3 stair_diff.mat qmethod Agal M fgal xyz x y z
 
-lin_system_choice =default('Choose between a direct or an iterative solver 1/0 (direct/iterative) (default 1)',1);
+lin_system_choice =default('Choose between direct or iterative solver 1/0 (direct/iterative) (default 1)',1);
 tic
 if lin_system_choice
-    fprintf('solving linear system using direct solver... \n')
+    fprintf('\nSolving linear system using direct solver... \n')
     x_it=Agal\fgal;
 else
-    fprintf('solving linear system using iterative solver...  ')
+    fprintf('\nSolving linear system using iterative solver...  ')
     solve_it
 end
 etoc=toc; fprintf('Galerkin system solved in %8.3e seconds\n\n',etoc)
 
-%------ compute a posteriori error estimate and plot solution
+% compute a posteriori error estimate (Q1 only) and plot solution
 if qmethod==1,
     diffpost3D
     errplot3D_stair(x_it,error_tot,ev,xyzleft,xyzright,x,y,z,99),

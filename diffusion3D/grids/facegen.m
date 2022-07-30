@@ -1,11 +1,11 @@
 function [hx,hy,hz,efx,ebound3D] = facegen(xyz,ev,domain)
-%EDGEGEN    face information for flux jump computation
+%EDGEGEN face information for flux jump computation
 %   [hx,hy,hz,efx] = facegen(xyz,ev);
-%   input
+%   inputs:
 %          xyz        nodal coordinate vector
 %          ev         element mapping matrix
 %          domain     cube or stair domain (1 or 0)
-%   output
+%   outputs:
 %          hx,hy,hz   elementwise face areas
 %          efx        element face index vector
 %          ebound3D   boundary nodes

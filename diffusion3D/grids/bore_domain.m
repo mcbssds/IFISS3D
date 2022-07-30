@@ -1,7 +1,7 @@
 function bore_domain(Dmax,nc)
-%BORE_DOMAIN bore hole domain Q2 grid generator
+%BORE_DOMAIN borehole domain Q2-element grid generator
 %    bore_domain(Dmax,nc);
-%    Input 
+%    input: 
 %    Dmax: limit of domain   [-Dmax, Dmax] 
 %    nc  : grid parameter 15*nc x 15*nc x 15*nc stretched grid
 %

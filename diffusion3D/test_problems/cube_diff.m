@@ -1,15 +1,15 @@
-% CUBE_DIFF solves Poisson problem on unit cube domain
+% CUBE_DIFF solves Poisson problem on cube domain
 % IFISS scriptfile: DJS; 29 July 2022.
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 
-%------ define geometry
+% define geometry
 pde=1; domain=1;
 fprintf('\n\nGrid generation for cube domain\n')
 nc=default('grid parameter: 3 for underlying 8x8x8 grid (default is 16x16x16)',4);
 cube_domain(1,nc)
 load cube_grid.mat
 
-%------ set up matrices
+% set up matrices
 qmethod=default('Q1/Q2 approximation 1/2? (default Q1)',1);
 % reference grid switch
 if grid_type==1  % uniform grid
@@ -23,27 +23,27 @@ else
     [A,M,f] = femq1_diff3D(xyz,ev);
 end
 
-%------ apply boundary conditions
+% apply boundary conditions
 [Agal,fgal] = nonzerobc3D(A,f,xyz,bound3D);
 
-%------ save resulting system
+% save resulting system
 fprintf('system saved in cube_diff.mat ...\n')
 gohome
 cd datafiles
 save -v7.3 cube_diff.mat qmethod Agal M fgal xyz x y z
 
-lin_system_choice = default('Choose between a direct or an iterative solver 1/0 (direct/iterative) (default 1)',1);
+lin_system_choice = default('Choose between direct or iterative solver 1/0 (direct/iterative) (default 1)',1);
 tic
 if lin_system_choice
-    fprintf('solving linear system using direct solver... \n')
+    fprintf('\nSolving linear system using direct solver... \n')
     x_it=Agal\fgal;
 else
-    fprintf('solving linear system using iterative solver...  ')
+    fprintf('\nSsolving linear system using iterative solver...  ')
     solve_it
 end
 etoc=toc; fprintf('Galerkin system solved in %8.3e seconds\n\n',etoc)
 
-%------ compute a posteriori error estimate and plot solution
+% compute a posteriori error estimate (Q1 only) and plot solution
 if qmethod==1,
     diffpost3D
     errplot3D(x_it,error_tot,ev,xyz,x,y,z,99),

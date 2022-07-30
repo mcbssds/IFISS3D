@@ -123,7 +123,7 @@ e5=[];
 k6=find( abs(xyz(:,2)-Dmax)<10*eps & xyz(:,3)<Dmax   & xyz(:,3) >left & xyz(:,1)<=Dmax  & xyz(:,1) >=left);
 e6=[];
 
-% Borehole values 
+% borehole values 
 k7=find( abs(xyz(:,3)-bd)<10*eps & xyz(:,1)>-bd &  xyz(:,1)<bd & xyz(:,2)<Dmax &  xyz(:,2)>=0);
 e7=[];
 k8=find( abs(xyz(:,1)-bd)<10*eps & xyz(:,2)<Dmax &  xyz(:,2)>=0 & xyz(:,3)>-bd & xyz(:,3)< bd);

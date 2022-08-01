@@ -1,13 +1,14 @@
 function [x,y,z,xyz] = q2grid3D(x,y,z,xyz,mv,bound);
 %Q2GRID3D triquadratic element grid generator
 %   [x,y,z,xyz] = q2grid3D(x,y,z,xyz,mv,bound);
-%   input
+%   inputs:
 %          x          x coordinate vector
 %          y          y coordinate vector
 %          z          z coordinate vector
-%          xyz         vertex coordinate vector
+%          xyz        vertex coordinates
 %          mv         Q2 macroelement mapping matrix
 %          bound      boundary vertex vector
+%   outputs:
 %
 % postpocesses Q2 element partitioning information to
 % give standard approximation in the case of stretched grids
@@ -16,7 +17,7 @@ function [x,y,z,xyz] = q2grid3D(x,y,z,xyz,mv,bound);
 
 xx=xyz(:,1); yy=xyz(:,2); zz = xyz(:,3); nvtx=length(xx);
 %
-%% recompute mid-side points in the case of stretched grids
+% recompute mid-side points in the case of stretched grids
 % y-direction
 yv=yy; ny=length(y);
 for k=2:2:ny;

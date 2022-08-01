@@ -1,6 +1,6 @@
 function macrogridplot3D(xyz,mv,bound3D,mbound3D)
 %MACROGRIDPLOT3D hexahedral macroelement grid verification
-%   macrogridplot3D(xyz,mv,bound,mbound);
+%   macrogridplot3D(xyz,mv,bound3D,mbound3D);
 % IFISS function: GP; 9 June 2022.
 % Copyright (c)  2022  G.Papanikos,  C.E. Powell, D.J. Silvester
 fprintf('\nSubdivision logistics ..\n')
@@ -12,8 +12,6 @@ nboundvtx=length(bound3D);
 fprintf('  %g nodes on Dirichlet boundary \n',nboundvtx)
 nboundedge=length(mbound3D(:,1));
 fprintf('  %g macroelement faces on Dirichlet boundary\n\n',nboundedge)
-
-
 
 adj=sparse(nvtx,nvtx); adx=sparse(nvtx,nvtx);
 for i=1:length(mv(:,1))

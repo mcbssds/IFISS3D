@@ -6,7 +6,9 @@ function f = specific_rhs3D(x,y,z,nel,ngpt)
 %          y          y coordinate vector
 %          z          z coordinate vector
 %          nel        number of elements  
-%   IFISS function: 
+%          ngpt       ???
+% IFISS function: CEP; 1st August 2022.
+% Copyright (c)  2022  G.Papanikos,  C.E. Powell, D.J. Silvester
 
 f=zeros(nel,ngpt);                                                                                           
  

@@ -23,6 +23,7 @@
 %
 % IFISS function: GP; 9 June 2022.
 % Copyright (c)  2022  G.Papanikos,  C.E. Powell, D.J. Silvester
+%
       one = 1.0e0;
 %     trilinear basis functions 
       phi(1,:) = 1/8 *(one-s).*(one-t).*(one-l);  %(-1,-1,-1) 1

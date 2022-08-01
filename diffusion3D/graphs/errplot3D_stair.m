@@ -23,17 +23,8 @@ sol3D = griddata(xyz(:,1),xyz(:,2),xyz(:,3),sol3D,X,Y,Z);
 
 for i=1:size(sol3D,3)
     [II,JJ] = find(X(:,:,i)<0 & Z(:,:,i)<0);
-    sol3D(II,JJ,i)=nan;
-end
-
-for i=1:size(sol3D,3)
-    [II,JJ] = find(X(:,:,i)<0 & Z(:,:,i)<0);
     sol3D(II,JJ,i)= nan;
 end
-    
-sol3D(II,JJ,i)=1;
-
-% [II]=find(Z<0);  sol3D(:,:,II) =nan;
 
 sol3D = permute(sol3D,[3 2 1]);
 

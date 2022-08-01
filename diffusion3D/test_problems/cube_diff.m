@@ -5,7 +5,7 @@
 % define geometry
 pde=1; domain=1;
 fprintf('\n\nGrid generation for cube domain\n')
-nc=default('grid parameter: 3 for underlying 8x8x8 grid (default is 16x16x16)',4);
+nc=default('Grid parameter: 3 for underlying 8x8x8 grid (default is 16x16x16)',4);
 cube_domain(1,nc)
 load cube_grid.mat
 
@@ -13,7 +13,7 @@ load cube_grid.mat
 qmethod=default('Q1/Q2 approximation 1/2? (default Q1)',1);
 % reference grid switch
 if grid_type==1  % uniform grid
-    savesol=default('save results for reference 1/0 (yes/no)? (default no)',0);
+    savesol=default('Save results for reference 1/0 (yes/no)? (default no)',0);
 else, savesol=0; end
 if qmethod ==2,
     [x,y,z,xyz] = q2grid3D(x,y,z,xyz,mv,bound3D);
@@ -27,7 +27,7 @@ end
 [Agal,fgal] = nonzerobc3D(A,f,xyz,bound3D);
 
 % save resulting system
-fprintf('system saved in cube_diff.mat ...\n')
+fprintf('System saved in cube_diff.mat ...\n')
 gohome
 cd datafiles
 save -v7.3 cube_diff.mat qmethod Agal M fgal xyz x y z

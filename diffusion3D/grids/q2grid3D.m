@@ -1,5 +1,5 @@
 function [x,y,z,xyz] = q2grid3D(x,y,z,xyz,mv,bound);
-%Q2GRID biquadratic element grid generator
+%Q2GRID3D triquadratic element grid generator
 %   [x,y,z,xyz] = q2grid3D(x,y,z,xyz,mv,bound);
 %   input
 %          x          x coordinate vector

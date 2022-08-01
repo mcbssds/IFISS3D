@@ -16,7 +16,7 @@ if Dmax<0.1 || Dmax ==0
 error('domain is too small, try again.')
 end
 
-grid_type=default('uniform/stretched grid (1/2) (default is uniform)',1);
+grid_type=default('Uniform/stretched grid (1/2) (default is uniform)',1);
 n=2^nc;
 np=n/(Dmax*2);
 

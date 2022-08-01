@@ -1,6 +1,6 @@
 function h = gplot3(A, xyz, varargin)
-%GPLOT Plot graph (nodes and edges).
-%   GPLOT(A, xyz) plots the graph specified by the adjacency matrix,
+%GPLOT3 Plots graph (nodes and edges).
+%   h = GPLOT3(A, xyz) plots the graph specified by the adjacency matrix,
 %   A, and the n-by-3 coordinate array, xyz.
 %
 %   GPLOT(A, xyz, linespec) uses line type and color specified in the

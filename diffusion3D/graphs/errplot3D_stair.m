@@ -45,6 +45,7 @@ zlabel('z') % z-axis label
 
 hold on
 
+
 hSlice = slice(x,y,z,sol3D,1/2,1/2,0);
 set(hSlice,'EdgeColor','none','FaceColor','interp');
 

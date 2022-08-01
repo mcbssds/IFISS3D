@@ -14,7 +14,7 @@ function errplot3D(sol3D,eldata3D,ev,xyz,x,y,z,fig)
 % IFISS function: GP; 9 June 2022.
 % Copyright (c)  2022  G.Papanikos,  C.E. Powell, D.J. Silvester
 
-fprintf('plotting solution and estimated errors... ')
+fprintf('Plotting solution and estimated errors... ')
 
 [X,Y,Z]=meshgrid(x,y,z);
 

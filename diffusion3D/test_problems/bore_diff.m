@@ -5,7 +5,7 @@
 % define geometry
 pde=1; domain=3;
 fprintf('\n\nGrid generation for borehole domain\n')
-nc=default('grid parameter? enter 2 for 30x30x30 grid (default 1)',1);
+nc=default('Grid parameter? enter 2 for 30x30x30 grid (default 1)',1);
 bore_domain(1,nc)
 load bore_grid.mat
 grid_type = 2;
@@ -14,7 +14,7 @@ grid_type = 2;
 qmethod=default('Q1/Q2 approximation 1/2? (default Q1)',1);
 % reference grid switch
 if grid_type==1  % uniform grid
-    savesol=default('save results for reference 1/0 (yes/no)? (default no)',0);
+    savesol=default('Save results for reference 1/0 (yes/no)? (default no)',0);
 else, savesol=0; end
 if qmethod ==2,
     [x,y,z,xyz] = q2grid3D(x,y,z,xyz,mv,bound3D);
@@ -28,7 +28,7 @@ end
 [Agal,fgal] = nonzerobc3D(A,f,xyz,bound3D);
 
 % save resulting system
-fprintf('system saved in borehole_diff.mat ...\n')
+fprintf('System saved in borehole_diff.mat ...\n')
 gohome
 cd datafiles
 save -v7.3 borehole_diff.mat qmethod Agal M fgal xyz x y z

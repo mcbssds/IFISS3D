@@ -92,18 +92,18 @@ system('/bin/cp ./diffusion3D/test_problems/tricubic_rhs.m ./diffusion3D/specifi
 system('/bin/cp ./diffusion3D/test_problems/zero_bc3D.m ./diffusion3D/specific_bc3D.m');
 cube_diff
 energy_norm_squared_approx = x_it'*A*x_it;
-fprintf('energy norm squared of approximation is %4.4f\n', energy_norm_squared_approx);
+fprintf('Energy norm squared of approximation is %4.4f\n', energy_norm_squared_approx);
 true_energy_norm_squared = 2048/18375;
-fprintf('energy norm squared of exact solution is %4.4f\n', true_energy_norm_squared);
+fprintf('Energy norm squared of exact solution is %4.4f\n', true_energy_norm_squared);
 e = sqrt(true_energy_norm_squared - energy_norm_squared_approx);
 fprintf('  ||u_{ref}-u_{FEM}||_{A} = %6.3e\n',e);
     if qmethod == 1
         effectivity_index = errorest./e;
-        fprintf('effectivity index = %4.4f\n',effectivity_index);
+        fprintf('Effectivity index = %4.4f\n',effectivity_index);
     end
 
 else
-    error('reference problem datafile not found!')
+    error('Reference problem datafile not found!')
 end
 
 

@@ -1,7 +1,7 @@
 function f = specific_rhs3D(x,y,z,nel,ngpt)
-%unit_rhs   unit RHS forcing function
+%ZERO_RHS3D evaluates source function f=0
 %   f = specific_rhs(x,y,z,nel)
-%   input
+%   inputs:
 %          x          x coordinate vector
 %          y          y coordinate vector
 %          z          z coordinate vector

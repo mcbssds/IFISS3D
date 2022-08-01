@@ -23,7 +23,7 @@ xbd=xyz(bound3D,1); ybd=xyz(bound3D,2); zbd=xyz(bound3D,3);
 bc=specific_bc3D(xbd,ybd,zbd); 
 fx = fx - Ax(:,bound3D)*bc;
 dA=zeros(nvtx,1); dA(bound3D)=ones(nbd,1);
-Ax(:,bound3D)=null_col;  Ax(bound3D,:)=null_row;   
+Ax(:,bound3D)=null_col;  Ax(bound3D,:)=null_row;
 Ax=Ax+spdiags(dA,0,nvtx,nvtx);  fx(bound3D)=bc; 
 a=Ax; f=fx;
 return

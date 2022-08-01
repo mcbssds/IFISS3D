@@ -31,7 +31,7 @@ e = sqrt(energy_norm_squared_ref - energy_norm_squared_approx);
 fprintf('  ||u_{ref}-u_{FEM}||_{A} = %6.3e\n',e);
     if qmethod == 1
         effectivity_index = errorest./e;
-        fprintf('effectivity index = %4.4f\n',effectivity_index);
+        fprintf('Effectivity index = %4.4f\n',effectivity_index);
     end
     
 elseif sn==2
@@ -47,7 +47,7 @@ e = sqrt(energy_norm_squared_ref - energy_norm_squared_approx);
 fprintf('  ||u_{ref}-u_{FEM}||_{A} = %6.3e\n',e);
     if qmethod == 1
         effectivity_index = errorest./e;
-        fprintf('effectivity index = %4.4f\n',effectivity_index);
+        fprintf('Effectivity index = %4.4f\n',effectivity_index);
     end
 
 elseif sn==3
@@ -84,7 +84,7 @@ e = sqrt(true_energy_norm_squared - energy_norm_squared_approx);
 fprintf('  ||u_{ref}-u_{FEM}||_{A} = %6.3e\n',e);
     if qmethod == 1
         effectivity_index = errorest./e;
-        fprintf('effectivity index = %4.4f\n',effectivity_index);
+        fprintf('Effectivity index = %4.4f\n',effectivity_index);
     end
 
 elseif sn == 13

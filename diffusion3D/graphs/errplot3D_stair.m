@@ -31,7 +31,7 @@ for i=1:size(sol3D,3)
     sol3D(II,JJ,i)= nan;
 end
     
-sol3D(II,JJ,i)=nan;
+sol3D(II,JJ,i);
 
 % [II]=find(Z<0);  sol3D(:,:,II) =nan;
 

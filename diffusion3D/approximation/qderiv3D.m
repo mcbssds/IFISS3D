@@ -1,14 +1,14 @@
 function [psi,dpsidx,dpsidy,dpsidz] = qderiv3D(s,t,l,xl,yl,zl)
 %QDERIV3D evaluates derivatives of triquadratic shape functions
 %   [psi,dpsidx,dpsidy,dpsidz] = qderiv3D(s,t,l,xl,yl);
-%   input
+%   inputs:
 %          s         reference element x coordinate
 %          t         reference element y coordinate
 %          l         reference element z coordinate
 %          xl        physical element x vertex coordinates
 %          yl        physical element y vertex coordinates
 %          zl        physical element z vertex coordinates
-%   output
+%   outputs:
 %          psi       elementwise shape functions
 %          dpsidx    x derivatives of psi
 %          dpsidy    y derivatives of psi

@@ -1,11 +1,11 @@
 function ev=q1grid3D(xyz,mv,bound3D);
 %Q1GRID3D trilinear element grid generator
-%   [ev,ebound]=q1grid3D(xyz,mv,bound,mbound);
-%   input
-%          xyz         vertex coordinate vector  
+%   ev=q1grid3D(xyz,mv,bound3D);
+%   inputs:
+%          xyz        vertex coordinates
 %          mv         Q2 macroelement mapping matrix
-%          bound3D      boundary vertex vector
-%   output
+%          bound3D    boundary vertex vector
+%   output:
 %          ev         element mapping matrix
 % IFISS function: GP; 9 June 2022.
 % Copyright (c)   G.Papanikos, C.E. Powell, D.J. Silvester
@@ -93,7 +93,7 @@ ev(ke,6)=mv(k,17);
 ev(ke,7)=mv(k,7);
 ev(ke,8)=mv(k,25);
 
-%eigth element 
+%eighth element 
 ke=8*k;
 ev(ke,1)=mv(k,20);
 ev(ke,2)=mv(k,22);

@@ -72,7 +72,7 @@ xyzsol = griddata(xc(:,1),xc(:,2),zc(:,3),eldata3D,X,Y,Z);
 
 for i=1:size(xyzsol,3)
     [II,JJ] = find(X(:,:,i)<0 & Z(:,:,i)<0);
-    xyzsol(II,JJ,i) =nan; 
+    xyzsol(II,JJ,i) =nan;
 end
 
 xyzsol = permute(xyzsol,[3 2 1]);

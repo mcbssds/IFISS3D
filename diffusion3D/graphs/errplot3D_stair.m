@@ -1,15 +1,15 @@
 function errplot3D_stair(sol3D,eldata3D,ev,xyzleft,xyzright,x,y,z,fig)
 %ERRPLOT3D_STAIR plots solution and error on stair domain
 %   errplot3D_stair(sol3D,eldata3D,xyzleft,xyzright,x,y,z,fig);
-%   input
-%          sol3D        nodal solution vector 
-%          eldata3D     element error vector
-%          ev           element mapping matrix
-%          xyzleft xyzright     vertex coordinate vector  
-%          x            vector of x-axis interpolation points
-%          y            vector of y-axis interpolation points
-%          z            vector of z-axis interpolation points
-%          fig          figure number
+%   inputs:
+%          sol3D                nodal solution vector 
+%          eldata3D             element error vector
+%          ev                   element mapping matrix
+%          xyzleft xyzright     vertex coordinates
+%          x                    vector of x-axis interpolation points
+%          y                    vector of y-axis interpolation points
+%          z                    vector of z-axis interpolation points
+%          fig                  figure number
 %
 % IFISS function: GP; 9 June 2022.
 % Copyright (c)  2022  G.Papanikos,  C.E. Powell, D.J. Silvester
@@ -31,8 +31,7 @@ end
 
 sol3D = permute(sol3D,[3 2 1]);
 
-
-%% create an axes and setup initial properties
+% create axes and set up initial properties
 figure(fig)
 subplot(221),contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),sol3D(:,:,round(size(Z,3)/2)),20),axis('square')
 axis('off'), squarex, title('Finite Element Solution','FontSize',12)
@@ -49,7 +48,7 @@ hold on
 hSlice = slice(x,y,z,sol3D,1/2,1/2,0);
 set(hSlice,'EdgeColor','none','FaceColor','interp');
 
-%% adjust lighting
+% adjust lighting
 camlight;
 camlight(-90,0);
 lighting gouraud
@@ -67,8 +66,7 @@ xc(:,1) = 0.125*sum(xl,2);
 xc(:,2) = 0.125*sum(yl,2);
 zc(:,3) = 0.125*sum(zl,2);
 
-%
-% interpolate to a cartesian product mesh
+% interpolate to a Cartesian product mesh
 x=0.5*(x(1:end-1)+x(2:end));
 y=0.5*(y(1:end-1)+y(2:end));
 z=0.5*(z(1:end-1)+z(2:end));
@@ -98,7 +96,7 @@ set(hSlice,'EdgeColor','none','FaceColor','interp');
 hSlice = slice(x,y,z,xyzsol,1/2,1/2,0);
 set(hSlice,'EdgeColor','none','FaceColor','interp');
 
-%% adjust lighting
+% adjust lighting
 camlight;
 camlight(-90,0);
 lighting gouraud

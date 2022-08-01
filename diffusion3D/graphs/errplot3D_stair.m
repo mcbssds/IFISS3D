@@ -23,7 +23,7 @@ sol3D = griddata(xyz(:,1),xyz(:,2),xyz(:,3),sol3D,X,Y,Z);
 
 for i=1:size(sol3D,3)
     [II,JJ] = find(X(:,:,i)<0 & Z(:,:,i)<0);
-    sol3D(II,JJ,i) =nan;
+    sol3D(II,JJ,i)=nan;
 end
 
 
@@ -44,7 +44,6 @@ ylabel('y') % y-axis label
 zlabel('z') % z-axis label
 
 hold on
-
 
 hSlice = slice(x,y,z,sol3D,1/2,1/2,0);
 set(hSlice,'EdgeColor','none','FaceColor','interp');

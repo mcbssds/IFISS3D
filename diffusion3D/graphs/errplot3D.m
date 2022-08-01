@@ -1,11 +1,11 @@
 function errplot3D(sol3D,eldata3D,ev,xyz,x,y,z,fig)
 %ERRPLOT3D plots solution and error on cube domain
 %   errplot3D(sol3D,eldata3D,ev,xyz,x,y,z,fig);
-%   input
+%   inputs:
 %          sol3D        nodal solution vector
 %          eldata3D     element error vector
 %          ev           element mapping matrix
-%          xyz          vertex coordinate vector
+%          xyz          vertex coordinates
 %          x            vector of x-axis interpolation points
 %          y            vector of y-axis interpolation points
 %          z            vector of z-axis interpolation points
@@ -22,7 +22,7 @@ sol3D = reshape(sol3D,[size(x,1),size(y,1),size(z,1)]);
 xmin = min(x(:)); xmax =  max(x(:)); xmean = mean(x(:)); 
 ymin = min(y(:)); ymax =  max(y(:)); ymean =  mean(y(:));
 zmin = min(z(:)); zmax =  max(z(:)); zmean =  mean(z(:));
-%% create an axes and setup initial properties
+% create axes and set up initial properties
 figure(fig)
 subplot(221),contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),sol3D(:,:,round(size(Z,3)/2)),20),axis('square')
 axis('off'), squarex, title('Finite Element Solution','FontSize',12)
@@ -40,7 +40,7 @@ set(hSlice,'EdgeColor','none','FaceColor','interp');
 hSlice = slice(x,y,z,sol3D, (xmax - xmean)/2,(ymax - ymean)/2,zmean);
 set(hSlice,'EdgeColor','none','FaceColor','interp');
 
-%% adjust lighting
+% adjust lighting
 camlight;
 camlight(-90,0);
 lighting gouraud

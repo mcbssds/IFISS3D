@@ -1,9 +1,9 @@
-%CONVERGENCE_RATE_CHECK generate plot for analyic test problems
+%CONVERGENCE_RATE_CHECK generate plot for test problems with analytic solutions
 % IFISS scriptfile: DJS; 29 July 2022.
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 close all
 
-%------ cube domain constant source (test problem 1)
+% cube domain constant source (test problem 1)
 figure(1)
 
 loglog([9*9*9,17*17*17,33*33*33 65*65*65 129*129*129 ],[0.148626742530367,0.075046364876659,0.037635974091263,0.018833272413076,0.009415702360345],'-','LineWidth',3);
@@ -26,7 +26,7 @@ ylabel('error')
 grid on
 set(gca,'FontSize',20)
 
-%------ stair-shaped domain constant source (test problem 2)
+% stair-shaped domain constant source (test problem 2)
 figure(2)
 
 % |e_{ref}|_A
@@ -54,7 +54,7 @@ ylabel('error')
 grid on
 set(gca,'FontSize',20)
 
-%------ cube domain triquadratic solution (test problem 12)
+% cube domain triquadratic solution (test problem 12)
 figure(12)
 
 loglog([9*9*9,17*17*17,33*33*33 65*65*65 129*129*129 ],[0.3788442,0.1887763,0.0943077,0.0471438,0.0235706],'-','LineWidth',3);
@@ -76,7 +76,7 @@ ylabel('error')
 grid on
 set(gca,'FontSize',20)
 
-%------ cube domain tricubic solution (test problem 13)
+% cube domain tricubic solution (test problem 13)
 figure(13)
 
 loglog([9*9*9,17*17*17,33*33*33 65*65*65 129*129*129 ],[1.4027758,0.7002514,0.3499770,0.1749698,0.0880972],'-','LineWidth',3);

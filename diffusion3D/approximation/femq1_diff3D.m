@@ -19,7 +19,7 @@ nvtx=length(x);
 [nel,nvt]=size(ev);
 lx=max(x)-min(x); ly=max(y)-min(y);lz=max(z)-min(z);
 hx=max(diff(x)); hy=max(diff(y));hz=max(diff(z));
-fprintf('setting up Q1 diffusion matrices...  ')
+fprintf('Setting up Q1 diffusion matrices...  ')
 %
 % initialise global matrices
 A = sparse(nvtx,nvtx);

@@ -11,8 +11,8 @@ fprintf('\n\nGrid generation for a stair-shaped domain.\n')
 nc=default('grid parameter: 3 for underlying 8x8x8 grid (default is 4 for 16x16x16 grid)',4);
 if nc<2, error('illegal parameter choice, try again.'), end
 n=2^nc; np=n/(Dmax*2); nq=n/(Dmax*4);
-%
-%------------ compute (x,y) coordinates of vertices
+
+% compute (x,y,z) coordinates of vertices
 % y-direction
 yy=[1/np:1/np:Dmax];
 ypos=[0,yy];
@@ -29,7 +29,7 @@ zpos=[0,zz];
 zneg=-zz(length(zz):-1:1);
 z=[zneg,zpos];
 
-%------------ compute triquadratic element coordinates
+% compute triquadratic element coordinates
 nvtx=(Dmax*nq+1)*(Dmax*nq)*(Dmax*n);
 % negative x-values
 [Xpos,Yneg,Z]=meshgrid(xpos,yneg,z);

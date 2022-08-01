@@ -1,15 +1,15 @@
 function [A,Q,f] = femq1_diff3D(xyz,ev)
 %FEMQ1_DIFF3D vectorized trilinear coefficient matrix generator
 %   [A,Q,f] = femq1_diff3D(xy,ev);
-%   input
-%          xyz         vertex coordinate vector
+%   inputs:
+%          xyz        vertex coordinates
 %          ev         element mapping matrix
-%   output
+%   outputs:
 %          A          stiffness matrix
 %          Q          mass matrix
 %          f          rhs vector
 %
-%   Natural boundary conditions apply. Dirichlet conditions
+%   Natural boundary conditions applied. Dirichlet conditions
 %   must be explicitly enforced by calling function nonzerobc.
 %   IFISS function: GP; 9 June 2022.
 % Copyright (c) 2021 G. Papanikos, C.E. Powell, D.J. Silvester

@@ -1,5 +1,5 @@
 function f = specific_rhs3D(x,y,z,nel,ngpt)
-%TRIQUADRATIC_RHS evaluates triqudratic forcing function f
+%TRIQUADRATIC_RHS evaluates specific forcing function f
 %   f = specific_rhs3D(x,y,z,nel)
 %   inputs:
 %          x          x coordinate vector

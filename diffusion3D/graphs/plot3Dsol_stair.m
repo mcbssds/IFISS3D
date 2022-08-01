@@ -1,9 +1,9 @@
 function plot3Dsol_stair(sol3D,xyzleft,xright,x,y,z,fig)
-%PLOT3DSOL_STAIR plots solution and error on square domain
+%PLOT3DSOL_STAIR plots solution and error on stair domain
 %   plot3Dsol_stair(sol3D,xyzleft,xright,x,y,z,fig);
-%   input
+%   inputs:
 %          sol3D           nodal solution vector
-%          xyzleft,xright  vertex coordinate vector
+%          xyzleft,xright  vertex coordinates
 %          x               vector of x-axis interpolation points
 %          y               vector of y-axis interpolation points
 %          z               vector of z-axis interpolation points
@@ -26,8 +26,7 @@ end
 
 sol3D = permute(sol3D,[3 2 1]);
 
-
-%% create an axes and setup initial properties
+% create axes and set up initial properties
 figure(fig)
 subplot(121),contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),sol3D(:,:,round(size(Z,3)/2)),20),axis('square')
 axis('off'), squarex, title('Finite Element Solution','FontSize',12)
@@ -43,7 +42,7 @@ hold on
 
 hSlice = slice(x,y,z,sol3D,1/2,1/2,0);
 set(hSlice,'EdgeColor','none','FaceColor','interp');
-%% adjust lighting
+% adjust lighting
 camlight;
 camlight(-90,0);
 lighting gouraud

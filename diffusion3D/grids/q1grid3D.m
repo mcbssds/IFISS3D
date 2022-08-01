@@ -15,7 +15,7 @@ xx=xyz(:,1); yy=xyz(:,2); zz=xyz(:,3); nvtx=length(xx);
 mel = length(mv(:,1)); nel = 8*mel;
 % ev=zeros(nel,8);
 %
-%% create elements from the macroelements
+% create elements from the macroelements
 k =1:mel;
 ke=8*k-7;
 ev(ke,1)=mv(k,1);

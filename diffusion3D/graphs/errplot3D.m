@@ -79,7 +79,7 @@ set(hSlice,'EdgeColor','none','FaceColor','interp');
 hSlice = slice(x,y,z,xyzsol,(xmax - xmean)/2,(ymax - ymean)/2,zmean);
 set(hSlice,'EdgeColor','none','FaceColor','interp');
 
-%% adjust lighting
+% adjust lighting
 camlight;
 camlight(-90,0);
 lighting gouraud

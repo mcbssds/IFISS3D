@@ -1,17 +1,17 @@
 function [A,Q,f] = femq2_diff3D(xyz,mv)
-%FEMQ2_DIFF vectorized triquadratic coefficient matrix generator
+%FEMQ2_DIFF3D vectorized triquadratic coefficient matrix generator
 %   [A,Q,f] = femq2_diff3D(xyz,mv);
-%   input
-%          xyz         nodal coordinate vector
+%   inputs:
+%          xyz        nodal coordinates
 %          mv         element mapping matrix
-%   output
+%   outputs:
 %          A          stiffness matrix
 %          Q          mass matrix
 %          f          rhs vector
 %
-%   Natural boundary conditions apply. Dirichlet conditions
-%   must be explicitly enforced by calling function nonzerobc.
-%   IFISS function: GP; 9 June 2022.
+% Natural boundary conditions applied. Dirichlet conditions
+% must be explicitly enforced by calling function nonzerobc3D.
+% IFISS function: GP; 9 June 2022.
 % Copyright (c) 2021 G. Papanikos, C. E Powell, D.J. Silvester
 
 x=xyz(:,1); y=xyz(:,2); z= xyz(:,3);
@@ -19,7 +19,7 @@ nvtx=length(x);
 nel=length(mv(:,1));
 lx=max(x)-min(x); ly=max(y)-min(y);lz=max(z)-min(z);
 hx=max(diff(x)); hy=max(diff(y)); hz =max(diff(z));
-fprintf('setting up Q2 diffusion matrices...  ')
+fprintf('Setting up Q2 diffusion matrices...  ')
 %
 % initialise global matrices
 A = sparse(nvtx,nvtx);
@@ -54,7 +54,7 @@ for igpt = 1:nngpt
     % end of Gauss point loop
 end
 %
-% perform assembly of global matrix  and source vector
+% perform assembly of global matrix and source vector
 for krow=1:27
     nrow=mv(:,krow);
     for kcol=1:27

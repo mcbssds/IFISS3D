@@ -9,9 +9,9 @@ function [A,Q,f] = femq1_diff3D(xyz,ev)
 %          Q          mass matrix
 %          f          rhs vector
 %
-%   Natural boundary conditions applied. Dirichlet conditions
-%   must be explicitly enforced by calling function nonzerobc.
-%   IFISS function: GP; 9 June 2022.
+% Natural boundary conditions applied. Dirichlet conditions
+% must be explicitly enforced by calling function nonzerobc3D.
+% IFISS function: GP; 9 June 2022.
 % Copyright (c) 2021 G. Papanikos, C.E. Powell, D.J. Silvester
 
 x=xyz(:,1); y=xyz(:,2); z=xyz(:,3);
@@ -28,7 +28,7 @@ f = zeros(nvtx,1);
 %
 
 % construct the integration rule
-ngpt=3;                                         % 2x2x2 Gauss points %(s,t,l)_i = ((-1)^k gpt,(-1)^j gpt,(-1)^r gpt), i = 4(k-1) +2(j-1) +r , k,j,r =1,2
+ngpt=3;                             % 2x2x2 Gauss points %(s,t,l)_i = ((-1)^k gpt,(-1)^j gpt,(-1)^r gpt), i = 4(k-1) +2(j-1) +r , k,j,r =1,2
 [oneg,onew] = gausspoints_oned(ngpt);
 [s,t,l,wt] = gausspoints_threed(oneg,onew);
 nngpt=ngpt^3; ng=ngpt;
@@ -40,7 +40,6 @@ xl_v = x(ev); yl_v = y(ev); zl_v = z(ev);
 ae = zeros(nel,8,8);
 re = zeros(nel,8,8);
 fe = zeros(nel,8);
-
 
 %  loop over Gauss points
 for igpt = 1:nngpt
@@ -55,7 +54,7 @@ for igpt = 1:nngpt
     % end of Gauss point loop
 end
 
-% perform assembly of global matrix  and source vector 
+% perform assembly of global matrix and source vector 
 for krow=1:8
     nrow=ev(:,krow);
     for kcol=1:8

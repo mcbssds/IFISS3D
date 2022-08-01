@@ -2,13 +2,13 @@
 %IFISS scriptfile: DJS 29 July 2022.
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 global amg_grid amg_smoother   
-% Declare global variables for scalar and vector problems
+% Declare global variables
 if exist('pde','var')==0,
     error('Oops ... you need to set up a specific discrete problem first!'),
 end
 
-if pde==1,     %---- 3D diffusion problem
-    fprintf('discretised 3D diffusion problem...\n')
+if pde==1,   % 3D diffusion problem
+    fprintf('solving discretised 3D diffusion problem...\n')
     % select Krylov subspace method
     itmeth = default('PCG/MINRES? 1/2 (default PCG)',1);
     
@@ -20,9 +20,9 @@ if pde==1,     %---- 3D diffusion problem
     fprintf('preconditioner:\n');
     fprintf('   0  none\n');
     fprintf('   1  diagonal\n');
-    fprintf('   2  incomplete cholesky\n');
+    fprintf('   2  incomplete Cholesky\n');
     fprintf('   3  algebraic multigrid\n');
-    precon = default('default is incomplete cholesky ',2);
+    precon = default('default is incomplete Cholesky ',2);
     if precon==0,     % none
         M1=[]; M2=[];
     elseif precon==1, % diagonal
@@ -75,7 +75,7 @@ else
 error('Oops ... undefined PDE problem'),
 end
 
-%------ print and plot results
+% print and plot results
 if flag ==0,
     % successful convergence
     fprintf('convergence in %3i iterations\n',iter)

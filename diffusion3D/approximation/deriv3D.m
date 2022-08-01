@@ -1,15 +1,14 @@
 function [jac,invjac,phi,dphidx,dphidy,dphidz] = deriv3D(s,t,l,xl,yl,zl)
 %DERIV3D evaluates derivatives of trilinear shape functions
-%   [jac,invjac,phi,dphidx,dphidy,dphidz] = deriv(s,t,l,xl,yl,zl);
-%   input
+%   [jac,invjac,phi,dphidx,dphidy,dphidz] = deriv3D(s,t,l,xl,yl,zl);
+%   inputs:
 %          s         reference element x coordinate
 %          t         reference element y coordinate
 %          l         reference element z coordinate
-
 %          xl        physical element vertex x coordinates
 %          yl        physical element vertex y coordinates
 %          zl        physical element vertex z coordinates
-%   output
+%   outputs:
 %          jac       elementwise jacobian (evaluated at (s,t,l))
 %          invjac    elementwise inverse of jacobian
 %          phi       elementwise shape functions
@@ -20,7 +19,6 @@ function [jac,invjac,phi,dphidx,dphidy,dphidz] = deriv3D(s,t,l,xl,yl,zl)
 % Copyright (c)  2022  G.Papanikos,  C.E. Powell, D.J. Silvester
 
 ngpt = size(s,1);
-
 [nel,nv] = size(xl);
 zero_v = zeros(nel,ngpt);
 one_v = ones(nel,ngpt);
@@ -31,7 +29,6 @@ one_vv = ones(nel,nv*ngpt);
 
 % evaluate shape functions
 [phi_e,dphids,dphidt,dphidl] = shape3D(s,t,l);
-%
 
 dxds = zero_v;
 dxdt = zero_v;
@@ -45,7 +42,7 @@ dzdl = zero_v;
 
 jac = zero_v;
 invjac = zero_v;
-%
+
 for ivtx = 1:8
     dxds(:) = dxds(:) + xl(:,ivtx) .* one_v*dphids(ivtx);
     dxdt(:) = dxdt(:) + xl(:,ivtx) .* one_v*dphidt(ivtx);
@@ -60,11 +57,11 @@ for ivtx = 1:8
     dzdl(:) = dzdl(:) + zl(:,ivtx) .* one_v*dphidl(ivtx);
     
 end
-%
+
 jac(:) =  dxds(:).*(dydt(:).*dzdl(:) - dydl(:).*dzdt(:))...
     -dxdt(:).*(dyds(:).*dzdl(:) - dydl(:).*dzds(:))...
     +dxdl(:).*(dyds(:).*dzdt(:) - dydt(:).*dzds(:));
-%
+
 % check element Jacobian
 if any(jac < 1e-9)
     fprintf('Bad element warning ...\n')

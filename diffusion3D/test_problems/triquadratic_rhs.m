@@ -1,7 +1,7 @@
 function f = specific_rhs3D(x,y,z,nel,ngpt)
-% RHS forcing function
+%TRIQUADRATIC_RHS evaluates triqudratic forcing function f
 %   f = specific_rhs3D(x,y,z,nel)
-%   input
+%   inputs:
 %          x          x coordinate vector
 %          y          y coordinate vector 
 %          z          y coordinate vector 
@@ -9,6 +9,7 @@ function f = specific_rhs3D(x,y,z,nel,ngpt)
 % IFISS function: DJS; 27 July 2022.
 % Copyright (c)  2022  G.Papanikos,  C.E. Powell, D.J. Silvester
 
+% specific f corresponding to triquadratic solution
  f= 2*(x.^2 - 1).*(y.^2 - 1) + 2*(x.^2 - 1).*(z.^2 - 1) + ...
-    2*(y.^2 -1).*(z.^2 - 1);         % triquadratic solution
+    2*(y.^2 -1).*(z.^2 - 1);         
 return

@@ -1,15 +1,15 @@
 function [hx,hy,hz,efx,ebound3D] = facegen(xyz,ev,domain)
-%EDGEGEN face information for flux jump computation
-%   [hx,hy,hz,efx] = facegen(xyz,ev);
+%FACEGEN face information for flux jump computation
+%   [hx,hy,hz,efx] = facegen(xyz,ev,domain);
 %   inputs:
 %          xyz        nodal coordinate vector
 %          ev         element mapping matrix
-%          domain     cube or stair domain (1 or 0)
+%          domain     cube, stair or borehole domain (1,2 or 3)
 %   outputs:
 %          hx,hy,hz   elementwise face areas
 %          efx        element face index vector
 %          ebound3D   boundary nodes
-% IFISS function: GP 2021; .
+% IFISS function: GP 4th August 2022;
 % Copyright (c)   G.Papanikos, C.E. Powell, D.J. Silvester
 
 nvtx=length(xyz(:,1));
@@ -43,7 +43,6 @@ adj5  = adj5 + sparse(ev(:,1),ev(:,2),1:nel,nvtx,nvtx);
 adj5  = adj5 + sparse(ev(:,2),ev(:,6),1:nel,nvtx,nvtx);
 adj5  = adj5 + sparse(ev(:,6),ev(:,5),1:nel,nvtx,nvtx);
 adj5  = adj5 + sparse(ev(:,5),ev(:,1),1:nel,nvtx,nvtx);
-
 
 
 [pp1,kk1,ll1]=find(adj1);
@@ -108,7 +107,6 @@ for i = 1:size(efx,1)
     end
 end
 ebound3D= cell2mat(ebound3Dnew);
-
 
 
 fprintf('done \n')

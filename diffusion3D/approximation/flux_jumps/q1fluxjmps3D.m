@@ -1,15 +1,14 @@
 function jmp = q1fluxjmps3D(q1sol,efx,xyz,ev,ebound3D,s)
-%Q1FLUXJMPS3D vectorised flux jumps on the midpoint of the faces for
-%hexahedral element
+%Q1FLUXJMPS3D vectorised flux jumps at midpoints of element faces
 %   jmp = q1fluxjmps3D(q1sol,efx,xy,ev,ebound,s);
-%   input
+%   inputs:
 %          q1sol        vertex solution vector
 %          efx          presorted element connectivity array
-%          xyz           vertex coordinate vector
+%          xyz          vertex coordinate vector
 %          ev           element mapping matrix
-%          ebound3d       element edge boundary matrix
+%          ebound3d     element edge boundary matrix
 %          s            quadrature point coordinate in (-1,1)
-%   output
+%   outputs:
 %          jmp          component elementwise edge flux jumps
 %
 % IFISS function: GP 23 June 2022 (modified from DJS; 27 September 2013).

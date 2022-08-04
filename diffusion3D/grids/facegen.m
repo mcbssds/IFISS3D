@@ -1,6 +1,6 @@
 function [hx,hy,hz,efx,ebound3D] = facegen(xyz,ev,domain)
 %FACEGEN computes face information for flux jump computation
-%   [hx,hy,hz,efx] = facegen(xyz,ev,domain);
+%   [hx,hy,hz,efx,ebound3D] = facegen(xyz,ev,domain);
 %   inputs:
 %          xyz        nodal coordinate vector
 %          ev         element mapping matrix

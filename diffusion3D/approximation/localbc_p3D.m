@@ -101,7 +101,7 @@ for bd=1:nbd
 
     bc=specific_bc3D(xbd,ybd,zbd);
    
-    error = bc(9)-1/4*(bc(1)+bc(3)+bc(5)+bc(7)) + bc(2)-0.5*(bc(1)+bc(3)) + bc(4)-0.5*(bc(3)+bc(5)) + bc(6)-0.5*(bc(5)+bc(7)) + bc(8)-0.5*(bc(1)+bc(7));
+    error = bc(9)-1/4*(bc(1)+bc(3)+bc(5)+bc(7));
     %% impose boundary condition without modifying the other equations
     %% DJS/DK mod
     bae(:,ek)=zero_col; bae(ek,:)=zero_row;   

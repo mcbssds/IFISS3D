@@ -16,7 +16,7 @@ function [elerr_p] = diffpost_bc3D_Q1halfreduced(elerror,fez,xyz,ev,ebound3D,xl_
 %  IFISS function: GP 2021; .
 %  Copyright (c)   G.Papanikos, C.E. Powell, D.J. Silvester
 
-      ngpt=3;
+     ngpt=2;
       [oneg,onew] = gausspoints_oned(ngpt);
       [s,t,l,wt] = gausspoints_threed(oneg,onew);
       nngpt=ngpt^3; 
@@ -45,88 +45,84 @@ function [elerr_p] = diffpost_bc3D_Q1halfreduced(elerror,fez,xyz,ev,ebound3D,xl_
         ael(:,:,:,subelt) =ael(:,:,:,subelt)+ wght*(dphidx_v.*permute(dphidx_v,[1 3 2]) + .....
                                                                       dphidy_v.*permute(dphidy_v,[1 3 2]) + .....
                                                                       dphidz_v.*permute(dphidz_v,[1 3 2])).*invjac_v(:);  
-
 % end of Gauss point loop
       end
-% debug
-%       if tout >0, 
-%         fprintf('\n\n test Q1 stiffness matrix \n') 
-%         fprintf('subelement : %g \n',subelt) 
-%         disp(squeeze(adem(elt,subelt,1:8,1:8))) 
-%       end
 % end of subdivided element loop
   end
   ael  = permute(ael,[1,4,2,3]);
 % manual assembly of subelement contributions
-% --------------------------------------------------- first face ------------------------
+% ------------------------------- first face ------------------------
 
-%cedroid, node number 6 
- aez(:,1,1)  = ael(:,1,3,3) + ael(:,2,4,4) + ael(:,3,1,1) + ael(:,4,2,2);
- aez(:,1,2)  = ael(:,2,4,7) + ael(:,3,1,6);
- aez(:,1,4)  = ael(:,4,2,5) + ael(:,1,3,8);
- aez(:,1,5)  = ael(:,1,3,6) + ael(:,2,4,5);
- aez(:,1,6)  = ael(:,3,1,8) + ael(:,4,2,7);
+%cedroid, node number 1
+aez(:,1,1)  = ael(:,1,3,3) + ael(:,2,4,4) + ael(:,3,1,1) + ael(:,4,2,2);
+aez(:,1,2)  = ael(:,2,4,7) + ael(:,3,1,6);
+aez(:,1,4)  = ael(:,4,2,5) + ael(:,1,3,8);
+aez(:,1,5)  = ael(:,1,3,6) + ael(:,2,4,5);
+aez(:,1,6)  = ael(:,3,1,8) + ael(:,4,2,7);
+aez(:,1,7)  = ael(:,1,3,7) + ael(:,2,4,8) + ael(:,3,1,5) + ael(:,4,2,6);  %added missing connection
 
-% -------------------------------------------------- Second face ------------------------                     
-% cedroid, node number 2  
-  aez(:,2,1)  = ael(:,2,7,4) + ael(:,3,6,1);
-  aez(:,2,2)  = ael(:,2,7,7) + ael(:,6,3,3) + ael(:,3,6,6) + ael(:,7,2,2);
-  aez(:,2,3)  = ael(:,6,3,8) + ael(:,7,2,5);
-  aez(:,2,5)  = ael(:,2,7,5) + ael(:,6,3,1);
-  aez(:,2,6)  = ael(:,3,6,8) + ael(:,7,2,4);
-  aez(:,2,7)  = ael(:,2,7,8) + ael(:,3,6,5) + ael(:,6,3,4) + ael(:,7,2,1);
+% -------------------------------- Second face ------------------------
+% cedroid, node number 2
+aez(:,2,1)  = ael(:,2,7,4) + ael(:,3,6,1);
+aez(:,2,2)  = ael(:,2,7,7) + ael(:,6,3,3) + ael(:,3,6,6) + ael(:,7,2,2);
+aez(:,2,3)  = ael(:,6,3,8) + ael(:,7,2,5);
+aez(:,2,5)  = ael(:,2,7,5) + ael(:,6,3,1);
+aez(:,2,6)  = ael(:,3,6,8) + ael(:,7,2,4);
+aez(:,2,7)  = ael(:,2,7,8) + ael(:,3,6,5) + ael(:,6,3,4) + ael(:,7,2,1);
 
-% -------------------------------------------------- third face ------------------------
+% -------------------------------- third face ------------------------
 
- % centroid node number 3
-  aez(:,3,2) = ael(:,6,8,3)+ael(:,7,5,2);
-  aez(:,3,3) = ael(:,5,7,7) + ael(:,6,8,8) + ael(:,7,5,5) + ael(:,8,6,6);
-  aez(:,3,4) = ael(:,5,7,4) + ael(:,8,6,1);
-  aez(:,3,5) = ael(:,5,7,2);
-  aez(:,3,6) = ael(:,8,6,3);
-  aez(:,3,7) = ael(:,5,7,3) + ael(:,6,8,4) + ael(:,7,5,1) + ael(:,8,6,2);
+% centroid node number 3
+aez(:,3,2) = ael(:,6,8,3) + ael(:,7,5,2);
+aez(:,3,3) = ael(:,5,7,7) + ael(:,6,8,8) + ael(:,7,5,5) + ael(:,8,6,6);
+aez(:,3,4) = ael(:,5,7,4) + ael(:,8,6,1);
+aez(:,3,5) = ael(:,5,7,2) + ael(:,6,8,1);                                    % added missing connection
+aez(:,3,6) = ael(:,8,6,3) + ael(:,7,5,4);                                    % added missing connection
+aez(:,3,7) = ael(:,5,7,3) + ael(:,6,8,4) + ael(:,7,5,1) + ael(:,8,6,2);
 
-  % -------------------------------------------------- fourth face ------------------------
-  % centroid node, number 4
-  aez(:,4,1)  = ael(:,1,8,3) + ael(:,4,5,2);
-  aez(:,4,3) = ael(:,5,4,7) + ael(:,8,1,6);
-  aez(:,4,4) = ael(:,1,8,8) + ael(:,4,5,5) + ael(:,5,4,4) + ael(:,8,1,1);
-  aez(:,4,5)  = ael(:,1,8,6);
-  aez(:,4,6) = ael(:,4,5,7) + ael(:,8,1,3);
-  aez(:,4,7) = ael(:,1,8,7) + ael(:,4,5,6)+ael(:,5,4,3)+ael(:,8,1,2);
+% -------------------------------- fourth face ------------------------
+% centroid node, number 4
+aez(:,4,1) = ael(:,1,8,3) + ael(:,4,5,2);
+aez(:,4,3) = ael(:,5,4,7) + ael(:,8,1,6);
+aez(:,4,4) = ael(:,1,8,8) + ael(:,4,5,5) + ael(:,5,4,4) + ael(:,8,1,1);
+aez(:,4,5) = ael(:,1,8,6) + ael(:,5,2,4);                                   %added missing connection
+aez(:,4,6) = ael(:,4,5,7) + ael(:,8,1,3);
+aez(:,4,7) = ael(:,1,8,7) + ael(:,4,5,6) + ael(:,5,4,3) + ael(:,8,1,2);
 
- 
- % node nummber 5 (center node of the fifth face),   node 19 (center node
- % of the sixth face) node 14 center node
- % ----------------------------------------------------------------------
- 
- aez(:,5,1)  = ael(:,1,6,3) + ael(:,2,5,4);
- aez(:,5,2)  = ael(:,2,5,7) + ael(:,6,1,3);
- aez(:,5,3) = ael(:,5,2,7)+ael(:,6,1,8);
- aez(:,5,4) = ael(:,1,6,8) + ael(:,5,2,4);
- aez(:,5,5)  = ael(:,1,6,6) + ael(:,2,5,5) + ael(:,5,2,2) + ael(:,6,1,1); 
- aez(:,5,7) = ael(:,1,6,7) + ael(:,2,5,8) + ael(:,5,2,3) + ael(:,6,1,4); 
+% -------------------------------fifth face --------------------------
+% centroid node, number 5
 
-   
- aez(:,6,1)  = ael(:,4,7,2) + ael(:,3,8,1); 
- aez(:,6,2)  = ael(:,3,8,6) + ael(:,7,4,2); 
- aez(:,6,3) = ael(:,8,3,6)+ael(:,7,4,5); 
- aez(:,6,4) = ael(:,4,7,5) + ael(:,8,3,1);  
- aez(:,6,6) = ael(:,3,8,8) + ael(:,4,7,7) + ael(:,7,4,4) + ael(:,8,3,3);  
- aez(:,6,7) = ael(:,3,8,5) + ael(:,4,7,6) + ael(:,7,4,1) + ael(:,8,3,2);
- 
- 
- aez(:,7,1)  = ael(:,1,7,3) + ael(:,2,8,4) + ael(:,3,5,1) + ael(:,4,6,2);
- aez(:,7,2)  = ael(:,2,8,7) + ael(:,3,5,6) + ael(:,6,4,3) + ael(:,7,1,2);
- aez(:,7,3) = ael(:,5,3,7) + ael(:,6,4,8) + ael(:,7,1,5) + ael(:,8,2,6);
- aez(:,7,4) = ael(:,1,7,8) + ael(:,4,6,5) + ael(:,5,3,4) + ael(:,8,2,1);
- aez(:,7,5)  = ael(:,1,7,6) + ael(:,2,8,5) + ael(:,5,3,2) + ael(:,6,4,1);
- aez(:,7,6) = ael(:,3,5,8) + ael(:,4,6,7) + ael(:,7,1,4) + ael(8,2,3);
- aez(:,7,7) = ael(:,1,7,7) + ael(:,2,8,8) + ael(:,3,5,5) + ael(:,4,6,6) + ael(:,5,3,3) + ael(:,6,4,4) + ael(:,7,1,1)+ael(:,8,2,2);                                                                                                                                                         aez(:,14,1)  = ael(:,1,7,2) + ael(:,2,8,1);                                                                                                                                                   
-                                                                                                                                                        aez(:,14,2)  = ael(:,2,8,6) + ael(:,6,4,2);
-                                                                                                                                                        aez(:,14,16) = ael(:,3,5,7) + ael(:,7,1,3);
-nn=7;                                                                                                                                                        aez(:,14,4)  = ael(:,1,7,5) + ael(:,5,3,1);
-mm=7;                                                                                                                                                        aez(:,14,18) = ael(:,4,6,8) + ael(:,8,2,4);                                                                   
+aez(:,5,1) = ael(:,1,6,3) + ael(:,2,5,4);
+aez(:,5,2) = ael(:,2,5,7) + ael(:,6,1,3);
+aez(:,5,3) = ael(:,5,2,7) + ael(:,6,1,8);
+aez(:,5,4) = ael(:,1,6,8) + ael(:,5,2,4);
+aez(:,5,5) = ael(:,1,6,6) + ael(:,2,5,5) + ael(:,5,2,2) + ael(:,6,1,1);
+aez(:,5,7) = ael(:,1,6,7) + ael(:,2,5,8) + ael(:,5,2,3) + ael(:,6,1,4);
+
+
+% -------------------------------sixth face --------------------------
+% centroid node, number 6
+
+aez(:,6,1)  = ael(:,4,7,2) + ael(:,3,8,1);
+aez(:,6,2)  = ael(:,3,8,6) + ael(:,7,4,2);
+aez(:,6,3)  = ael(:,8,3,6) + ael(:,7,4,5);
+aez(:,6,4)  = ael(:,4,7,5) + ael(:,8,3,1);
+aez(:,6,6)  = ael(:,3,8,8) + ael(:,4,7,7) + ael(:,7,4,4) + ael(:,8,3,3);
+aez(:,6,7)  = ael(:,3,8,5) + ael(:,4,7,6) + ael(:,7,4,1) + ael(:,8,3,2);
+
+% ----------------  mid node  of all elements --------------------------- 
+% number 7
+aez(:,7,1)  = ael(:,1,7,3) + ael(:,2,8,4) + ael(:,3,5,1) + ael(:,4,6,2);
+aez(:,7,2)  = ael(:,2,8,7) + ael(:,3,5,6) + ael(:,6,4,3) + ael(:,7,1,2);
+aez(:,7,3)  = ael(:,5,3,7) + ael(:,6,4,8) + ael(:,7,1,5) + ael(:,8,2,6);
+aez(:,7,4)  = ael(:,1,7,8) + ael(:,4,6,5) + ael(:,5,3,4) + ael(:,8,2,1);
+aez(:,7,5)  = ael(:,1,7,6) + ael(:,2,8,5) + ael(:,5,3,2) + ael(:,6,4,1);
+aez(:,7,6)  = ael(:,3,5,8) + ael(:,4,6,7) + ael(:,7,1,4) + ael(:,8,2,3);
+aez(:,7,7)  = ael(:,1,7,7) + ael(:,2,8,8) + ael(:,3,5,5) + ael(:,4,6,6) + ael(:,5,3,3) + ael(:,6,4,4) + ael(:,7,1,1)+ael(:,8,2,2);                                                                                                                                                      aez(:,14,1)  = ael(:,1,7,2) + ael(:,2,8,1);                                                                                                                                                   
+                                                                                                                                                        
+                                                                                                                                                        
+nn=7;                                                                                                                                                       
+mm=7;                                                                                                                                                                                                                       
       
 tic
 % recompute contributions from elements with Dirichlet boundaries

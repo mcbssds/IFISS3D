@@ -20,7 +20,7 @@ x=xyz(:,1); y=xyz(:,2); z=xyz(:,3); nvtx=length(x);
 nel=length(ev(:,1));
 
 % construct the integration rule
-ngpt=3;
+ngpt=2;
 [oneg,onew] = gausspoints_oned(ngpt);
 [s,t,wt] = gausspoints_twod(oneg,onew);
 nngpt=ngpt^2;
@@ -70,42 +70,43 @@ for igpt=1:nngpt
     
     % face 1
     
-    faceres(:,1)  = faceres(:,1)  +  (1/2)*(1/4)*wigpt*jmp_ll(:,1).*phi_v_1(:,3).*hx(:).*hy(:)./8;
-    faceres(:,1)  = faceres(:,1)  +  (1/2)*(1/4)*wigpt*jmp_rl(:,1).*phi_v_1(:,4).*hx(:).*hy(:)./8;
-    faceres(:,1)  = faceres(:,1)  +  (1/2)*(1/4)*wigpt*jmp_rr(:,1).*phi_v_1(:,1).*hx(:).*hy(:)./8;
-    faceres(:,1)  = faceres(:,1)  +  (1/2)*(1/4)*wigpt*jmp_lr(:,1).*phi_v_1(:,2).*hx(:).*hy(:)./8;
+    faceres(:,1)  = faceres(:,1)  +  (1/2)*(1/2)*wigpt*jmp_ll(:,1).*phi_v_1(:,3).*hx(:).*hy(:)./8;
+    faceres(:,1)  = faceres(:,1)  +  (1/2)*(1/2)*wigpt*jmp_rl(:,1).*phi_v_1(:,4).*hx(:).*hy(:)./8;
+    faceres(:,1)  = faceres(:,1)  +  (1/2)*(1/2)*wigpt*jmp_rr(:,1).*phi_v_1(:,1).*hx(:).*hy(:)./8;
+    faceres(:,1)  = faceres(:,1)  +  (1/2)*(1/2)*wigpt*jmp_lr(:,1).*phi_v_1(:,2).*hx(:).*hy(:)./8;
     % face 2
     
-    faceres(:,2)  = faceres(:,2)  +  (1/2)*(1/4)*wigpt*jmp_ll(:,2).*phi_v_2(:,7).*hy(:).*hz(:)./8;
-    faceres(:,2)  = faceres(:,2)  +  (1/2)*(1/4)*wigpt*jmp_rl(:,2).*phi_v_2(:,6).*hy(:).*hz(:)./8;
-    faceres(:,2)  = faceres(:,2)  +  (1/2)*(1/4)*wigpt*jmp_rr(:,2).*phi_v_2(:,2).*hy(:).*hz(:)./8;
-    faceres(:,2)  = faceres(:,2)  +  (1/2)*(1/4)*wigpt*jmp_lr(:,2).*phi_v_2(:,3).*hy(:).*hz(:)./8;
+    faceres(:,2)  = faceres(:,2)  +  (1/2)*(1/2)*wigpt*jmp_ll(:,2).*phi_v_2(:,7).*hy(:).*hz(:)./8;
+    faceres(:,2)  = faceres(:,2)  +  (1/2)*(1/2)*wigpt*jmp_rl(:,2).*phi_v_2(:,6).*hy(:).*hz(:)./8;
+    faceres(:,2)  = faceres(:,2)  +  (1/2)*(1/2)*wigpt*jmp_rr(:,2).*phi_v_2(:,2).*hy(:).*hz(:)./8;
+    faceres(:,2)  = faceres(:,2)  +  (1/2)*(1/2)*wigpt*jmp_lr(:,2).*phi_v_2(:,3).*hy(:).*hz(:)./8;
     % face 3
     
-    faceres(:,3) = faceres(:,3) +  (1/2)*(1/4)*wigpt*jmp_ll(:,3).*phi_v_3(:,7).*hx(:).*hy(:)./8;
-    faceres(:,3) = faceres(:,3) +  (1/2)*(1/4)*wigpt*jmp_rl(:,3).*phi_v_3(:,8).*hx(:).*hy(:)./8;
-    faceres(:,3) = faceres(:,3) +  (1/2)*(1/4)*wigpt*jmp_rr(:,3).*phi_v_3(:,5).*hx(:).*hy(:)./8;
-    faceres(:,3) = faceres(:,3) +  (1/2)*(1/4)*wigpt*jmp_lr(:,3).*phi_v_3(:,6).*hx(:).*hy(:)./8;
+    faceres(:,3) = faceres(:,3) +  (1/2)*(1/2)*wigpt*jmp_ll(:,3).*phi_v_3(:,7).*hx(:).*hy(:)./8;
+    faceres(:,3) = faceres(:,3) +  (1/2)*(1/2)*wigpt*jmp_rl(:,3).*phi_v_3(:,8).*hx(:).*hy(:)./8;
+    faceres(:,3) = faceres(:,3) +  (1/2)*(1/2)*wigpt*jmp_rr(:,3).*phi_v_3(:,5).*hx(:).*hy(:)./8;
+    faceres(:,3) = faceres(:,3) +  (1/2)*(1/2)*wigpt*jmp_lr(:,3).*phi_v_3(:,6).*hx(:).*hy(:)./8;
     
     % face 4
-    faceres(:,4)  = faceres(:,4) +  (1/2)*(1/4)*wigpt*jmp_ll(:,4).*phi_v_4(:,8).*hy(:).*hz(:)./8;
-    faceres(:,4)  = faceres(:,4) +  (1/2)*(1/4)*wigpt*jmp_rl(:,4).*phi_v_4(:,5).*hy(:).*hz(:)./8;
-    faceres(:,4)  = faceres(:,4) +  (1/2)*(1/4)*wigpt*jmp_rr(:,4).*phi_v_4(:,1).*hy(:).*hz(:)./8;
-    faceres(:,4)  = faceres(:,4) +  (1/2)*(1/4)*wigpt*jmp_lr(:,4).*phi_v_4(:,4).*hy(:).*hz(:)./8;
+    faceres(:,4)  = faceres(:,4) +  (1/2)*(1/2)*wigpt*jmp_ll(:,4).*phi_v_4(:,8).*hy(:).*hz(:)./8;
+    faceres(:,4)  = faceres(:,4) +  (1/2)*(1/2)*wigpt*jmp_rl(:,4).*phi_v_4(:,5).*hy(:).*hz(:)./8;
+    faceres(:,4)  = faceres(:,4) +  (1/2)*(1/2)*wigpt*jmp_rr(:,4).*phi_v_4(:,1).*hy(:).*hz(:)./8;
+    faceres(:,4)  = faceres(:,4) +  (1/2)*(1/2)*wigpt*jmp_lr(:,4).*phi_v_4(:,4).*hy(:).*hz(:)./8;
     
     %face 5
     
-    faceres(:,5)  = faceres(:,5) +   (1/2)*(1/4)*wigpt*jmp_ll(:,5).*phi_v_5(:,6).*hx(:).*hz(:)./8;
-    faceres(:,5)  = faceres(:,5) +   (1/2)*(1/4)*wigpt*jmp_rl(:,5).*phi_v_5(:,5).*hx(:).*hz(:)./8;
-    faceres(:,5)  = faceres(:,5) +   (1/2)*(1/4)*wigpt*jmp_rr(:,5).*phi_v_5(:,1).*hx(:).*hz(:)./8;
-    faceres(:,5)  = faceres(:,5) +   (1/2)*(1/4)*wigpt*jmp_lr(:,5).*phi_v_5(:,2).*hx(:).*hz(:)./8;
+    faceres(:,5)  = faceres(:,5) +   (1/2)*(1/2)*wigpt*jmp_ll(:,5).*phi_v_5(:,6).*hx(:).*hz(:)./8;
+    faceres(:,5)  = faceres(:,5) +   (1/2)*(1/2)*wigpt*jmp_rl(:,5).*phi_v_5(:,5).*hx(:).*hz(:)./8;
+    faceres(:,5)  = faceres(:,5) +   (1/2)*(1/2)*wigpt*jmp_rr(:,5).*phi_v_5(:,1).*hx(:).*hz(:)./8;
+    faceres(:,5)  = faceres(:,5) +   (1/2)*(1/2)*wigpt*jmp_lr(:,5).*phi_v_5(:,2).*hx(:).*hz(:)./8;
     
     %face 6
     
-    faceres(:,6)  = faceres(:,6) +   (1/2)*(1/4)*wigpt*jmp_ll(:,6).*phi_v_6(:,7).*hx(:).*hz(:)./8;
-    faceres(:,6)  = faceres(:,6) +   (1/2)*(1/4)*wigpt*jmp_rl(:,6).*phi_v_6(:,8).*hx(:).*hz(:)./8;
-    faceres(:,6)  = faceres(:,6) +   (1/2)*(1/4)*wigpt*jmp_rr(:,6).*phi_v_6(:,4).*hx(:).*hz(:)./8;
-    faceres(:,6)  = faceres(:,6) +   (1/2)*(1/4)*wigpt*jmp_lr(:,6).*phi_v_6(:,3).*hx(:).*hz(:)./8;
+    faceres(:,6)  = faceres(:,6) +   (1/2)*(1/2)*wigpt*jmp_ll(:,6).*phi_v_6(:,7).*hx(:).*hz(:)./8;
+    faceres(:,6)  = faceres(:,6) +   (1/2)*(1/2)*wigpt*jmp_rl(:,6).*phi_v_6(:,8).*hx(:).*hz(:)./8;
+    faceres(:,6)  = faceres(:,6) +   (1/2)*(1/2)*wigpt*jmp_rr(:,6).*phi_v_6(:,4).*hx(:).*hz(:)./8;
+    faceres(:,6)  = faceres(:,6) +   (1/2)*(1/2)*wigpt*jmp_lr(:,6).*phi_v_6(:,3).*hx(:).*hz(:)./8;
 end           % end of Gauss points loop
+
 
 return

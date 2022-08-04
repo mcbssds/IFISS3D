@@ -70,7 +70,7 @@ for el = 1:nel3b
     fe=fez(el3e,:)';
     % set up local coordinates and impose interpolated error as Dirichlet bc
     xl=x(lev(el3e,:)); yl=y(lev(el3e,:)); zl=z(lev(el3e,:));
-    [bae,fe] = localbc_p3D(ae,fe,faces,xl,yl,zl);
+    [bae,fe] = localbcfull_p3D(ae,fe,faces,xl,yl,zl);
     % solve local problem
     err=bae\fe;
     elerr_p(el3e,1) = err'*fe;
@@ -92,7 +92,7 @@ for el = 1:nel2b
     fe=fez(el2e,:)';
     % set up local coordinates and impose interpolated error as Dirichlet bc
     xl=x(lev(el2e,:)); yl=y(lev(el2e,:)); zl=z(lev(el2e,:));
-    [bae,fe] = localbc_p3D(ae,fe,faces,xl,yl,zl);
+    [bae,fe] = localbcfull_p3D(ae,fe,faces,xl,yl,zl);
     % solve local problem
     err=bae\fe;
     elerr_p(el2e,1) = err'*fe;
@@ -112,7 +112,7 @@ for el = 1:nel1b
     ae=squeeze(aez(el1e,1:19,1:19));
     % set up local coordinates and impose interpolated error as Dirichlet bc
     xl=x(lev(el1e,:)); yl=y(lev(el1e,:)); zl=z(lev(el1e,:));
-    [bae,fe] = localbc_p3D(ae,fe,faces,xl,yl,zl);
+    [bae,fe] = localbcfull_p3D(ae,fe,faces,xl,yl,zl);
     % solve local problem
     err=bae\fe;
     elerr_p(el1e,1) = err'*fe;

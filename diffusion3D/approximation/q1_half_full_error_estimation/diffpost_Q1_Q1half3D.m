@@ -3,9 +3,9 @@ function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half
 % employs elementwise Q1-bubbles for the edge midpoints and centroid
 %   [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s, yl_s, zl_s] = diffpost_Q1_Q1half3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
 %   input
-%          xyz          vertex coordinate vector  
+%          xyz          vertex coordinate vector
 %          ev           element mapping matrix
-%          ebound3D     element face boundary matrix 
+%          ebound3D     element face boundary matrix
 %          q1sol3D       Q1 solution vector
 %          fcx          element face connectivity array
 %          hx,hy,hz     element mesh sizes
@@ -21,7 +21,7 @@ function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half
 %   SIFISS function: GP; 09 June 2022
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 
-  fprintf('computing Q1 error estimator...  \n')
+ fprintf('computing Q1 error estimator...  \n')
   x=xyz(:,1); y=xyz(:,2); z=xyz(:,3);
   nel=length(ev(:,1));
   nn=19;
@@ -29,7 +29,7 @@ function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half
 
 %
 % construct the integration rule
-  ngpt=3;
+  ngpt=2;
   [oneg,onew] = gausspoints_oned(ngpt);
   [s,t,l,wt] = gausspoints_threed(oneg,onew);
   nngpt=ngpt^3; 
@@ -279,9 +279,9 @@ function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half
   ae(:,10,9)  = ael(:,6,8,7) + ael(:,7,5,6);
   ae(:,10,17) = ael(:,7,5,8) + ael(:,8,6,7);
   ae(:,10,11) = ael(:,8,6,5) + ael(:,5,7,8);
-  ae(:,10,5)  = ael(:,5,7,2);
+  ae(:,10,5)  = ael(:,5,7,2) + ael(:,6,8,1);                                % found missing element connection a6_81
   ae(:,10,14) = ael(:,5,7,3) + ael(:,6,8,4) + ael(:,7,5,1) + ael(:,8,6,2);
-  ae(:,10,19) = ael(:,8,6,3);
+  ae(:,10,19) = ael(:,8,6,3) + ael(:,7,5,4);                                % found missing element connection a7,54
   ae(:,10,4)  = ael(:,5,7,1);
   ae(:,10,12) = ael(:,5,7,4) + ael(:,8,6,1);
   ae(:,10,18) = ael(:,8,6,4);
@@ -302,7 +302,7 @@ function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half
   ae(:,18,19) = ael(:,4,8,7) + ael(:,8,4,3);       ae(:,4,5)  = ael(:,1,5,6) + ael(:,5,1,2);      ae(:,12,1)  = ael(:,1,8,2);
   ae(:,18,17) = ael(:,8,4,7);                      ae(:,4,1)  = ael(:,1,5,2);                     ae(:,12,6)  = ael(:,1,8,3) + ael(:,4,5,2);
   ae(:,18,6)  = ael(:,4,8,2);                      ae(:,4,6)  = ael(:,1,5,3);                     ae(:,12,15) = ael(:,4,5,3);
-  ae(:,18,14) = ael(:,4,8,6) + ael(:,8,4,2);       ae(:,4,14) = ael(:,1,5,7) + ael(:,5,1,3);      ae(:,12,5)  = ael(:,1,8,6);
+  ae(:,18,14) = ael(:,4,8,6) + ael(:,8,4,2);       ae(:,4,14) = ael(:,1,5,7) + ael(:,5,1,3);      ae(:,12,5)  = ael(:,1,8,6) + ael(:,5,4,2);  % add missing connection a5_42
   ae(:,18,10) = ael(:,8,4,6);                      ae(:,4,10) = ael(:,5,1,7);                     ae(:,12,14) = ael(:,1,8,7) + ael(:,4,5,6)+ael(:,5,4,3)+ael(:,8,1,2);
   fde(:,18)   = fdem(:,4,8) + fdem(:,8,4);         fde(:,4)    = fdem(:,5,1) + fdem(:,1,5);       ae(:,12,19) = ael(:,4,5,7) + ael(:,8,1,3);
                                                                                                   ae(:,12,3)  = ael(:,5,4,6);
@@ -311,7 +311,7 @@ function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half
                                                                                                   fde(:,12)    = fdem(:,1,8) + fdem(:,4,5) + fdem(:,8,1) + fdem(:,5,4);
  % center nodes of fith sixth face and the centre node all 8 elements
  
- % node nummber 5 (center node of the fifth face),   node 19 (center node
+ % node number 5 (center node of the fifth face),   node 19 (center node
  % of the sixth face) node 14 center node
  % ----------------------------------------------------------------------
  ae(:,5,5)  = ael(:,1,6,6) + ael(:,2,5,5) + ael(:,5,2,2) + ael(:,6,1,1);   ae(:,19,19) = ael(:,3,8,8) + ael(:,4,7,7) + ael(:,7,4,4) + ael(:,8,3,3);   ae(:,14,14) = ael(:,1,7,7) + ael(:,2,8,8) + ael(:,3,5,5) + ael(:,4,6,6) + ael(:,5,3,3) + ael(:,6,4,4) + ael(:,7,1,1)+ael(:,8,2,2); 
@@ -330,7 +330,10 @@ function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half
  ae(:,5,9)  = ael(:,6,1,7);                                                ae(:,19,9)  = ael(:,7,4,6);                                                ae(:,14,5)  = ael(:,1,7,6) + ael(:,2,8,5) + ael(:,5,3,2) + ael(:,6,4,1);
  fde(:,5)   = fdem(:,1,6) + fdem(:,2,5) + fdem(:,6,1) + fdem(:,5,2);       fde(:,19)   = fdem(:,4,7) + fdem(:,3,8) + fdem(:,7,4) + fdem(:,8,3);       ae(:,14,1)  = ael(:,1,7,2) + ael(:,2,8,1);                                                                                                                                                   
                                                                                                                                                       ae(:,14,2)  = ael(:,2,8,6) + ael(:,6,4,2);
-                                                                                                                                            fde(:,14)   = fdem(:,1,7) + fdem(:,2,8) + fdem(:,3,5) + fdem(:,4,6) +....
+                                                                                                                                                      ae(:,14,4)  = ael(:,1,7,5) + ael(:,5,3,1);  % added missing connection 14 - 4
+                                                                                                                                                      ae(:,14,16) = ael(:,3,5,7) + ael(:,7,1,3);  % added missing connection 14 - 16
+                                                                                                                                                      ae(:,14,18) = ael(:,4,6,8) + ael(:,8,2,4);  % added missing connection 14 - 18
+                                                                                                                                                      fde(:,14)   = fdem(:,1,7) + fdem(:,2,8) + fdem(:,3,5) + fdem(:,4,6) +....
                                                                                                                                                                     fdem(:,5,3) + fdem(:,6,4) + fdem(:,7,1)+ fdem(:,8,2);                                                                                                                                                               
 % debug
 %         if tout>0,
@@ -338,7 +341,7 @@ function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half
 %         fprintf('element : %g \n',elt) 
 %         disp(squeeze(ade(elt,1:19,1:19)))
 %         end
-
+%for i =1:nel; sigval(:,i) = eig(squeeze(ae(i,:,:))); end;
 
 % compute face residuals
   res_face = faceres_Q1_Q1half3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz);

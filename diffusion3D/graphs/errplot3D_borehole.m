@@ -1,11 +1,11 @@
 function errplot3D_borehole(sol3D,eldata3D,ev,xyz,x,y,z,bd,fig)
-%ERRPLOT3D_STAIR plots solution and error on stair domain
-%   errplot3D_stair(sol3D,eldata3D,xyzleft,xyzright,x,y,z,fig);
-%   input
+%ERRPLOT3D_BOREHOLE plots solution and error on borehole domain
+%   errplot3D_borehole(sol3D,eldata3D,xyzleft,xyzright,x,y,z,fig);
+%   inputs:
 %          sol3D        nodal solution vector 
 %          eldata3D     element error vector
 %          ev           element mapping matrix
-%          xyzleft xyzright     vertex coordinate vector  
+%          xyz          vertex coordinate vector  
 %          x            vector of x-axis interpolation points
 %          y            vector of y-axis interpolation points
 %          z            vector of z-axis interpolation points
@@ -27,13 +27,10 @@ for i=1:size(sol3D,3)
     sol3D(II,JJ,i) =nan; 
 end
 
-
-% [II]=find(Z<0);  sol3D(:,:,II) =nan;
-
 sol3D = permute(sol3D,[3 2 1]);
 
 
-%% create an axes and setup initial properties
+%% create axes and setup initial properties
 figure(fig)
 subplot(221),contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),sol3D(:,:,round(size(Z,3)/2)),20),axis('square')
 axis('off'), squarex, title('Finite Element Solution','FontSize',12)
@@ -50,7 +47,7 @@ set(hSlice,'EdgeColor','none','FaceColor','interp');
 
 hSlice = slice(x,y,z,sol3D, (xmax - xmean)/2,(ymax - ymean)/2,zmean);
 set(hSlice,'EdgeColor','none','FaceColor','interp');
-%% adjust lighting
+% adjust lighting
 camlight;
 camlight(-90,0);
 lighting gouraud
@@ -98,7 +95,7 @@ set(hSlice,'EdgeColor','none','FaceColor','interp');
 hSlice = slice(x,y,z,xyzsol,(xmax - xmean)/2,(ymax - ymean)/2,zmean);
 set(hSlice,'EdgeColor','none','FaceColor','interp');
 
-%% adjust lighting
+% adjust lighting
 camlight;
 camlight(-90,0);
 lighting gouraud

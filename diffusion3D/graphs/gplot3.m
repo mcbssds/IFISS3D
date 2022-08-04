@@ -1,5 +1,5 @@
 function h = gplot3(A, xyz, varargin)
-%GPLOT3 Plots graph (nodes and edges).
+%GPLOT3 Plots graph (nodes and edges)
 %   h = GPLOT(A, xyz) 
 %   Plots the graph specified by the adjacency matrix A and
 %   the n-by-3 coordinate array, xyz.

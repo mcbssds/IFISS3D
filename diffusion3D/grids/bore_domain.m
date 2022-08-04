@@ -173,6 +173,6 @@ bound3D=sort([k1;k2;k3;k4;k5;k6;k7;k8;k9;k10;k11]);
 
 gohome
 cd datafiles
-save -v7.3 bore_grid.mat mv xyz bound3D mbound3D x y z n nc
+save -v7.3 bore_grid.mat mv xyz bound3D mbound3D x y z n nc bd
 
 return

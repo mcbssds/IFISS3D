@@ -47,7 +47,7 @@ etoc=toc; fprintf('Galerkin system solved in %8.3e seconds\n\n',etoc)
 % compute a posteriori error estimate (Q1 only) and plot solution
 if qmethod==1,
     diffpost3D
-    errplot3D(x_it,error_tot,ev,xyz,x,y,z,99),
+    errplot3D_borehole(x_it,error_tot,ev,xyz,x,y,z,bd,99),
 elseif qmethod==2,
     plot3Dsol(x_it,x,y,z,100)
 end

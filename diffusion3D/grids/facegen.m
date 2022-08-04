@@ -68,7 +68,7 @@ efc(:,:,2) = reshape(diag(adj2(A2(ss,2),A2(ss,1)))',nel,4);
 efc(:,:,3) = reshape(diag(adj5(A5(ss,2),A5(ss,1)))',nel,4);
 
 efc = reshape(efc,[nel,12]);
-if domain == 1  % cube domain
+if domain == 1 || domain == 3  % cube domain or borehole domain
     efc = efc(:,[1,10,8,4,5,6,7,3,9,2,11,12]);
     efc  = efc(:,[7,12,11,9,10,8]);
 else  % stair domain

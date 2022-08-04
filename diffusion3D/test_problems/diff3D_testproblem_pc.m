@@ -1,4 +1,4 @@
-% DIFF3D_TESTPROBLEM (for Windows users) driver for 3D test problem setup
+% DIFF3D_TESTPROBLEM_PC (for Windows users) driver for 3D test problem setup
 % IFISS scriptfile: DJS; 27 July 2022.
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 

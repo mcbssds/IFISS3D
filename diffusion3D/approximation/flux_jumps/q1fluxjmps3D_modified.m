@@ -1,8 +1,7 @@
 function jmp = q1fluxjmps3D_modified(q1sol,efx,xyz,ev,ebound3D,s,t)
-%Q1FLUXJMPS3D_MODIFIED vectorised flux jumps on the midpoint and edges of
-%the faces for hexahedral element
+%Q1FLUXJMPS3D_MODIFIED vectorised flux jumps at element midpoints and edges
 %   jmp = q1fluxjmps3D_modified(q1sol,efx,xyz,ev,ebound3D,s,t)
-%   input
+%   inputs:
 %          q1sol        vertex solution vector
 %          efx          presorted element connectivity array
 %          xyz          vertex coordinate vector
@@ -10,10 +9,10 @@ function jmp = q1fluxjmps3D_modified(q1sol,efx,xyz,ev,ebound3D,s,t)
 %          ebound3d     element edge boundary matrix
 %          s            quadrature point coordinate in (-1,1)
 %          t            quadrature point coordinate in (-1,1)
-%   output
+%   outputs:
 %          jmp          component elementwise edge flux jumps
 %
-% call function  deriv3D 
+% calls function  deriv3D 
 % IFISS function: GP 9 June 2022 
 % Copyright (c) 2022  G.Papanikos, C.E. Powell, D.J. Silvester
 tic
@@ -30,6 +29,7 @@ xl_v = x(ev);
 yl_v = y(ev);
 zl_v = z(ev);
 sl_v = q1sol(ev);
+
 % evaluate derivatives and normal flux on a face in turn
 % and assemble into flux and face area adjacency matrices
 

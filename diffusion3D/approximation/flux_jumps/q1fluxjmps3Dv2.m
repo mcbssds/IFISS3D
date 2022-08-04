@@ -1,5 +1,5 @@
 function [jmp1,jmp2,jmp3,jmp4] = q1fluxjmps3Dv2(q1sol,efx,xyz,ev,ebound3D,s,t,l)
-%Q1FLUXJMPSv2 vectorised flux jumps for hexahedral element mid face node
+%Q1FLUXJMPS3DV2 vectorised flux jumps for element mid face node
 %and edge nodes
 %   jmp = q1fluxjmps3Dv2(q1sol,efx,xy,ev,ebound,s,t,l);
 %   input

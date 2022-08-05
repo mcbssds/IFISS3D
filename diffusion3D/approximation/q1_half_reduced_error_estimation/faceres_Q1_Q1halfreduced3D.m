@@ -1,19 +1,19 @@
 function [faceres] = faceres_Q1_Q1halfreduced3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
-%FACERES_Q1_Q1halfreduced3D  computes Q1(h/2) reduced  face residuals for stochastic Q1 solution
-%  [faceres] = stoch_faceres_Q1_Q1halfreduced3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
-%   input
+%FACERES_Q1_Q1HALFREDUCED3D  computes Q1(h/2) reduced face residuals for Q1 solution
+%   [faceres] = faceres_Q1_Q1halfreduced3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
+%   inputs:
 %          xyz           vertex coordinate vector
 %          ev            element mapping matrix
 %          ebound3D      element face boundary matrix
-%          q1sol3D       stochastic Q1 solution vector
+%          q1sol3D       Q1 solution vector
 %          fcx           element face connectivity array
 %          hx,hy,hz      element mesh sizes
-%   output
+%   output:
 %         faceres      face residuals
 %
-%   calls functions q1fluxjmps3D_modified, gausspoints_oned,
-%   gausspoints_twod
-%   IFISS function: GP; 22 June 2022
+% Calls functions q1fluxjmps3D_modified, gausspoints_oned,
+% gausspoints_twod
+% IFISS function: GP; 22 June 2022
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 
 x=xyz(:,1); y=xyz(:,2); z=xyz(:,3); nvtx=length(x);

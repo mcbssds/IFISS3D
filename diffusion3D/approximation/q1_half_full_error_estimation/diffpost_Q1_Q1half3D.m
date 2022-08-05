@@ -9,7 +9,6 @@ function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half
 %          q1sol3D      Q1 solution vector
 %          fcx          element face connectivity array
 %          hx,hy,hz     element mesh sizes
-
 %   outputs:
 %          err_sq_el   element error estimate
 %	   xx		??

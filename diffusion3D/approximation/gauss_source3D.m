@@ -1,5 +1,5 @@
 function ff = gauss_source3D(s,t,l,xl,yl,zl,ngpt)
-%GAUSS_SOURCE3D evaluates source term at Gauss points 
+%GAUSS_SOURCE3D evaluates source term at Gauss point in all elements 
 %   ff = gauss_source3D(s,t,xl,yl,zl);
 %   inputs:
 %          s         reference element x coordinate   

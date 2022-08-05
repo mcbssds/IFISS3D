@@ -1,26 +1,24 @@
 function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1halfreduced3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
-%DIFFPOST_Q1_Q1halfreduced3D computes Q1(h/2) reduced error estimator for Q1 solution
+%DIFFPOST_Q1_Q1HALFREDUCED3D computes Q1(h/2) reduced error estimator for Q1 solution
 %employs elementwise reduced Q1-bubbles for midpoint centroid nodes
-%   [zerr_sq_el,zelerr,zfe,zae] = stoch_diffpost_q1_ypx(xy,ev,ebound,x_gal,...
-%                                  fcx,hx,hy,hz);
-%   input
+%   [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1halfreduced3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz);
+%   inputs:
 %          xyz          vertex coordinate vector
 %          ev           element mapping matrix
 %          ebound3D     element face boundary matrix
-%          q1sol3D        Q1 solution vector
+%          q1sol3D      Q1 solution vector
 %          fcx          element face connectivity array
 %          hx,hy,hz     element mesh sizes
-
-%   output
+%   outputs:
 %          err_sq_el   element error estimate
 %          xx          elementwise error estimate
 %          fe          elementwise rhs vectors
 %          ae          LDLT factorized element matrices
 %          xl_m,yl_m,zl_m,xl_s,yl_s,zl_s element coordinates
 %
-%   calls functions  gausspoints_oned, gausspoints_threed gauss_source3D
-%   deriv3D
-%   IFISS function: GP; 22 June 2022
+%  Calls functions: gausspoints_oned, gausspoints_threed, gauss_source3D
+%  and deriv3D.
+%  IFISS function: GP; 22 June 2022
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 
 fprintf('computing Q1 error estimator...  \n')

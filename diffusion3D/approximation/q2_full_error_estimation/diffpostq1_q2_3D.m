@@ -10,7 +10,7 @@ function [errorsq_ele,xx,fe,ae] = diffpostq1_q2_3D(xyz,ev,ebound3D,q1sol3D,fcx,h
 %          hx,hy,hz      element mesh sizes
 %   outputs:
 %          errorsq_ele  element error estimate
-%          elerr        elementwise error estimate
+%          xx           elementwise error estimate
 %          fe           elementwise rhs vectors
 %          ae           LDLT factorized element matrices
 %

@@ -1,8 +1,7 @@
 function [jmp1,jmp2,jmp3,jmp4] = q1fluxjmps3Dv2(q1sol,efx,xyz,ev,ebound3D,s,t,l)
-%Q1FLUXJMPS3DV2 vectorised flux jumps for element mid face node
-%and edge nodes
-%   jmp = q1fluxjmps3Dv2(q1sol,efx,xy,ev,ebound,s,t,l);
-%   input
+%Q1FLUXJMPS3DV2 vectorised flux jumps for element mid face and edge nodes
+%   [jmp1,jmp2,jmp3,jmp4] = q1fluxjmps3Dv2(q1sol,efx,xyz,ev,ebound3D,s,t,l)
+%   inputs:
 %          q1sol        vertex solution vector
 %          efx          presorted element connectivity array
 %          xyz          vertex coordinate vector
@@ -12,11 +11,11 @@ function [jmp1,jmp2,jmp3,jmp4] = q1fluxjmps3Dv2(q1sol,efx,xyz,ev,ebound3D,s,t,l)
 %          t            Gaussian point , t\in (-1,1)
 %          l            Gaussian point , l\in (-1,1)
 %
-%   output
-%          jmp1          component elementwise edge flux jumps
-%          jmp2          component elementwise edge flux jumps
-%          jmp3          component elementwise edge flux jumps
-%          jmp4          component elementwise edge flux jumps
+%   outputs:
+%          jmp1         component elementwise edge flux jumps
+%          jmp2         component elementwise edge flux jumps
+%          jmp3         component elementwise edge flux jumps
+%          jmp4         component elementwise edge flux jumps
 %
 % IFISS function: GP 22 June 2022; .
 % Copyright (c)   G.Papanikos, C.E. Powell, D.J. Silvester

@@ -1,5 +1,5 @@
 function ff = gauss_source3D(s,t,l,xl,yl,zl,ngpt)
-%GAUSS_SOURCE3D evaluates source term at Gauss point in all elements 
+%GAUSS_SOURCE3D evaluates source term at Gauss point
 %   ff = gauss_source3D(s,t,xl,yl,zl);
 %   inputs:
 %          s         reference element x coordinate   
@@ -9,7 +9,7 @@ function ff = gauss_source3D(s,t,l,xl,yl,zl,ngpt)
 %          yl        physical element y vertex coordinates  
 %          zl        physical element z vertex coordinates
 %  output:
-%          ff        ???
+%          ff        vector of f values for all elements
 % IFISS function: GP; 9 June 2022.
 % Copyright(c) 2022  G.Papanikos,  C.E. Powell, D.J. Silvester
 

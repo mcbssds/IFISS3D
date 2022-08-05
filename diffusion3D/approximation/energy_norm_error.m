@@ -1,14 +1,13 @@
 function EE = energy_norm_error(xyz,ev,FEMsol,sn,qmethod)
-% ENERGY_NORM_ERROR computes the energy norm of the error between the
-% exact solution and the FEM approximation for the test problems 11,12, 13 and 14 with
-% exact solution 
-%   EE = energy_norm_error(xyz,ev,q1sol,sn)
-%   input
+%ENERGY_NORM_ERROR computes energy norm of error
+%   EE = energy_norm_error(xyz,ev,FEMsol,sn, qmethod)
+%   inputs:
 %          xyz        vertex coordinate vector
 %          ev         element mapping matrix
 %          FEMsol     finite element solution
-%          sn         test problems with analytical solution (test problems 11, 12, 13 and 14)
-%  outpt
+%          sn         test problem number
+%          qmethod    flag for Q1/Q2 elements
+%  output:
 %          EE         energy norm of the error
 %
 % IFISS function: GP; 9 June 2022.

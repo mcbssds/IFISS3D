@@ -1,6 +1,6 @@
 function jmp = q1fluxjmps3D(q1sol,efx,xyz,ev,ebound3D,s)
 %Q1FLUXJMPS3D vectorised flux jumps at midpoints of element faces
-%   jmp = q1fluxjmps3D(q1sol,efx,xy,ev,ebound,s);
+%   jmp = q1fluxjmps3D(q1sol,efx,xy,ev,ebound3D,s);
 %   inputs:
 %          q1sol        vertex solution vector
 %          efx          presorted element connectivity array

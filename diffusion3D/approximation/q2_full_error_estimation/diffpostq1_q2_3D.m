@@ -1,14 +1,14 @@
 function [errorsq_ele,xx,fe,ae] = diffpostq1_q2_3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
 %DIFFPOSTQ1_Q2_3D local Poisson error estimator for Q1 solution using full Q2 bubble functions
-%   [errorsq_ele,elerr,fe,ae] = diffpostq1_q2_3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz);
-%   input
+%  [errorsq_ele,xx,fe,ae] = diffpostq1_q2_3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz);
+%  inputs:
 %          xyz           vertex coordinate vector
 %          ev            element mapping matrix
 %          ebound3D      element edge boundary matrix
 %          q1sol3D       Q1 solution vector
 %          fcx           element face connectivity array
 %          hx,hy,hz      element mesh sizes
-%   output
+%   outputs:
 %          errorsq_ele  element error estimate
 %          elerr        elementwise error estimate
 %          fe           elementwise rhs vectors

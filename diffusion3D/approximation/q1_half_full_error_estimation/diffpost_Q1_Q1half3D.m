@@ -1,22 +1,23 @@
 function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
-%DIFFPOST_Q1_Q1half3D computes Q1(h/2) error estimator for Q1 solution
+%DIFFPOST_Q1_Q1HALF3D computes Q1(h/2) error estimator for Q1 solution
 % employs elementwise Q1-bubbles for the edge midpoints and centroid
 %   [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s, yl_s, zl_s] = diffpost_Q1_Q1half3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
-%   input
+%   inputs:
 %          xyz          vertex coordinate vector
 %          ev           element mapping matrix
 %          ebound3D     element face boundary matrix
-%          q1sol3D       Q1 solution vector
+%          q1sol3D      Q1 solution vector
 %          fcx          element face connectivity array
 %          hx,hy,hz     element mesh sizes
 
-%   output
+%   outputs:
 %          err_sq_el   element error estimate
+%	   xx		??
 %          fe          elementwise rhs vectors
 %          ae          LDLT factorized element matrices
 %          xl_m,yl_m,zl_m,xl_s,yl_s,zl_s element coordinates
 %
-%   calls functions  gausspoints_oned, gausspoints_threed deriv3D
+%   Calls functions: gausspoints_oned, gausspoints_threed, deriv3D
 %   gauss_source3D
 %   SIFISS function: GP; 09 June 2022
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester

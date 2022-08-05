@@ -1,13 +1,13 @@
 function [elerr_p] = diffpost_bc3D_Q1halfreduced(elerror,fez,xyz,ev,ebound3D,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s)
-%DIFFPOST_Q1halfreduced postprocesses local Poisson error estimator 
-%   [errorsq_cbc] = diffpost_bc3D_Y(errorsq_ele,fe,xyz,ev,ebound);
-%   input
-%          errorsq_ele   element error estimate (without BC imposition) 
-%          aez            
+%DIFFPOST_Q1HALFREDUCED postprocesses local Poisson error estimator 
+%   [elerr_p] = diffpost_bc3D_Q1halfreduced(elerror,fez,xyz,ev,ebound3D,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s) 
+%   inputs:
+%          elerror  	 element error estimate (without BC imposed)         
 %          fez           elementwise rhs vectors
 %          xyz           vertex coordinate vector  
 %          ev            element mapping matrix
 %          ebound3D      element face boundary matrix 
+%	   xl_m,yl_m,zl_m,xl_s,yl_s,zl_s
 %   output
 %          errorsq_cbc    element error estimate with BC correction
 %

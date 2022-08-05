@@ -1,17 +1,17 @@
 function [elerr_p] = diffpost_bc3D(elerror,fez,xyz,ev,ebound3D);
-%DIFFPOST_BC3D postprocesses local Poisson Q2 full error estimator
-%   [errorsq_cbc] = diffpost_bc3D(errorsq_ele,fe,xyz,ev,ebound);
-%   input
-%          elerror       element error estimate (without BC imposition)
-%          fe            elementwise rhs vectors
+%DIFFPOST_BC3D postprocesses local Q2 full Poisson error estimator
+%   [elerr_p] = diffpost_bc3D(elerror,fez,xyz,ev,ebound3D);
+%   inputs:
+%          elerror       element error estimate (without BC imposed)
+%          fez           elementwise rhs vectors
 %          xyz           vertex coordinate vector
 %          ev            element mapping matrix
 %          ebound3D      element face boundary matrix
-%   output
-%          errorsq_cbc    element error estimate with BC correction
+%   outputs:
+%          elerr_p       element error estimate with BC correction
 %
-%   calls functions gausspoints_oned, gausspoints_threed
-%   IFISS function: GP; 09 June 2022
+% Calls functions gausspoints_oned, gausspoints_threed
+% IFISS function: GP; 09 June 2022
 % Copyright (c)  2022 G.Papanikos, C.E. Powell, D.J. Silvester
 
 x=xyz(:,1); y=xyz(:,2); z= xyz(:,3);

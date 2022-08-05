@@ -1,23 +1,23 @@
 function [errorsq_ele,xx,fe,ae] = diffpostq1_3D_q2_reduced(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
 %DIFFPOSTQ1_3D_Q2_reduced local Poisson error estimator for Q1 solution
-%using only Q2 base functions in the midpoint of the face and centroid point
-%   [errorsq_ele,elerr,fe,ae] = diffpostq1_q2_reduced(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy);
-%   input
+%using only Q2 basis functions at the midpoint of the faces and element centroid
+%   [errorsq_ele,xx,fe,ae] = diffpostq1_3D_q2_reduced(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz);
+%   inputs:
 %          xyz           vertex coordinate vector
 %          ev            element mapping matrix
 %          ebound3D      element edge boundary matrix
 %          q1sol3D       Q1 solution vector
 %          fcx           element face connectivity array
 %          hx,hy,hz      element mesh sizes
-%   output
+%   outputs:
 %          errorsq_ele  element error estimate
-%          elerr        elementwise error estimate
+%          xx           elementwise error estimate
 %          fe           elementwise rhs vectors
 %          ae           LDLT factorized element matrices
 %
-%   calls functions q1fluxjmps3D, gausspoints_oned, gausspoints_threed,
-%   deriv3D, qderiv3D gauss_source3D
-%   IFISS function: GP; 09 June 2022
+%  Calls functions q1fluxjmps3D, gausspoints_oned, gausspoints_threed,
+%  deriv3D, qderiv3D gauss_source3D
+%  IFISS function: GP; 09 June 2022
 % Copyright (c)  2022 G.Papanikos, C.E. Powell, D.J. Silvester
 
 fprintf('computing Q1 error estimator...  \n')

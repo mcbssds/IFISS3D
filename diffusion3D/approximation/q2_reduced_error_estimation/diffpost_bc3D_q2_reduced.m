@@ -1,14 +1,14 @@
 function [elerr_p] = diffpost_bc3D_q2_reduced(elerror,fez,xyz,ev,ebound3D);
-%DIFFPOST_BC3D postprocesses local Poisson error estimator
-%   [errorsq_cbc] = diffpost_bc3D(errorsq_ele,fe,xyz,ev,ebound);
-%   input
-%          errorsq_ele   element error estimate (without BC imposition)
+%DIFFPOST_BC3D_Q2_REDUCED postprocesses local Poisson error estimator
+%   [elerr_p] = diffpost_bc3D_q2_reduced(elerror,fez,xyz,ev,ebound3D);
+%   inputs:
+%          elerror       element error estimate (without BC imposed)
 %          fez           elementwise rhs vectors
 %          xyz           vertex coordinate vector
 %          ev            element mapping matrix
 %          ebound3D      element face boundary matrix
-%   output
-%          elerr_p    element error estimate with BC correction
+%   output:
+%          elerr_p       element error estimate with BC correction
 %
 %   calls functions gausspoints_oned, gausspoints_threed deriv3D qderiv3D
 %   IFISS function: GP; 09 June 2022

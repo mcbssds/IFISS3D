@@ -7,13 +7,13 @@ function [elerr_p] = diffpost_bc3D_Q1halfreduced(elerror,fez,xyz,ev,ebound3D,xl_
 %          xyz           vertex coordinate vector  
 %          ev            element mapping matrix
 %          ebound3D      element face boundary matrix 
-%	   xl_m,yl_m,zl_m,xl_s,yl_s,zl_s
+%	   xl_m,yl_m,zl_m,xl_s,yl_s,zl_s element coordinates
 %   output
-%          errorsq_cbc    element error estimate with BC correction
+%          elerr_p      element error estimate with BC correction
 %
-%   calls functions gausspoints_oned, gausspoints_threed
+%  Calls functions gausspoints_oned, gausspoints_threed
 %  Rebuilt in IFISS3.1 to retain compatibility with earlier versions
-%  IFISS function: GP 2021; .
+%  IFISS function: GP 2021;
 %  Copyright (c)   G.Papanikos, C.E. Powell, D.J. Silvester
 
      ngpt=2;

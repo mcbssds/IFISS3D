@@ -1,13 +1,13 @@
 function EE = energy_norm_error(xyz,ev,FEMsol,sn,qmethod)
 % ENERGY_NORM_ERROR computes the energy norm of the error between the
-% exact solution and the FEM approximation for the test problems 4,6 with
-% exact solution and the H^1 seminorm for the problems 3 and 5
+% exact solution and the FEM approximation for the test problems 11,12, 13 and 14 with
+% exact solution 
 %   EE = energy_norm_error(xyz,ev,q1sol,sn)
 %   input
 %          xyz        vertex coordinate vector
 %          ev         element mapping matrix
 %          FEMsol     finite element solution
-%          sn         test problems with analytical solution (test problems 3, 4, 5 and 6)
+%          sn         test problems with analytical solution (test problems 11, 12, 13 and 14)
 %  outpt
 %          EE         energy norm of the error
 %
@@ -90,10 +90,10 @@ elseif sn == 12 % derivatives of triquadratic exact solution u = -(x.^2-1)(y.^2-
     ux = -2.*xe.*(ye.^2 - 1).*(ze.^2 - 1);
     uy = -2.*ye.*(xe.^2 - 1).*(ze.^2 - 1);
     uz = -2.*ze.*(xe.^2 - 1).*(ye.^2 - 1);
-elseif sn == 13 % derivatives of tricubic exact solution u = -(x.^3-1)(y.^3-1)(z.^3-1)
-    ux = -3.*xe.^2.*(ye.^3 - 1).*(ze.^3 - 1);
-    uy = -3.*ye.^2.*(xe.^3 - 1).*(ze.^3 - 1);
-    uz = -3.*ze.^2.*(xe.^3 - 1).*(ye.^3 - 1);
+elseif sn == 13 % derivatives of tricubic exact solution u = -xyz(x.^2-1)(y.^2-1)(z.^2-1)
+    ux = -ye.*ze.*(3.*xe.^2-1).*(ye.^2 - 1).*(ze.^2 - 1);
+    uy = -xe.*ze.*(3.*ye.^2-1).*(xe.^2 - 1).*(ze.^2 - 1);
+    uz = -xe.*ye.*(3.*ze.^2-1).*(xe.^2 - 1).*(ye.^2 - 1);
 elseif sn == 14 % derivatives of triquartic exact solution u = -(x.^4-1)(y.^4-1)(z.^4-1)
     ux = -4.*xe.^3.*(ye.^4 - 1).*(ze.^4 - 1);
     uy = -4.*ye.^3.*(xe.^4 - 1).*(ze.^4 - 1);

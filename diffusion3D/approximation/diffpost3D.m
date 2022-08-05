@@ -18,42 +18,41 @@ if  approx_space==1
     error_tot = sqrt(errorsq_ele); errorest=norm(error_tot(:),2);
     fprintf('Simplistic estimate energy error is %10.4e \n',errorest)
     
-    if sn~=5
-        % include the boundary correction
-        [errorsq_cbc] = diffpost_bc3D(errorsq_ele,fe,xyz,ev,ebound3D);
-        error_tot = sqrt(errorsq_cbc); errorest=norm(error_tot,2);
-        fprintf('Corrected estimate energy error is %10.4e \n',errorest)
-    end
+    % include the boundary correction
+    [errorsq_cbc] = diffpost_bc3D(errorsq_ele,fe,xyz,ev,ebound3D);
+    error_tot = sqrt(errorsq_cbc); errorest=norm(error_tot,2);
+    fprintf('Corrected estimate energy error is %10.4e \n',errorest)
+    
 elseif approx_space==2
     [errorsq_ele,elerr,fe,ae] = diffpostq1_3D_q2_reduced(xyz,ev,ebound3D,x_it,fcx,hx,hy,hz);
     error_tot = sqrt(errorsq_ele); errorest=norm(error_tot(:),2);
     fprintf('Simplistic estimate energy error is %10.4e \n',errorest)
-    if sn~=5
-        % include the boundary correction
-        [errorsq_cbc] = diffpost_bc3D_q2_reduced(errorsq_ele,fe,xyz,ev,ebound3D);
-        error_tot = sqrt(errorsq_cbc); errorest=norm(error_tot,2);
-        fprintf('Corrected estimate energy error is %10.4e \n',errorest)
-    end
+    
+    % include the boundary correction
+    [errorsq_cbc] = diffpost_bc3D_q2_reduced(errorsq_ele,fe,xyz,ev,ebound3D);
+    error_tot = sqrt(errorsq_cbc); errorest=norm(error_tot,2);
+    fprintf('Corrected estimate energy error is %10.4e \n',errorest)
+    
 elseif approx_space==3
     [errorsq_ele,elerr,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half3D(xyz,ev,ebound3D,x_it,fcx,hx,hy,hz);
     error_tot = sqrt(errorsq_ele); errorest=norm(error_tot(:),2);
     fprintf('Simplistic estimate energy error is %10.4e \n',errorest)
-    if sn~=5
-        % include the boundary correction
-        [errorsq_cbc] = diffpost_bc3D_Q1half(errorsq_ele,fe,xyz,ev,ebound3D,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s);
-        error_tot = sqrt(errorsq_cbc); errorest=norm(error_tot,2);
-        fprintf('Corrected estimate energy error is %10.4e \n',errorest)
-    end
+    
+    % include the boundary correction
+    [errorsq_cbc] = diffpost_bc3D_Q1half(errorsq_ele,fe,xyz,ev,ebound3D,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s);
+    error_tot = sqrt(errorsq_cbc); errorest=norm(error_tot,2);
+    fprintf('Corrected estimate energy error is %10.4e \n',errorest)
+    
 elseif approx_space == 4
     [errorsq_ele,elerr,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1halfreduced3D(xyz,ev,ebound3D,x_it,fcx,hx,hy,hz);
     error_tot = sqrt(errorsq_ele); errorest=norm(error_tot(:),2);
     fprintf('Simplistic estimate energy error is %10.4e \n',errorest)
-    if sn~=5
-        % include the boundary correction
-        [errorsq_cbc] = diffpost_bc3D_Q1halfreduced(errorsq_ele,fe,xyz,ev,ebound3D,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s);
-        error_tot = sqrt(errorsq_cbc); errorest=norm(error_tot,2);
-        fprintf('Corrected estimate energy error is %10.4e \n',errorest)
-    end
+    
+    % include the boundary correction
+    [errorsq_cbc] = diffpost_bc3D_Q1halfreduced(errorsq_ele,fe,xyz,ev,ebound3D,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s);
+    error_tot = sqrt(errorsq_cbc); errorest=norm(error_tot,2);
+    fprintf('Corrected estimate energy error is %10.4e \n',errorest)
+    
 else
     fprintf('Invalid input!');
 end

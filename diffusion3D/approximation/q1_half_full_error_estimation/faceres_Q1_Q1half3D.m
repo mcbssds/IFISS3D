@@ -1,17 +1,17 @@
 function [faceres] = faceres_Q1_Q1half3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
-%FACERES_Q1_Q1half3D  computes Q1(h/2) face residuals for Q1 solution
+%FACERES_Q1_Q1HALF3D  computes Q1(h/2) face residuals for Q1 solution
 %  [faceres] = faceres_Q1_Q1half3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
-%   input
+%   inputs:
 %          xyz           vertex coordinate vector
 %          ev            element mapping matrix
 %          ebound3D      element face boundary matrix
 %          q1sol3D       stochastic Q1 solution vector
 %          fcx           element face connectivity array
 %          hx,hy,hz      element mesh sizes
-%   output
+%   outputs:
 %          faceres      edge residuals
 %
-%   calls functions q1fluxjmps3D_modified, gausspoints_oned, stoch_gauss_coeff, deriv3D qderiv
+%   Calls functions q1fluxjmps3D_modified, gausspoints_oned, stoch_gauss_coeff, deriv3D qderiv
 %   SIFISS function: GP; 09 June 2022
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 

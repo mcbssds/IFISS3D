@@ -15,7 +15,6 @@ function h = gplot3(A,xyz,linespec)
 % Modified from code available at: https://github.com/cmccomb/gplot3
 % which is itself a modified version of the in-built MATLAB gplot function
 
-
 % Returns i and j, lists of connected nodes
 [i,j] = find(A);
 % Extract

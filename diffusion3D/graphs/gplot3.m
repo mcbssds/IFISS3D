@@ -1,32 +1,27 @@
-function h = gplot3(A, xyz, varargin)
-%GPLOT3 Plots graph (nodes and edges)
-%   h = GPLOT(A, xyz) 
-%   Plots the graph specified by the adjacency matrix A and
-%   the n-by-3 coordinate array, xyz.
+function h = gplot3(A,xyz,linespec)
+%GPLOT3 plots edge-node graph specified by adjacency and coordinate matrices
+%  h = gplot3(A,xyz,linespec) 
+%  inputs:
+%         A          matrix with 1 in (i,j)th position if nodes i and j 
+%                    are connected and 0 otherwise
+%         xyz        matrix containing (x,y,z) coordinates of nodes
+%         linespec   specifies line type and/or colour for plotting; see
+%                    MATLAB function PLOT for possibilities
 %
-%   GPLOT(A, xyz, linespec) uses line type and color specified in the
-%   string LineSpec. See PLOT for possibilities.
+%   output:
+%         h          handle for created plot
 %
-%   h = GPLOT(A, xyz) returns the a handle to the graph.
-%
-%   h = GPLOT(A, xyz, 'LineWidth', 5, ...) also takes arbitrary arguments
-%   for line properties
-% If no arguments given, then run buckminster sphere example
-% source: https://github.com/cmccomb/gplot3
+% IFISS function CP; 11 August 2022.
+% Modified from code available at: https://github.com/cmccomb/gplot3
+% which is itself a modified version of the in-built MATLAB gplot function
 
-if nargin == 0
-    [A, xyz] = bucky;
-end
-% If only one argument given, throw error.
-if nargin == 1
-    error('Please provide an adjacency matrix and coordinate array');
-end
+
 % Returns i and j, lists of connected nodes
 [i,j] = find(A);
-% Extact
-X = [ xyz(i,1) xyz(j,1)]';
-Y = [ xyz(i,2) xyz(j,2)]';
-Z = [ xyz(i,3) xyz(j,3)]';
+% Extract
+X = [xyz(i,1) xyz(j,1)]';
+Y = [xyz(i,2) xyz(j,2)]';
+Z = [xyz(i,3) xyz(j,3)]';
 % Add NaN values to break between line segments
 X = [X; NaN(size(i))'];
 Y = [Y; NaN(size(i))'];
@@ -36,28 +31,4 @@ X = X(:);
 Y = Y(:);
 Z = Z(:);
 
-% If only two arguments, then plot as is
-if nargin == 0 || nargin == 2
-    h = plot3(X, Y, Z);
-end
-
-% If linespec given, then use it
-if nargin >= 3
-    if mod(nargin, 2) == 1
-        h = plot3(X, Y, Z, varargin{1});
-        start = 2;
-    else
-        h = plot3(X, Y, Z);
-        start = 1;
-    end
-    
-    % Now apply the rest of the var string
-    if ~isempty(varargin)
-        for i=start:2:length(varargin)
-            set(h, varargin{i}, varargin{i+1});
-        end
-    end
-    
-end
-
-end
+h = plot3(X,Y,Z,linespec);

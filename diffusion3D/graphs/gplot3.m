@@ -25,7 +25,7 @@ Z = [xyz(i,3) xyz(j,3)]';
 X = [X; NaN(size(i))'];
 Y = [Y; NaN(size(i))'];
 Z = [Z; NaN(size(i))'];
-% Serialize the x and y data
+% Serialize the x, y and z data
 X = X(:);
 Y = Y(:);
 Z = Z(:);

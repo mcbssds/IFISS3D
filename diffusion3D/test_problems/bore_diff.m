@@ -5,7 +5,7 @@
 % define geometry
 pde=1; domain=3;
 fprintf('\n\nGrid generation for borehole domain\n')
-nc=default('Grid parameter? enter 2 for 30x30x30 grid (default 1)',1);
+nc=default('Grid parameter? enter 2 for 62x62x16 grid (default 1)',1);
 bore_domain(1,nc)
 load bore_grid.mat
 grid_type = 2;
@@ -49,7 +49,7 @@ if qmethod==1,
     diffpost3D
     errplot3D_borehole(x_it,error_tot,ev,xyz,x,y,z,bd,99),
 elseif qmethod==2,
-    plot3Dsol(x_it,x,y,z,100)
+    plot3Dsol_borehole(x_it,xyz,x,y,z,bd,100)
 end
 
 if savesol == 1

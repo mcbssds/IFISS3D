@@ -1,6 +1,6 @@
-function errplot3D_borehole(sol3D,eldata3D,ev,xyz,x,y,z,bd,fig)
-%ERRPLOT3D_BOREHOLE plots solution and error on borehole domain
-%   errplot3D_borehole(sol3D,eldata3D,ev,x,y,z,bd,fig);
+function plot3Dsol_borehole(sol3D,xyz,x,y,z,bd,fig)
+%PLOTSOL3D_BOREHOLE plots solution on borehole domain
+%   plotsol3D_borehole(sol3D,x,y,z,bd,fig);
 %   inputs:
 %          sol3D        nodal solution vector 
 %          eldata3D     element error vector
@@ -15,7 +15,7 @@ function errplot3D_borehole(sol3D,eldata3D,ev,xyz,x,y,z,bd,fig)
 % IFISS function: GP; 9 June 2022.
 % Copyright (c)  2022  G.Papanikos,  C.E. Powell, D.J. Silvester
 
-fprintf('plotting solution and estimated errors... ')
+fprintf('plotting solution... ')
 
 [X,Y,Z]=meshgrid(x,y,z);
 sol3D = griddata(xyz(:,1),xyz(:,2),xyz(:,3),sol3D,Y,Z,X);
@@ -32,10 +32,10 @@ end
 
 %% create axes and setup initial properties
 figure(fig)
-subplot(221),contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),sol3D(:,:,round(size(Z,3)/2)),20),axis('square')
+subplot(121),contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),sol3D(:,:,round(size(Z,3)/2)),20),axis('square')
 axis('off'), squarex, title('Finite Element Solution','FontSize',12)
 axis('square')
-subplot(222),
+subplot(122),
 daspect([1 1 1]);
 axis([xmin xmax ymin ymax zmin zmax])
 xlabel('x') % x-axis label
@@ -47,52 +47,6 @@ set(hSlice,'EdgeColor','none','FaceColor','interp');
 
 hSlice = slice(x,y,z,sol3D, (xmax - xmean)/2,(ymax - ymean)/2,zmean);
 set(hSlice,'EdgeColor','none','FaceColor','interp');
-% adjust lighting
-camlight;
-camlight(-90,0);
-lighting gouraud
-colormap jet; colorbar;
-view(330,30)
-
-xx=xyz(:,1); yy=xyz(:,2); zz=xyz(:,3);
-nel=length(eldata3D);
-% loop over elements    
-
-xl = xx(ev);
-yl = yy(ev);
-zl = zz(ev);
-xc(:,1) = 0.125*sum(xl,2);
-xc(:,2) = 0.125*sum(yl,2);
-zc(:,3) = 0.125*sum(zl,2);
-
-%
-% interpolate to a cartesian product mesh
-x=0.5*(x(1:end-1)+x(2:end));
-y=0.5*(y(1:end-1)+y(2:end));
-z=0.5*(z(1:end-1)+z(2:end));
-[X,Y,Z]=meshgrid(x,y,z);
-xyzsol = griddata(xc(:,1),xc(:,2),zc(:,3),eldata3D,Y,Z,X);
-
-for i=1:size(xyzsol,3)
-    [II,JJ] = find(X(:,:,i)>=-bd & X(:,:,i)<=bd & Y(:,:,i)>=-bd & Y(:,:,i)<=bd & Z(:,:,i)>0 & Z(:,:,i)<=1);
-    xyzsol(II,JJ,i) =nan; 
-end
-
-subplot(223),
-contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),xyzsol(:,:,round(size(Z,3)/2)),20),axis('square')
-subplot(224)
-daspect([1 1 1]);
-axis([xmin xmax ymin ymax zmin zmax])
-xlabel('x') % x-axis label
-ylabel('z') % y-axis label
-zlabel('y') % z-axis label
-hold on
-hSlice = slice(x,y,z,xyzsol,xmean,ymean,zmin);
-set(hSlice,'EdgeColor','none','FaceColor','interp');
-
-hSlice = slice(x,y,z,xyzsol,(xmax - xmean)/2,(ymax - ymean)/2,zmean);
-set(hSlice,'EdgeColor','none','FaceColor','interp');
-
 % adjust lighting
 camlight;
 camlight(-90,0);

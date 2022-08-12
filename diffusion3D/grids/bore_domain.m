@@ -31,12 +31,19 @@ plot(x,0*x,'bo'), axis('equal')
 title('Location of mesh points in each direction')
 
 nx = 6*nnx+3;
-nz = nx;
-z = x;
+ny = nx;
 y = x;
+
+nz=2^(nc+2);
+npz=nz/(Dmax*2);
+zz=[1/npz:1/npz:Dmax];
+zpos=[0,zz];
+zneg=-zz(length(zz):-1:1);
+z=[zneg,zpos]';
+
 n = nx-1;
 np = n/2;
-ny = length(y);
+nz = length(z);
 nvtx = nx*ny*nz;
 
 [X,Y,Z]=meshgrid(x,y,z);
@@ -49,15 +56,17 @@ xyz=[xx(:),yy(:),zz(:)];
 
 nn = length(1:2:np*Dmax+np);
 
+
 v  = 1:2:np*Dmax+np;
-xn = 1:np*np*np*Dmax;
+xn = 1:np*np*Dmax;
 kx = v';
 ky = ones(nn,nn).*v;
+kz =  1;
 
-kz =  repmat(ky(:),1,nn);
-ky =  repmat(ky,nn,1);
-kx =  repmat(kx,nn,1);
 %
+
+for k=1:npz*Dmax
+
 mref =(n+1)*(ky-1)+kx +(n+1)*(n+1)*(kz-1);
 mref1=(n+1)*(ky-1)+kx +(n+1)*(n+1)*kz;
 mref2=(n+1)*(ky-1)+kx +(n+1)*(n+1)*(kz+1);
@@ -101,6 +110,9 @@ nvv(:,26)=  mref2(:)+n+1;
 nvv(:,27)=  mref2(:)+n+2;
 
 mv(macro_element,1:27)=nvv(:,1:27);
+xn = xn + np*np;
+kz =kz+2;
+end
 %
 macro_element = size(mv,1);
 

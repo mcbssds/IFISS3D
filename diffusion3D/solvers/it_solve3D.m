@@ -1,13 +1,13 @@
 %IT_SOLVE3D iterative solution of predefined 3D diffusion problem
-%IFISS scriptfile: DJS 29 July 2022.
+%IFISS scriptfile: CP 12th August 2022.
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 global amg_grid amg_smoother   
 % Declare global variables
-if exist('pde','var')==0,
+if exist('pde','var')==0
     error('Oops ... you need to set up a specific discrete problem first!'),
 end
 
-if pde==1,   % 3D diffusion problem
+if pde==1   % 3D diffusion problem
     fprintf('solving discretised 3D diffusion problem...\n')
     % select Krylov subspace method
     itmeth = default('PCG/MINRES? 1/2 (default PCG)',1);
@@ -23,14 +23,13 @@ if pde==1,   % 3D diffusion problem
     fprintf('   2  incomplete Cholesky\n');
     fprintf('   3  algebraic multigrid\n');
     precon = default('default is incomplete Cholesky ',2);
-    if precon==0,     % none
+    if precon==0     % none
         M1=[]; M2=[];
-    elseif precon==1, % diagonal
+    elseif precon==1 % diagonal
         D=diag(diag(Agal)); M1=sqrt(D); M2=M1;
-    elseif precon==2, % incomplete Cholesky
+    elseif precon==2 % incomplete Cholesky
         M1 = ichol(Agal); M2=M1';
-        %    M2 = cholinc(Agal,'0'); M1=M2'; fprintf('--- cholinc.m\n')%
-    elseif precon==3, % AMG
+    elseif precon==3 % AMG
         % uses global variables amg_grid amg_smoother
         amg_grid = amg_grids_setup(Agal);
         fprintf('\nSetup done.\n')
@@ -39,12 +38,12 @@ if pde==1,   % 3D diffusion problem
         smoothopt = default('PDJ/PGS smoother? 1/2 (point damped Jacobi)',1);
         if smoothopt==1
             fprintf('point damped Jacobi smoothing ..\n')
-            smoother_params = amg_smoother_params(amg_grid, 'PDJ', 2);
+            smoother_params = amg_smoother_params3D(amg_grid, 'PDJ', 2);
         else
             fprintf('point Gauss-Seidel smoothing ..\n')
-            smoother_params = amg_smoother_params(amg_grid, 'PGS', 2);
+            smoother_params = amg_smoother_params3D(amg_grid, 'PGS', 2);
         end
-        amg_smoother = amg_smoother_setup(amg_grid, smoother_params);
+        amg_smoother = amg_smoother_setup3D(amg_grid, smoother_params);
     else
         error('Oops ... invalid preconditioner')
     end
@@ -53,7 +52,7 @@ if pde==1,   % 3D diffusion problem
     % zero initial guess
     x0=zeros(size(fgal));
     tic
-    if itmeth==1, %---- PCG
+    if itmeth==1 %---- PCG
         if precon < 3
             fprintf('\nPCG iteration ...\n');
             [x_it,flag,relres,iter,resvec] = pcg(Agal,fgal,tol,maxit,M1,M2,x0);
@@ -61,13 +60,13 @@ if pde==1,   % 3D diffusion problem
             [x_it,flag,relres,iter,resvec] = ...
              pcg(Agal,fgal,tol,maxit, @amg_v_cycle, [], x0, amg_grid, amg_smoother); 
         end
-    elseif itmeth==2, %---- MINRES
+    elseif itmeth==2 %---- MINRES
         if precon < 3
             fprintf('\nMINRES iteration ...\n');
             [x_it,flag,relres,iter,resvec] = minres(Agal,fgal,tol,maxit,M1,M2,x0);
         else
             [x_it,flag,relres,iter,resvec] = ...
-              minres(Agal,fgal,tol,maxit,@amg_v_cycle, [], x0, amg_grid, amg_smoother);
+              minres(Agal,fgal,tol,maxit,@amg_v_cycle,[],x0, amg_grid,amg_smoother);
         end
     else
         error('Oops ... invalid iterative method!')
@@ -78,7 +77,7 @@ error('Oops ... undefined PDE problem'),
 end
 
 % print and plot results
-if flag ==0,
+if flag ==0
     % successful convergence
     fprintf('convergence in %3i iterations\n',iter)
     nr0=resvec(1);

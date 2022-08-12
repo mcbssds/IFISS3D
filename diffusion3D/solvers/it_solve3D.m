@@ -33,7 +33,9 @@ if pde==1,   % 3D diffusion problem
     elseif precon==3, % AMG
         % uses global variables amg_grid amg_smoother
         amg_grid = amg_grids_setup(Agal);
-        fprintf('\nsetup done.\n')
+        fprintf('\nSetup done.\n')
+        plot_mg = default('plot AMG grid sequence? yes/no 1/2 (default no)',2);
+        if plot_mg==1, amg_coarsen_plot3D(amg_grid, xyz); end
         smoothopt = default('PDJ/PGS smoother? 1/2 (point damped Jacobi)',1);
         if smoothopt==1
             fprintf('point damped Jacobi smoothing ..\n')

@@ -1,17 +1,17 @@
 % BORE_DIFF solves Poisson problem on a borehole domain
-% IFISS scriptfile: DJS; 29 July 2022.
+% IFISS scriptfile: DJS; 14 August 2022.
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 
 % define geometry
 pde=1; domain=3;
 fprintf('\n\nGrid generation for borehole domain\n')
-nc=default('Grid parameter? enter 2 for 62x62x16 grid (default 1)',1);
+nc=default('Grid parameter? enter 2 for 48x48x32 grid (default 1)',1);
 bore_domain(1,nc)
 load bore_grid.mat
 grid_type = 2;
 
 % set up matrices
-qmethod=default('Q1/Q2 approximation 1/2? (default Q1)',1);
+qmethod=1; %-------- Q2 option not tested
 % reference grid switch
 if grid_type==1  % uniform grid
     savesol=default('Save results for reference 1/0 (yes/no)? (default no)',0);
@@ -31,9 +31,9 @@ end
 fprintf('System saved in borehole_diff.mat ...\n')
 gohome
 cd datafiles
-save -v7.3 borehole_diff.mat qmethod Agal M fgal xyz x y z
+save -v7 borehole_diff.mat qmethod Agal M fgal xyz x y z
 
-lin_system_choice = default('Choose between direct or iterative solver 1/0 (direct/iterative) (default 1)',1);
+lin_system_choice = default('Choose between iterative or direct solver 0/1 (default 0)',0);
 tic
 if lin_system_choice
     fprintf('\nSolving linear system using direct solver... \n')

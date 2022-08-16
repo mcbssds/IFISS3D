@@ -1,5 +1,5 @@
 function plot3Dsol_stair(sol3D,xyzleft,xright,x,y,z,fig)
-%PLOT3DSOL_STAIR plots solution and error on stair domain
+%PLOT3DSOL_STAIR plots solution on stair domain
 %   plot3Dsol_stair(sol3D,xyzleft,xright,x,y,z,fig);
 %   inputs:
 %          sol3D           nodal solution vector

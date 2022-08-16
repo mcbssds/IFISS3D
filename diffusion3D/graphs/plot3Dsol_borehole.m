@@ -1,6 +1,6 @@
 function plot3Dsol_borehole(sol3D,xyz,x,y,z,bd,fig)
-%PLOTSOL3D_BOREHOLE plots solution on borehole domain
-%   plotsol3D_borehole(sol3D,x,y,z,bd,fig);
+%PLOT3DSOL_BOREHOLE plots solution on borehole domain
+%   plot3Dsol_borehole(sol3D,x,y,z,bd,fig);
 %   inputs:
 %          sol3D        nodal solution vector 
 %          eldata3D     element error vector
@@ -13,7 +13,7 @@ function plot3Dsol_borehole(sol3D,xyz,x,y,z,bd,fig)
 %          fig          figure number
 %
 % IFISS function: GP; 9 June 2022.
-% Copyright (c)  2022  G.Papanikos,  C.E. Powell, D.J. Silvester
+% Copyright (c) 2022 G.Papanikos, C.E. Powell, D.J. Silvester
 
 fprintf('plotting solution... ')
 

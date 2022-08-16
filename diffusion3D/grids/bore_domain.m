@@ -3,10 +3,11 @@ function bore_domain(Dmax,nc)
 %   bore_domain(Dmax,nc);
 %   inputs: 
 %   Dmax   limits of domain [-Dmax, Dmax] 
-%   nc     grid parameter 15*nc x 15*nc x 15*nc stretched grid
-%
+%   nc     grid parameter
+
+% gives stretched grid around borehole
 % grid defining data is saved to the file: bore_grid.mat
-% IFISS function: DJS; 29 July 2022
+% IFISS function: DJS; 14 August 2022
 % Copyright (c) G. Papanikos, C.E. Powell, D.J. Silvester
 
 bd = 1e-2; % borehole semi-width
@@ -18,7 +19,7 @@ if Dmax<0.1 || Dmax ==0
 end
 
 left = -Dmax;
-nnx  = 5*nc;
+nnx  = 4*nc;
 
 % compute (x,y,z) coordinates of vertices
 x_pos = subint_expand(Dmax,Dmax/2,bd,2*nnx,nnx); 
@@ -34,7 +35,9 @@ nx = 6*nnx+3;
 ny = nx;
 y = x;
 
-nz=2^(nc+2);
+% uniform in the z-direction
+
+nz=2^(nc+3);
 npz=nz/(Dmax*2);
 zz=[1/npz:1/npz:Dmax];
 zpos=[0,zz];
@@ -185,6 +188,6 @@ bound3D=sort([k1;k2;k3;k4;k5;k6;k7;k8;k9;k10;k11]);
 
 gohome
 cd datafiles
-save -v7.3 bore_grid.mat mv xyz bound3D mbound3D x y z n nc bd
+save -v7 bore_grid.mat mv xyz bound3D mbound3D x y z n nc bd
 
 return

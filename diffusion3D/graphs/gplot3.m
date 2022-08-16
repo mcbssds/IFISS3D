@@ -1,5 +1,5 @@
 function h = gplot3(A,xyz,linespec)
-%GPLOT3 plots edge-node graph specified by adjacency and coordinate matrices
+%GPLOT3 plots edge-node graph from adjacency and coordinate matrices
 %  h = gplot3(A,xyz,linespec) 
 %  inputs:
 %         A          matrix with 1 in (i,j)th position if nodes i and j 

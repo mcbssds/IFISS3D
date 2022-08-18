@@ -11,7 +11,7 @@ function [A,Q,f] = femq2_diff3D(xyz,mv)
 %
 % Natural boundary conditions applied. Dirichlet conditions
 % must be explicitly enforced by calling function nonzerobc3D.
-% IFISS function: GP; 9 June 2022.
+% IFISS function: GP; 9 June 2022; DJS 14 August 2022
 % Copyright (c) 2021 G. Papanikos, C. E Powell, D.J. Silvester
 
 x=xyz(:,1); y=xyz(:,2); z= xyz(:,3);
@@ -25,13 +25,15 @@ fprintf('Setting up Q2 diffusion matrices...  ')
 A = sparse(nvtx,nvtx);
 Q = sparse(nvtx,nvtx);
 f = zeros(nvtx,1);
-%
+
 % construct the integration rule
 ngpt=3;
 [oneg,onew] = gausspoints_oned(ngpt);
 [s,t,l,wt] = gausspoints_threed(oneg,onew);
 nngpt=ngpt^3; ng=ngpt;
-%
+
+
+% inner loop over elements
 xl_v = x(mv(:,1:8));  yl_v = y(mv(:,1:8)); zl_v = z(mv(:,1:8));
 
 ae = zeros(nel,27,27);
@@ -49,8 +51,10 @@ for igpt = 1:nngpt
     [psi,dpsidx,dpsidy,dpsidz] = qderiv3D(sigpt,tigpt,ligpt,xl_v,yl_v,zl_v);
     
     fe = fe + wght*rhs(:).*psi.*jac(:);
-    ae = ae + wght*(dpsidx.*permute(dpsidx,[1 3 2]) + dpsidy.*permute(dpsidy,[1,3,2]) + dpsidz.*permute(dpsidz,[1,3,2]) ).*invjac(:);
-    re = re + wght*psi.*permute(psi,[1 3 2]);
+    ae = ae + wght*(dpsidx.*permute(dpsidx,[1 3 2]) + ...
+                    dpsidy.*permute(dpsidy,[1,3,2]) + ...
+                    dpsidz.*permute(dpsidz,[1,3,2]) ).*invjac(:);
+    re = re + wght*psi.*permute(psi,[1 3 2]).*jac(:);
     % end of Gauss point loop
 end
 %

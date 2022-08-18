@@ -11,7 +11,7 @@ function [A,Q,f] = femq1_diff3D(xyz,ev)
 %
 % Natural boundary conditions applied. Dirichlet conditions
 % must be explicitly enforced by calling function nonzerobc3D.
-% IFISS function: GP; 9 June 2022.
+% IFISS function: GP; 9 June 2022; DJS 18 August 2022
 % Copyright (c) 2021 G. Papanikos, C.E. Powell, D.J. Silvester
 
 x=xyz(:,1); y=xyz(:,2); z=xyz(:,3);
@@ -20,7 +20,7 @@ nvtx=length(x);
 lx=max(x)-min(x); ly=max(y)-min(y);lz=max(z)-min(z);
 hx=max(diff(x)); hy=max(diff(y));hz=max(diff(z));
 fprintf('Setting up Q1 diffusion matrices...  ')
-%
+
 % initialise global matrices
 A = sparse(nvtx,nvtx);
 Q = sparse(nvtx,nvtx);
@@ -28,13 +28,12 @@ f = zeros(nvtx,1);
 %
 
 % construct the integration rule
-ngpt=3;                             % 2x2x2 Gauss points %(s,t,l)_i = ((-1)^k gpt,(-1)^j gpt,(-1)^r gpt), i = 4(k-1) +2(j-1) +r , k,j,r =1,2
+ngpt=2; %-------- 2x2x2 Gauss points
 [oneg,onew] = gausspoints_oned(ngpt);
 [s,t,l,wt] = gausspoints_threed(oneg,onew);
 nngpt=ngpt^3; ng=ngpt;
 
 % inner loop over elements
-
 xl_v = x(ev); yl_v = y(ev); zl_v = z(ev);
 
 ae = zeros(nel,8,8);
@@ -49,8 +48,10 @@ for igpt = 1:nngpt
     
     rhs = gauss_source3D(sigpt,tigpt,ligpt,xl_v,yl_v,zl_v);
     fe = fe + wght*rhs(:).*phi.*jac(:);
-    ae = ae + wght*(dphidx.*permute(dphidx,[1 3 2]) + dphidy.*permute(dphidy,[1,3,2]) + dphidz.*permute(dphidz,[1,3,2]) ).*invjac(:);
-    re = re + wght*phi.*permute(phi,[1 3 2]);
+    ae = ae + wght*(dphidx.*permute(dphidx,[1 3 2]) + ...
+                    dphidy.*permute(dphidy,[1,3,2]) + ...
+                    dphidz.*permute(dphidz,[1,3,2]) ).*invjac(:);
+    re = re + wght*phi.*permute(phi,[1 3 2]).*jac(:);
     % end of Gauss point loop
 end
 

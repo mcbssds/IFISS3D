@@ -1,0 +1,58 @@
+%--------- second test problem
+batchmode3D('3DP2')
+Working in batch mode from data file 3DP2_batch.m
+
+specification of reference Poisson problem.
+choose specific example
+     1  Cube domain, constant source
+     2  Stair-shaped domain, constant source
+     3  Borehole domain, constant source
+
+    11  Cube domain, analytic trilinear    solution 
+    12  Cube domain, analytic triquadratic solution
+    13  Cube domain, analytic tricubic     solution
+     2
+
+Grid generation for a stair-shaped domain.
+grid parameter: 3 for underlying 8x8x8 grid (default is 4 for 16x16x16 grid)
+     5
+
+Q1/Q2 approximation 1/2? (default Q1)
+     1
+
+Save results for reference 1/0 (yes/no)? (default no)
+     0
+
+Setting up Q1 diffusion matrices...  done
+System saved in stair_diff.mat ...
+Choose between direct or iterative solver 1/0 (direct/iterative) (default 1)
+     1
+
+
+Solving linear system using direct solver... 
+Galerkin system solved in 1.799e-01 seconds
+
+Choose a specific error estimation space
+     1.  Q2(h)
+     2.  reduced Q2(h)
+     3.  Q1(h/2)
+     4.  reduced Q1(h/2)
+default is reduced Q2 approximation
+     2
+
+include boundary correction yes/no 1/0 (default 0)
+     0
+
+FAST a posteriori error estimation for Q1 element 
+checking face numbering and computing face areas ... done 
+computing Q1 error estimator...  
+error estimation took 9.503e-02 seconds
+Simplistic estimate energy error is 3.8058e-02 
+plotting solution and estimated errors... done
+Energy norm squared of approximation is 0.2950
+Energy norm squared of reference solution is 0.2967
+  ||u_{ref}-u_{FEM}||_{A} = 4.168e-02
+Effectivity index = 0.9131
+
+load batchrun
+%------ end of test

@@ -1,0 +1,194 @@
+%--------- first test problem
+batchmode3D('3DP1')
+Working in batch mode from data file 3DP1_batch.m
+
+specification of reference Poisson problem.
+choose specific example
+     1  Cube domain, constant source
+     2  Stair-shaped domain, constant source
+     3  Borehole domain, constant source
+
+    11  Cube domain, analytic trilinear    solution 
+    12  Cube domain, analytic triquadratic solution
+    13  Cube domain, analytic tricubic     solution
+     1
+
+Grid generation for cube domain
+Grid parameter: 3 for underlying 8x8x8 grid (default is 16x16x16)
+     4
+
+Uniform/stretched grid (1/2) (default is uniform)
+     1
+
+Q1/Q2 approximation 1/2? (default Q1)
+     1
+
+Save results for reference 1/0 (yes/no)? (default no)
+     0
+
+Setting up Q1 diffusion matrices...  done
+System saved in cube_diff.mat ...
+Choose between direct or iterative solver 1/0 (direct/iterative) (default 1)
+     1
+
+
+Solving linear system using direct solver... 
+Galerkin system solved in 1.645e-02 seconds
+
+Choose a specific error estimation space
+     1.  Q2(h)
+     2.  reduced Q2(h)
+     3.  Q1(h/2)
+     4.  reduced Q1(h/2)
+default is reduced Q2 approximation
+     4
+
+include boundary correction yes/no 1/0 (default 0)
+     0
+
+FAST a posteriori error estimation for Q1 element 
+checking face numbering and computing face areas ... done 
+computing Q1 error estimator...  
+Q1(h/2) estimate |  res_face = 1.1221e-02
+error estimation took 2.664e-02 seconds
+Simplistic estimate energy error is 6.4254e-02 
+Plotting solution and estimated errors... done
+Energy norm squared of approximation is 0.6398
+Energy norm squared of reference solution is 0.6454
+  ||u_{ref}-u_{FEM}||_{A} = 7.505e-02
+Effectivity index = 0.8562
+
+%-------------------- test preconditioned solvers
+load batchrun
+
+%-------------------- diagonal scaling
+it_solve3D 
+solving discretised 3D diffusion problem...
+PCG/MINRES? 1/2 (default PCG) : 2
+maximum number of iterations? (default 100) : 
+preconditioner:
+   0  none
+   1  diagonal
+   2  incomplete Cholesky
+   3  algebraic multigrid
+default is incomplete Cholesky  : 1
+
+MINRES iteration ...
+convergence in  25 iterations
+
+    k  log10(||r_k||/||r_0||)   
+    0           0.0000 
+    1          -0.0879 
+    2          -0.1827 
+    3          -0.2858 
+    4          -0.4018 
+    5          -0.5378 
+    6          -0.7100 
+    7          -0.9842 
+    8          -1.4184 
+    9          -1.7564 
+   10          -2.0954 
+   11          -2.4601 
+   12          -2.8860 
+   13          -3.4219 
+   14          -4.0035 
+   15          -4.5745 
+   16          -5.0551 
+   17          -5.4866 
+   18          -5.8851 
+   19          -6.3488 
+   20          -6.9373 
+   21          -7.4278 
+   22          -8.1089 
+   23          -8.8123 
+   24          -9.5935 
+   25         -10.3985 
+Bingo!
+
+  3.4776e-02 seconds
+
+
+use new (enter figno) or existing (0) figure, default is 0 : 13
+colour (b,g,r,c,m,y,k): enter 1--7 (default 1) : 1
+ 
+%-------------------- incomplete factorisation
+it_solve3D
+solving discretised 3D diffusion problem...
+PCG/MINRES? 1/2 (default PCG) : 2
+maximum number of iterations? (default 100) : 
+preconditioner:
+   0  none
+   1  diagonal
+   2  incomplete Cholesky
+   3  algebraic multigrid
+default is incomplete Cholesky  : 2
+
+MINRES iteration ...
+convergence in  17 iterations
+
+    k  log10(||r_k||/||r_0||)   
+    0           0.0000 
+    1          -0.2391 
+    2          -0.6200 
+    3          -1.3262 
+    4          -2.0405 
+    5          -2.6984 
+    6          -3.4406 
+    7          -4.1808 
+    8          -4.7252 
+    9          -5.3135 
+   10          -5.7514 
+   11          -6.4460 
+   12          -7.2935 
+   13          -8.0827 
+   14          -8.8362 
+   15          -9.4805 
+   16          -9.9046 
+   17         -10.7981 
+Bingo!
+
+  1.6082e-02 seconds
+
+
+use new (enter figno) or existing (0) figure, default is 0 : 
+figure number (default is current active figure) : 
+colour (b,g,r,c,m,y,k): enter 1--7 (default 1) : 5
+
+%-------------------- algebraic multigrid
+it_solve3D
+solving discretised 3D diffusion problem...
+PCG/MINRES? 1/2 (default PCG) : 2
+maximum number of iterations? (default 100) : 
+preconditioner:
+   0  none
+   1  diagonal
+   2  incomplete Cholesky
+   3  algebraic multigrid
+default is incomplete Cholesky  : 3
+AMG grid coarsening ...  10 grid levels constructed.
+
+Setup done.
+plot AMG grid sequence? yes/no 1/2 (default no) : 
+PDJ/PGS smoother? 1/2 (point damped Jacobi) : 2
+point Gauss-Seidel smoothing ..
+convergence in   5 iterations
+
+    k  log10(||r_k||/||r_0||)   
+    0           0.0000 
+    1          -1.6490 
+    2          -3.7655 
+    3          -5.9500 
+    4          -8.2217 
+    5         -10.3994 
+Bingo!
+
+  6.7196e-02 seconds
+
+
+use new (enter figno) or existing (0) figure, default is 0 : 
+figure number (default is current active figure) : 
+colour (b,g,r,c,m,y,k): enter 1--7 (default 1) : 7
+ 
+legend('diagonal', 'incomplete','AMG','Location', 'Best')
+
+%------ end of test

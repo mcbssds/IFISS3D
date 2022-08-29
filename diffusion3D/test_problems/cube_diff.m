@@ -30,7 +30,7 @@ end
 fprintf('System saved in cube_diff.mat ...\n')
 gohome
 cd datafiles
-save -v7.3 cube_diff.mat qmethod Agal M fgal xyz x y z
+save cube_diff.mat qmethod Agal M fgal xyz x y z
 
 lin_system_choice = default('Choose between direct or iterative solver 1/0 (direct/iterative) (default 1)',1);
 tic

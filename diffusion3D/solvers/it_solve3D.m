@@ -1,5 +1,5 @@
 %IT_SOLVE3D iterative solution of predefined 3D diffusion problem
-%IFISS scriptfile: CP 12th August 2022.
+%IFISS scriptfile: CP 12 August 2022; DJS  24 August 2022
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 global amg_grid amg_smoother   
 % Declare global variables
@@ -31,11 +31,13 @@ if pde==1   % 3D diffusion problem
         M1 = ichol(Agal); M2=M1';
     elseif precon==3 % AMG
         % uses global variables amg_grid amg_smoother
-        amg_grid = amg_grids_setup(Agal);
-        fprintf('\nSetup done.\n')
+        regrid = default('reuse AMG grid sequence? yes/no 1/2 (default no)',2);
+        if regrid~=1, tic, amg_grid = amg_grids_setup3D(Agal);
+        fprintf('\nsetup done.\n'), toc
+        amg_grid_complexity(amg_grid); end
         plot_mg = default('plot AMG grid sequence? yes/no 1/2 (default no)',2);
         if plot_mg==1, amg_coarsen_plot3D(amg_grid, xyz); end
-        smoothopt = default('PDJ/PGS smoother? 1/2 (point damped Jacobi)',1);
+        smoothopt = default('PDJ/PGS smoother? 1/2 (point Gauss Seidel)',2);
         if smoothopt==1
             fprintf('point damped Jacobi smoothing ..\n')
             smoother_params = amg_smoother_params3D(amg_grid, 'PDJ', 2);

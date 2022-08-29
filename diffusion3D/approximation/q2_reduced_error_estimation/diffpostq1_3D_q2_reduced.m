@@ -17,10 +17,10 @@ function [errorsq_ele,xx,fe,ae] = diffpostq1_3D_q2_reduced(xyz,ev,ebound3D,q1sol
 %
 %  Calls functions q1fluxjmps3D, gausspoints_oned, gausspoints_threed,
 %  deriv3D, qderiv3D gauss_source3D
-%  IFISS function: GP; 09 June 2022
+%  IFISS function: GP; 09 June 2022; DJS 23 August 2022
 % Copyright (c)  2022 G.Papanikos, C.E. Powell, D.J. Silvester
 
-fprintf('computing Q1 error estimator...  \n')
+fprintf('computing Q2(r) error estimate ...  \n')
 x=xyz(:,1); y=xyz(:,2); z=xyz(:,3);
 nel=length(ev(:,1));
 errorsq_ele = zeros(nel,1);

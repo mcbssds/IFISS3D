@@ -31,7 +31,7 @@ end
 fprintf('System saved in borehole_diff.mat ...\n')
 gohome
 cd datafiles
-save -v7 borehole_diff.mat qmethod Agal M fgal xyz x y z
+save borehole_diff.mat qmethod Agal M fgal xyz x y z
 
 lin_system_choice = default('Choose between iterative or direct solver 0/1 (default 0)',0);
 tic

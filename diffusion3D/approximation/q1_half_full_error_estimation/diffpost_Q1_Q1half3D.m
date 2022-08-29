@@ -1,7 +1,9 @@
-function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
-%DIFFPOST_Q1_Q1HALF3D computes Q1(h/2) error estimator for Q1 solution
+function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = ...
+          diffpost_Q1_Q1half3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
+%DIFFPOST_Q1_Q1HALF3D computes Q1(h/2) error estimator
 % employs elementwise Q1-bubbles for the edge midpoints and centroid
-%   [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s, yl_s, zl_s] = diffpost_Q1_Q1half3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
+%   [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = ...
+%         diffpost_Q1_Q1half3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz);
 %   inputs:
 %          xyz          vertex coordinate vector
 %          ev           element mapping matrix
@@ -11,23 +13,22 @@ function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half
 %          hx,hy,hz     element mesh sizes
 %   outputs:
 %          err_sq_el   element error estimate
-%	   xx		??
+%	       xx		   elementwise error coefficients
 %          fe          elementwise rhs vectors
 %          ae          LDLT factorized element matrices
 %          xl_m,yl_m,zl_m,xl_s,yl_s,zl_s element coordinates
 %
 %   Calls functions: gausspoints_oned, gausspoints_threed, deriv3D
 %   gauss_source3D
-%   SIFISS function: GP; 09 June 2022
+%   IFISS function: GP; 09 June 2022; DJS 29 August 2022
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 
- fprintf('computing Q1 error estimator...  \n')
+ fprintf('computing Q1 error estimate ...  \n')
   x=xyz(:,1); y=xyz(:,2); z=xyz(:,3);
   nel=length(ev(:,1));
   nn=19;
   xl_v=nan(nel,8); yl_v=nan(nel,8); zl_v=nan(nel,8);
 
-%
 % construct the integration rule
   ngpt=2;
   [oneg,onew] = gausspoints_oned(ngpt);
@@ -35,12 +36,10 @@ function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half
   nngpt=ngpt^3; 
   t1=tic;
 %
-% inner loop over elements    
-
+% inner loop over elements
       xl_v = x(ev);
       yl_v= y(ev);
       zl_v = z(ev);
-
 
 % initialise local stochastic and deterministic matrices
 %  ae = zeros(nel,nn,nn);
@@ -52,6 +51,7 @@ function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half
   fdem = zeros(nel,8,8);
   
   xl_s = zeros(nel,8,8); yl_s = zeros(nel,8,8); zl_s = zeros(nel,8,8);
+
 % compute local mid-edge coordinates
 
   xface1(:,1)= 0.5*(xl_v(:,1)+xl_v(:,2));                                  yface1(:,1)= 0.5*(yl_v(:,1)+yl_v(:,2));                                   zface1(:,1) = zl_v(:,1);
@@ -89,6 +89,9 @@ function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half
   xface6(:,3)= 0.5*(xl_v(:,7)+xl_v(:,8));                                  yface6(:,3)= yl_v(:,7);                                                   zface6(:,3) = 0.5*(zl_v(:,7)+zl_v(:,8));  
   xface6(:,4)= 0.5*(xl_v(:,8)+xl_v(:,4));                                  yface6(:,4)= yl_v(:,7);                                                   zface6(:,4) = 0.5*(zl_v(:,8)+zl_v(:,4));  
   xcentrface6(:,1)= 0.25*( xface6(:,1)+ xface6(:,2)+ xface6(:,3)+ xface6(:,4)); ycentrface6(:,1)= yl_v(:,7);                                         zcentrface6(:,1) =  0.25*(zface6(:,1)+ zface6(:,2)+ zface6(:,3)+ zface6(:,4));
+
+%  initialisation
+  xmid = zeros(length(xcentrface1),1); ymid = zeros(length(ycentrface1),1); zmid = zeros(length(zcentrface1),1);
   
   xmid(:) = 1./6*(xcentrface1(:,1)+xcentrface2(:,1)+xcentrface3(:,1)+xcentrface4(:,1)+xcentrface5(:,1)+xcentrface6(:,1));
   ymid(:) = 1./6*(ycentrface1(:,1)+ycentrface2(:,1)+ycentrface3(:,1)+ycentrface4(:,1)+ycentrface5(:,1)+ycentrface6(:,1));

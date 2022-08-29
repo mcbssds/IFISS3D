@@ -1,7 +1,9 @@
-function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1halfreduced3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
-%DIFFPOST_Q1_Q1HALFREDUCED3D computes Q1(h/2) reduced error estimator for Q1 solution
-%employs elementwise reduced Q1-bubbles for midpoint centroid nodes
-%   [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1halfreduced3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz);
+function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = ...
+         diffpost_Q1_Q1halfreduced3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
+%DIFFPOST_Q1_Q1HALFREDUCED3D computes Q1(h/2) reduced error estimator
+% employs elementwise reduced Q1-bubbles for midpoint centroid nodes
+%   [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = ...
+%        diffpost_Q1_Q1halfreduced3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz);
 %   inputs:
 %          xyz          vertex coordinate vector
 %          ev           element mapping matrix
@@ -18,10 +20,10 @@ function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = diffpost_Q1_Q1half
 %
 %  Calls functions: gausspoints_oned, gausspoints_threed, gauss_source3D
 %  and deriv3D.
-%  IFISS function: GP; 22 June 2022
+%  IFISS function: GP; 22 June 2022; DJS 29 August 2022
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 
-fprintf('computing Q1 error estimator...  \n')
+fprintf('computing Q1(r) error estimate ...  \n')
 x=xyz(:,1); y=xyz(:,2); z=xyz(:,3);
 nel=length(ev(:,1));
 xl_v=nan(nel,8); yl_v=nan(nel,8); zl_v=nan(nel,8);
@@ -51,8 +53,8 @@ fde = zeros(nel,7);
 fdem = zeros(nel,8,8);
 
 xl_s = zeros(nel,8,8); yl_s = zeros(nel,8,8); zl_s = zeros(nel,8,8);
-% compute local mid-edge coordinates
 
+% compute local mid-edge coordinates
 
   xface1(:,1)= 0.5*(xl_v(:,1)+xl_v(:,2));                                  yface1(:,1)= 0.5*(yl_v(:,1)+yl_v(:,2));                                   zface1(:,1) = zl_v(:,1);
   xface1(:,2)= 0.5*(xl_v(:,2)+xl_v(:,3));                                  yface1(:,2)= 0.5*(yl_v(:,2)+yl_v(:,3));                                   zface1(:,2) = zl_v(:,1);
@@ -89,7 +91,10 @@ xl_s = zeros(nel,8,8); yl_s = zeros(nel,8,8); zl_s = zeros(nel,8,8);
   xface6(:,3)= 0.5*(xl_v(:,7)+xl_v(:,8));                                  yface6(:,3)= yl_v(:,7);                                                   zface6(:,3) = 0.5*(zl_v(:,7)+zl_v(:,8));  
   xface6(:,4)= 0.5*(xl_v(:,8)+xl_v(:,4));                                  yface6(:,4)= yl_v(:,7);                                                   zface6(:,4) = 0.5*(zl_v(:,8)+zl_v(:,4));  
   xcentrface6(:,1)= 0.25*( xface6(:,1)+ xface6(:,2)+ xface6(:,3)+ xface6(:,4)); ycentrface6(:,1)= yl_v(:,7);                                         zcentrface6(:,1) =  0.25*(zface6(:,1)+ zface6(:,2)+ zface6(:,3)+ zface6(:,4));
-  
+ 
+%  initialisation
+  xmid = zeros(length(xcentrface1),1); ymid = zeros(length(ycentrface1),1); zmid = zeros(length(zcentrface1),1);
+
   xmid(:) = 1./6*(xcentrface1(:,1)+xcentrface2(:,1)+xcentrface3(:,1)+xcentrface4(:,1)+xcentrface5(:,1)+xcentrface6(:,1));
   ymid(:) = 1./6*(ycentrface1(:,1)+ycentrface2(:,1)+ycentrface3(:,1)+ycentrface4(:,1)+ycentrface5(:,1)+ycentrface6(:,1));
   zmid(:) = 1./6*(zcentrface1(:,1)+zcentrface2(:,1)+zcentrface3(:,1)+zcentrface4(:,1)+zcentrface5(:,1)+zcentrface6(:,1));
@@ -198,8 +203,7 @@ fdem = permute(fdem,[1,3,2]);
 ael  = permute(ael,[1,4,2,3]);
 % manual assembly of subelement contributions
 % ------------------------------- first face ------------------------
-
-%cedroid, node number 1
+%centroid, node number 1
 ae(:,1,1)  = ael(:,1,3,3) + ael(:,2,4,4) + ael(:,3,1,1) + ael(:,4,2,2);
 ae(:,1,2)  = ael(:,2,4,7) + ael(:,3,1,6);
 ae(:,1,4)  = ael(:,4,2,5) + ael(:,1,3,8);
@@ -209,7 +213,7 @@ ae(:,1,7)  = ael(:,1,3,7) + ael(:,2,4,8) + ael(:,3,1,5) + ael(:,4,2,6);  %added 
 
 fde(:,1)   = fdem(:,1,3) + fdem(:,2,4) + fdem(:,3,1) + fdem(:,4,2);
 % -------------------------------- Second face ------------------------
-% cedroid, node number 2
+% centroid, node number 2
 ae(:,2,1)  = ael(:,2,7,4) + ael(:,3,6,1);
 ae(:,2,2)  = ael(:,2,7,7) + ael(:,6,3,3) + ael(:,3,6,6) + ael(:,7,2,2);
 ae(:,2,3)  = ael(:,6,3,8) + ael(:,7,2,5);
@@ -219,7 +223,6 @@ ae(:,2,7)  = ael(:,2,7,8) + ael(:,3,6,5) + ael(:,6,3,4) + ael(:,7,2,1);
 
 fde(:,2)   = fdem(:,2,7) + fdem(:,3,6) + fdem(:,7,2) + fdem(:,6,3);
 % -------------------------------- third face ------------------------
-
 % centroid node number 3
 ae(:,3,2) = ael(:,6,8,3) + ael(:,7,5,2);
 ae(:,3,3) = ael(:,5,7,7) + ael(:,6,8,8) + ael(:,7,5,5) + ael(:,8,6,6);
@@ -240,10 +243,8 @@ ae(:,4,7) = ael(:,1,8,7) + ael(:,4,5,6) + ael(:,5,4,3) + ael(:,8,1,2);
 
 fde(:,4)    = fdem(:,1,8) + fdem(:,4,5) + fdem(:,8,1) + fdem(:,5,4);
 
-
 % -------------------------------fifth face --------------------------
 % centroid node, number 5
-
 ae(:,5,1) = ael(:,1,6,3) + ael(:,2,5,4);
 ae(:,5,2) = ael(:,2,5,7) + ael(:,6,1,3);
 ae(:,5,3) = ael(:,5,2,7) + ael(:,6,1,8);
@@ -255,7 +256,6 @@ fde(:,5)   = fdem(:,1,6) + fdem(:,2,5) + fdem(:,6,1) + fdem(:,5,2);
 
 % -------------------------------sixth face --------------------------
 % centroid node, number 6
-
 ae(:,6,1)  = ael(:,4,7,2) + ael(:,3,8,1);
 ae(:,6,2)  = ael(:,3,8,6) + ael(:,7,4,2);
 ae(:,6,3)  = ael(:,8,3,6) + ael(:,7,4,5);

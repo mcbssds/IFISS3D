@@ -182,6 +182,6 @@ bound3D=sort([k1;k2;k3;k4;k5;k6]);
 
 gohome
 cd datafiles
-save -v7.3 cube_grid.mat mv xyz bound3D mbound3D grid_type x y z n nc
+save cube_grid.mat mv xyz bound3D mbound3D grid_type x y z n nc
 
 return

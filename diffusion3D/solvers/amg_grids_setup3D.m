@@ -22,7 +22,7 @@ function [grid_data] = amg_grids_setup3Dx(A, i_method, max_levels)
 % level: sets the current grid level and should not be used when calling
 % this method externally (level 1: initial problem, levels 2 onwards
 % correspond to coarse grids, etc)
-%   IFISS function: DJS; 29 August 2022
+%   IFISS function: DJS; 4 September 2022
 % Copyright (c) 2005 J. Boyle, D.J. Silvester
 
 
@@ -82,7 +82,7 @@ function [grid_data] = amg_grids_setup3Dx(A, i_method, max_levels)
 %
 % i_method 0 - Direct interpolation  
 % ----------
-% Described in Briggs, Henson & McCormickEqn (see eqn 8.12)
+% Described in Briggs, Henson & McCormick, see eqn (8.12)
 %
 % i_method 1 - Stuben's direct interpolation method
 % ----------
@@ -118,10 +118,14 @@ function [grid_data] = amg_grids_setup3Dx(A, i_method, max_levels)
 % 'Point i is strongly coupled/connected to point j' means the value at point i is strongly
 % influenced by point j, i.e. A_ij is large  
 
-%% DJS modification 
-% Output is switched on by resetting iout=1 
-iout=1;
+%% DJS modification(s) - 4/9/22
+% optimsation to enhance vectorisation in case i_method=1
+% warning message is printed in other cases
+% added code to ensure Octave compatibility
 
+% Output is switched off by resetting iout=0
+iout=1;
+% setting iout=2 generates plot of matrix connection patterns
 
 if nargin < 3
     max_levels = inf;
@@ -133,15 +137,23 @@ if nargin < 3
     end
 end
 
+if i_method ~= 1
+   fprintf('\nWarning ... interpolation option is NOT optimised!\n')
+end
 
-% if amg_setup has been called with max_levels==0 simply put A into grid_data and return 
+% if amg_setup has been called with max_levels==0 simply put A into grid_data and return
 if max_levels == 0
     grid_data(1).A = A;
     return
 end
 
+%-------- specify the important parameters
 have_pC = false; % true==generate C points from strong positive connections in method 1
 c_steps = 1; % number of coarsening step to perform per level
+
+%-------- check for Octave implementation
+verl= license;
+is_octave = sum(verl(1:3)=='GNU')==3;
 
 level = 2;   % since first C level is level 2
 n_C = 0;     % number of coarse points   
@@ -156,18 +168,15 @@ while (level <= max_levels+1) && (n_C ~= 1)
             
     for c_s = 1:c_steps
        if iout, fprintf('\n\nLevel %i step %i coarsening started\n', level, c_s), end
-        % SET UP INITIAL PARAMETERS
-        % -------------------------
+        
+        % ------- SET UP INITIAL PARAMETERS
         fails = false;
-        n_th = 2/3;        % defines threshold for strong negative connections
-        p_th = 0.5;         % defines threshold for strong positive connections
+        n_th = 2/3;       % sets threshold for strong negative connections
+        p_th = 0.5;       % sets threshold for strong positive connections
         
         nnz_A = nnz(A);  	% number of non zero entries in A
         s_A = length(A);    % dimension of matrix A
-        
-% sanity check
-%  g_weight = zeros(s_A,1);  % stores grid weights (used to generate coarse matrix)
-        
+                
         str = zeros(1,s_A);         % col i stores points that strongly influence point i (-ve connections)
         str_F = zeros(1,s_A);		% col i stores F points that strongly influence point i (-ve connections)
         str_C = zeros(1,s_A);		% col i stores C points that strongly influence point i (-ve connections)
@@ -201,8 +210,13 @@ while (level <= max_levels+1) && (n_C ~= 1)
         
         is_negstrong = sparse([],[],[],s_A,s_A,nnz_A); % preallocate
         is_posstrong = sparse([],[],[],s_A,s_A,nnz_A); % preallocate
-            % vectorised loop
+        if is_octave
+        % explicit loop compatible with MATLAB 2016a or earlier versions
+        for ii = 1:s_A, is_negstrong(:,ii) =  A(:,ii) < threshold(ii); end
+            else
+            % vectorised loop over compatible array dimensions
             is_negstrong(:,1:s_A) =  A(:,1:s_A) < threshold(1:s_A);
+            end
         is_negstrong = is_negstrong';
         
         % untranspose A
@@ -249,9 +263,14 @@ end
              p_flag = true;
              Amdt = (A - diag(diag(A)))';    % A minus diagonal transposed
              threshold_p = p_th * max(Amdt); % find strong +ve thresholds
-                %for index2 = 1:s_A        % test for strong +ve connections
-                is_posstrong(:,1:s_A) =  Amdt(:,1:s_A) > threshold_p(1:s_A);
-                %end
+             if is_octave
+             % explicit loop compatible with MATLAB 2016a or earlier versions
+             for ii2 = 1:s_A        % test for strong +ve connections
+             is_posstrong(:,ii2) =  Amdt(:,ii2) > threshold_p(ii2); end
+             else
+             % vectorised loop over compatible array dimensions
+             is_posstrong(:,1:s_A) =  Amdt(:,1:s_A) > threshold_p(1:s_A);
+             end
              is_posstrong = is_posstrong';
              end
              if is_posstrong(i,j)        % Case of +ve strong connections

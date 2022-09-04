@@ -24,14 +24,14 @@ function [smoother_params] = amg_smoother_params3D(amg_grid, smoother_type, no_s
 %      smoother_params(n).nsweeps   no. of times smoother is applied (pre and post)
 %      smoother_params(n).pre       pre-sweep direction ('forward' or 'backward')
 %      smoother_params(n).post      post-sweep direction ('forward' or 'backward')
-%      smoother_params(n).damping   damping for PDJ, default value is 0.5
+%      smoother_params(n).damping   damping for PDJ, default value is 0.8
 %
-%  IFISS function: CP; 12th August 2022. 
+%  IFISS function: CP; 12th August 2022; DJS; 3 September 2022
 %  Copyright (c) 2007 by J. Boyle
 
 no_levels = length(amg_grid);
 smoother_params = [];
-damping = 0.5;  % damping for PDJ - NEEDS FIXING IN 3D/USER DEFINED INPUT??
+damping = 0.8;  
 
 for level = 1:no_levels
     smoother_params(level).nsweeps = no_sweeps;

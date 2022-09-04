@@ -28,11 +28,11 @@ if pde==1   % 3D diffusion problem
     elseif precon==1 % diagonal
         D=diag(diag(Agal)); M1=sqrt(D); M2=M1;
     elseif precon==2 % incomplete Cholesky
-        M1 = ichol(Agal); M2=M1';
+        tic,M1 = ichol(Agal); M2=M1'; fprintf('\nsetup done.\n'), toc
     elseif precon==3 % AMG
         % uses global variables amg_grid amg_smoother
         regrid = default('reuse AMG grid sequence? yes/no 1/2 (default no)',2);
-        if regrid~=1, tic, amg_grid = amg_grids_setup3D(Agal);
+        if regrid~=1, tic, amg_grid = amg_grids_setup3D(Agal,1);
         fprintf('\nsetup done.\n'), toc
         amg_grid_complexity(amg_grid); end
         plot_mg = default('plot AMG grid sequence? yes/no 1/2 (default no)',2);

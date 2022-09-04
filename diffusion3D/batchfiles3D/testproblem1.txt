@@ -105,7 +105,7 @@ convergence in  25 iterations
    25         -10.3985 
 Bingo!
 
-  3.4776e-02 seconds
+   1.6774e-02 seconds
 
 
 use new (enter figno) or existing (0) figure, default is 0 : 13
@@ -122,6 +122,9 @@ preconditioner:
    2  incomplete Cholesky
    3  algebraic multigrid
 default is incomplete Cholesky  : 2
+
+setup done.
+Elapsed time is 0.001099 seconds.
 
 MINRES iteration ...
 convergence in  17 iterations
@@ -147,7 +150,7 @@ convergence in  17 iterations
    17         -10.7981 
 Bingo!
 
-  1.6082e-02 seconds
+   1.1178e-02 seconds
 
 
 use new (enter figno) or existing (0) figure, default is 0 : 
@@ -165,30 +168,106 @@ preconditioner:
    2  incomplete Cholesky
    3  algebraic multigrid
 default is incomplete Cholesky  : 3
-AMG grid coarsening ...  10 grid levels constructed.
 
-Setup done.
+
+reuse AMG grid sequence? yes/no 1/2 (default no) : 
+AMG grid coarsening ... 
+
+Level 2 step 1 coarsening started
+C points after 1st pass: 735
+C points after 2nd pass: 735
+C points after coarsening: 735
+
+Weak positive connections exist
+Strong positive connections exist
+Coarsening completed (735 Coarse, 2640 Fine and 1538 Unconnected points)
+
+
+Level 3 step 1 coarsening started
+C points after 1st pass: 343
+C points after 2nd pass: 343
+C points after coarsening: 343
+
+Weak positive connections exist
+Strong positive connections exist
+Coarsening completed (343 Coarse, 392 Fine and 0 Unconnected points)
+
+
+Level 4 step 1 coarsening started
+C points after 1st pass: 63
+C points after 2nd pass: 63
+C points after coarsening: 63
+
+Weak positive connections exist
+Strong positive connections exist
+Coarsening completed (63 Coarse, 280 Fine and 0 Unconnected points)
+
+
+Level 5 step 1 coarsening started
+C points after 1st pass: 15
+C points after 2nd pass: 23
+C points after coarsening: 23
+
+Weak positive connections exist
+Strong positive connections exist
+Coarsening completed (23 Coarse, 40 Fine and 0 Unconnected points)
+
+
+Level 6 step 1 coarsening started
+C points after 1st pass: 3
+C points after 2nd pass: 9
+C points after coarsening: 9
+
+Weak positive connections exist
+Strong positive connections exist
+Coarsening completed (9 Coarse, 14 Fine and 0 Unconnected points)
+
+
+Level 7 step 1 coarsening started
+C points after 1st pass: 2
+C points after 2nd pass: 2
+C points after coarsening: 2
+
+Weak positive connections exist
+Strong positive connections exist
+Coarsening completed (2 Coarse, 7 Fine and 0 Unconnected points)
+
+
+Level 8 step 1 coarsening started
+
+Warning: no negative connections exist for coarsening step 1 on level 8
+Coarsening has stopped: last viable coarse level is level 7
+
+setup done.
+Elapsed time is 0.147233 seconds.
+
+ total number of levels (L) is 7
+starting stencil size (c_1) is 16.49
+      grid complexity (c_G) is 1.24
+  operator complexity (c_A) is 1.58
+ average stencil size (c_S) is 22.88 
+
 plot AMG grid sequence? yes/no 1/2 (default no) : 
-PDJ/PGS smoother? 1/2 (point damped Jacobi) : 2
+PDJ/PGS smoother? 1/2 (point Gauss Seidel) : 
 point Gauss-Seidel smoothing ..
-convergence in   5 iterations
+convergence in   6 iterations
 
     k  log10(||r_k||/||r_0||)   
     0           0.0000 
-    1          -1.6490 
-    2          -3.7655 
-    3          -5.9500 
-    4          -8.2217 
-    5         -10.3994 
+    1          -1.4004 
+    2          -3.2860 
+    3          -5.1467 
+    4          -7.3221 
+    5          -9.2195 
+    6         -11.4098 
 Bingo!
 
-  6.7196e-02 seconds
+  3.0362e-02 seconds
 
 
 use new (enter figno) or existing (0) figure, default is 0 : 
 figure number (default is current active figure) : 
 colour (b,g,r,c,m,y,k): enter 1--7 (default 1) : 7
- 
-legend('diagonal', 'incomplete','AMG','Location', 'Best')
+legend('diagonal', 'incomplete','AMG','Location', 'Best'), shg
 
 %------ end of test

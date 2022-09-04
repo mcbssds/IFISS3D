@@ -20,6 +20,7 @@ function [smoother_data] = amg_smoother_setup3D(grid_data, smoother_params)
 % IFISS function: CP 12th August 2022
 % Copyright (c) 2007 by J. Boyle
 
+
 size = length(grid_data);
 
 for level = 1:size
@@ -43,3 +44,4 @@ for level = 1:size
         smoother_data(level).D = (1/omega)*spdiags(diag(grid_data(level).A), 0, n, n);    
      end
 end
+

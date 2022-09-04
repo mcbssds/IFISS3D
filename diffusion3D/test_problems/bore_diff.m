@@ -1,5 +1,5 @@
 % BORE_DIFF solves Poisson problem on a borehole domain
-% IFISS scriptfile: DJS; 14 August 2022.
+% IFISS scriptfile: DJS; 4 September 2022.
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 
 % define geometry
@@ -17,21 +17,15 @@ if grid_type==1  % uniform grid
     savesol=default('Save results for reference 1/0 (yes/no)? (default no)',0);
 else, savesol=0; end
 if qmethod ==2,
-    [x,y,z,xyz] = q2grid3D(x,y,z,xyz,mv,bound3D);
+    [x,y,z,xyz] = q2grid3D(x,y,z,xyz);
     [A,M,f] = femq2_diff3D(xyz,mv);
 else
-    ev = q1grid3D(xyz,mv,bound3D);
+    ev = q1grid3D(xyz,mv);
     [A,M,f] = femq1_diff3D(xyz,ev);
 end
 
 % boundary conditions
 [Agal,fgal] = nonzerobc3D(A,f,xyz,bound3D);
-
-% save resulting system
-fprintf('System saved in borehole_diff.mat ...\n')
-gohome
-cd datafiles
-save borehole_diff.mat qmethod Agal M fgal xyz x y z
 
 lin_system_choice = default('Choose between iterative or direct solver 0/1 (default 0)',0);
 tic
@@ -53,6 +47,8 @@ elseif qmethod==2,
 end
 
 if savesol == 1
-    save borehole_diff.mat x_it error_tot fcx hx hy hz -append
+fprintf('System saved in borehole_diff.mat ...\n')
+gohome
+cd datafiles
+save borehole_diff.mat qmethod Agal M fgal xyz x y z x_it
 end
-

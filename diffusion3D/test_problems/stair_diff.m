@@ -1,5 +1,5 @@
 % STAIR_DIFF solves Poisson problem on stair-shaped domain
-% IFISS scriptfile: DJS; 29 July 2022.
+% IFISS scriptfile: DJS; 4 September 2022.
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 
 % define geometry
@@ -12,21 +12,15 @@ qmethod=default('Q1/Q2 approximation 1/2? (default Q1)',1);
 % reference grid switch
 savesol=default('Save results for reference 1/0 (yes/no)? (default no)',0);
 if qmethod ==2,
-    [x,y,z,xyz] = q2grid3D(x,y,z,xyz,mv,bound3D);
+    [x,y,z,xyz] = q2grid3D(x,y,z,xyz);
     [A,M,f] = femq2_diff3D(xyz,mv);
 else
-    ev = q1grid3D(xyz,mv,bound3D);
+    ev = q1grid3D(xyz,mv);
     [A,M,f] = femq1_diff3D(xyz,ev);
 end
 
 % apply boundary conditions
 [Agal,fgal] = nonzerobc3D(A,f,xyz,bound3D);
-
-% save resulting system
-fprintf('System saved in stair_diff.mat ...\n')
-gohome
-cd datafiles
-save stair_diff.mat qmethod Agal M fgal xyz x y z
 
 lin_system_choice =default('Choose between direct or iterative solver 1/0 (direct/iterative) (default 1)',1);
 tic
@@ -49,5 +43,9 @@ elseif qmethod==2,
 end
 
 if savesol == 1
-    save stair_diff.mat x_it error_tot fcx hx hy hz -append
+% save resulting system
+fprintf('System saved in stair_diff.mat ...\n')
+gohome
+cd datafiles
+save stair_diff.mat qmethod Agal M fgal xyz x y z x_it
 end

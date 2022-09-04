@@ -1,6 +1,5 @@
 function [bae,fe] = localbcfull_p3D(ae,fe,faces,xl,yl,zl)
-%LOCALBCFULL_P3D imposes Dirichlet BC for Poisson error estimator for full set
-%of bubble functions   
+%LOCALBCFULL_P3D imposes Dirichlet BC for full set of bubble functions
 %  [bae,fe] = localbcfull_p3D(ae,fe,edges,xl,yl,zl);
 %  inputs:
 %          ae           Poisson problem matrix

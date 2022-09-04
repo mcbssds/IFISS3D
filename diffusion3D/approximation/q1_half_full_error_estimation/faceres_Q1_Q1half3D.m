@@ -12,7 +12,7 @@ function [faceres] = faceres_Q1_Q1half3D(xyz,ev,ebound3D,q1sol3D,fcx,hx,hy,hz)
 %          faceres      edge residuals
 %
 %   Calls functions q1fluxjmps3D_modified, gausspoints_oned, stoch_gauss_coeff, deriv3D qderiv
-%   SIFISS function: GP; 09 June 2022
+%   IFISS function: GP; 09 June 2022
 % Copyright (c) 2022 G. Papanikos, C.E. Powell, D.J. Silvester
 
 x=xyz(:,1); y=xyz(:,2); z=xyz(:,3); nvtx=length(x);

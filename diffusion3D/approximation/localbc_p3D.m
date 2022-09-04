@@ -1,5 +1,5 @@
 function [bae,fe] = localbc_p3D(ae,fe,faces,xl,yl,zl)
-%LOCALBC_P3D imposes Dirichlet BC for local Poisson error estimator 
+%LOCALBC_P3D imposes Dirichlet BC for reduced set of bubble functions
 %   [bae,fe] = localbc_p3D(ae,fe,edges,xl,yl,zl);
 %   inputs:
 %          ae           Poisson problem matrix

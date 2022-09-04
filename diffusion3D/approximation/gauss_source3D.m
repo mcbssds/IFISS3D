@@ -1,4 +1,4 @@
-function ff = gauss_source3D(s,t,l,xl,yl,zl,ngpt)
+function ff = gauss_source3D(s,t,l,xl,yl,zl)
 %GAUSS_SOURCE3D evaluates source term at Gauss point
 %   ff = gauss_source3D(s,t,xl,yl,zl);
 %   inputs:
@@ -10,14 +10,11 @@ function ff = gauss_source3D(s,t,l,xl,yl,zl,ngpt)
 %          zl        physical element z vertex coordinates
 %  output:
 %          ff        vector of f values for all elements
-% IFISS function: GP; 9 June 2022.
+% IFISS function: GP; 9 June 2022: DJS; 4 September 2022
 % Copyright(c) 2022  G.Papanikos,  C.E. Powell, D.J. Silvester
-
-if nargin<7
-   ngpt = 1;
-end    
+   
 [nel,nv] = size(xl);
-zero_v = zeros(nel,ngpt); xx=zero_v; yy=xx; zz=xx;
+zero_v = zeros(nel,1); xx=zero_v; yy=xx; zz=xx;
 [phi_e,~,~,~] = shape3D(s,t,l);
  
 for ivtx=1:8
@@ -26,5 +23,5 @@ for ivtx=1:8
     zz = zz + phi_e(ivtx) * zl(:,ivtx);
 end
 
-ff=specific_rhs3D(xx,yy,zz,nel,ngpt);
+ff=specific_rhs3D(xx,yy,zz,nel);
 return

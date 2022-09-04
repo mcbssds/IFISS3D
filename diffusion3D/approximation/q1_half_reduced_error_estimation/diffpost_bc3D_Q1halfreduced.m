@@ -1,5 +1,5 @@
 function [elerr_p] = diffpost_bc3D_Q1halfreduced(elerror,fez,xyz,ev,ebound3D,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s)
-%DIFFPOST_Q1HALFREDUCED postprocesses local Poisson error estimator 
+%DIFFPOST_BC3D_Q1HALFREDUCED postprocesses local Poisson error estimator
 %   [elerr_p] = diffpost_bc3D_Q1halfreduced(elerror,fez,xyz,ev,ebound3D,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s) 
 %   inputs:
 %          elerror  	 element error estimate (without BC imposed)         
@@ -12,8 +12,7 @@ function [elerr_p] = diffpost_bc3D_Q1halfreduced(elerror,fez,xyz,ev,ebound3D,xl_
 %          elerr_p      element error estimate with BC correction
 %
 %  Calls functions gausspoints_oned, gausspoints_threed
-%  Rebuilt in IFISS3.1 to retain compatibility with earlier versions
-%  IFISS function: GP 2021;
+%  IFISS function: GP 2021; DJS 4 September 2022
 %  Copyright (c)   G.Papanikos, C.E. Powell, D.J. Silvester
 
      ngpt=2;

@@ -2,10 +2,6 @@
 % IFISS scriptfile: DJS 29 July 2022
 % Copyright (c) 2022 G. Papanikos C.E. Powell, D.J. Silvester
 
-if exist('pde','var')==0,
-   error('You need to set up a specific discrete problem first!'), 
-end
-
 %----- preset parameters
 tol = 1e-10;
 maxit = 199;

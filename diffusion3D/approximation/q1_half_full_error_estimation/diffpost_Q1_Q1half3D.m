@@ -13,7 +13,7 @@ function [err_sq_el,xx,fe,ae,xl_m,yl_m,zl_m,xl_s,yl_s,zl_s] = ...
 %          hx,hy,hz     element mesh sizes
 %   outputs:
 %          err_sq_el   element error estimate
-%	       xx		   elementwise error coefficients
+%	   xx	       elementwise error coefficients
 %          fe          elementwise rhs vectors
 %          ae          LDLT factorized element matrices
 %          xl_m,yl_m,zl_m,xl_s,yl_s,zl_s element coordinates

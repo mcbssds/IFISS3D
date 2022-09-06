@@ -41,7 +41,7 @@ set(hSlice,'EdgeColor','none','FaceColor','interp');
 camlight;
 camlight(-90,0);
 lighting gouraud
-colorbar
+colormap jet; colorbar;
 view(330,30)
 
 return

@@ -31,7 +31,7 @@ sol3D = permute(sol3D,[3 2 1]);
 % create axes and set up initial properties
 figure(fig)
 subplot(221),contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),sol3D(:,:,round(size(Z,3)/2)),20),axis('square')
-axis('off'), squarex, title('Cross Section of Finite Element Solution','FontSize',12)
+axis('off'), squarex, title('Cross Section of Finite Element Solution (z=0)','FontSize',12)
 axis('square')
 subplot(222),
 daspect([1 1 1]);
@@ -44,6 +44,7 @@ hold on
 
 hSlice = slice(x,y,z,sol3D,1/2,1/2,0);
 set(hSlice,'EdgeColor','none','FaceColor','interp');
+title('Finite Element Solution','FontSize',12)
 
 % adjust lighting
 camlight;
@@ -79,7 +80,7 @@ xyzsol = permute(xyzsol,[3 2 1]);
 
 subplot(223),
 contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),xyzsol(:,:,round(size(Z,3)/2)),20),axis('square')
-title('Cross Section of Estimated Error','FontSize',12)
+title('Cross Section of Estimated Error (z=0)','FontSize',12)
 subplot(224)
 daspect([1 1 1]);
 axis([-1 1 -1 1 -1 1])
@@ -93,6 +94,7 @@ set(hSlice,'EdgeColor','none','FaceColor','interp');
 
 hSlice = slice(x,y,z,xyzsol,1/2,1/2,0);
 set(hSlice,'EdgeColor','none','FaceColor','interp');
+title('Estimated Error','FontSize',12)
 
 % adjust lighting
 camlight;

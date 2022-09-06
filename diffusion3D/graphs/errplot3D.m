@@ -25,8 +25,7 @@ zmin = min(z(:)); zmax =  max(z(:)); zmean =  mean(z(:));
 % create axes and set up initial properties
 figure(fig)
 subplot(221),contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),sol3D(:,:,round(size(Z,3)/2)),20),axis('square')
-axis('off'), squarex, title('Cross Section of Finite Element Solution','FontSize',12)
-axis('square')
+axis('off'), squarex, title('Cross Section of Finite Element Solution (z=0)','FontSize',12);
 subplot(222),
 daspect([1 1 1]);
 axis([xmin xmax ymin ymax zmin zmax])
@@ -39,6 +38,7 @@ set(hSlice,'EdgeColor','none','FaceColor','interp');
 
 hSlice = slice(x,y,z,sol3D, (xmax - xmean)/2,(ymax - ymean)/2,zmean);
 set(hSlice,'EdgeColor','none','FaceColor','interp');
+title('Finite Element Solution','FontSize',12);
 
 % adjust lighting
 camlight;
@@ -65,7 +65,7 @@ z=0.5*(z(1:end-1)+z(2:end));
 xyzsol = griddata(xc(:,1),xc(:,2),zc(:,3),eldata3D,X,Y,Z);
 
 subplot(223),contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),xyzsol(:,:,round(size(Z,3)/2)),15),axis('square')
-title('Cross Section of Estimated Error','FontSize',12)
+title('Cross Section of Estimated Error (z=0)','FontSize',12);
 subplot(224)
 daspect([1 1 1]);
 axis([xmin xmax ymin ymax zmin zmax])
@@ -78,6 +78,7 @@ set(hSlice,'EdgeColor','none','FaceColor','interp');
 
 hSlice = slice(x,y,z,xyzsol,(xmax - xmean)/2,(ymax - ymean)/2,zmean);
 set(hSlice,'EdgeColor','none','FaceColor','interp');
+title('Estimated Error','FontSize',12);
 
 % adjust lighting
 camlight;

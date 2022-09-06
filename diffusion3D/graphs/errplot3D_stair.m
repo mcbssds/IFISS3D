@@ -31,7 +31,7 @@ sol3D = permute(sol3D,[3 2 1]);
 % create axes and set up initial properties
 figure(fig)
 subplot(221),contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),sol3D(:,:,round(size(Z,3)/2)),20),axis('square')
-axis('off'), squarex, title('Finite Element Solution','FontSize',12)
+axis('off'), squarex, title('Cross Section of Finite Element Solution','FontSize',12)
 axis('square')
 subplot(222),
 daspect([1 1 1]);

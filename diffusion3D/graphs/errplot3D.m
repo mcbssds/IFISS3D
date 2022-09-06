@@ -25,7 +25,7 @@ zmin = min(z(:)); zmax =  max(z(:)); zmean =  mean(z(:));
 % create axes and set up initial properties
 figure(fig)
 subplot(221),contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),sol3D(:,:,round(size(Z,3)/2)),20),axis('square')
-axis('off'), squarex, title('Finite Element Solution','FontSize',12)
+axis('off'), squarex, title('Cross Section of Finite Element Solution','FontSize',12)
 axis('square')
 subplot(222),
 daspect([1 1 1]);
@@ -65,7 +65,7 @@ z=0.5*(z(1:end-1)+z(2:end));
 xyzsol = griddata(xc(:,1),xc(:,2),zc(:,3),eldata3D,X,Y,Z);
 
 subplot(223),contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),xyzsol(:,:,round(size(Z,3)/2)),15),axis('square')
-title('Estimated Error','FontSize',12)
+title('Cross Section of Estimated Error','FontSize',12)
 subplot(224)
 daspect([1 1 1]);
 axis([xmin xmax ymin ymax zmin zmax])

@@ -22,7 +22,7 @@ sol3D = reshape(sol3D,[size(x,1),size(y,1),size(z,1)]);
 % create axes and set up initial properties
 figure(fig)
 subplot(121),contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),sol3D(:,:,round(size(Z,3)/2)),20),axis('square')
-axis('off'), squarex, title('Finite Element Solution','FontSize',12)
+axis('off'), squarex, title('Cross Section of Finite Element Solution (z=0)','FontSize',12)
 
 subplot(122),
 daspect([1 1 1]);
@@ -37,6 +37,7 @@ set(hSlice,'EdgeColor','none','FaceColor','interp');
 
 hSlice = slice(x,y,z,sol3D,(xmax - xmean)/2,(ymax - ymean)/2,zmean);
 set(hSlice,'EdgeColor','none','FaceColor','interp');
+title('Finite Element Solution','FontSize',12)
 % adjust lighting
 camlight;
 camlight(-90,0);

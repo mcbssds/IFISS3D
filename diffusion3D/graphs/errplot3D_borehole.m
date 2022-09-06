@@ -33,7 +33,7 @@ end
 %% create axes and setup initial properties
 figure(fig)
 subplot(221),contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),sol3D(:,:,round(size(Z,3)/2)),20),axis('square')
-axis('off'), squarex, title('Finite Element Solution','FontSize',12)
+axis('off'), squarex, title('Cross Section of Finite Element Solution','FontSize',12)
 axis('square')
 subplot(222),
 daspect([1 1 1]);
@@ -80,6 +80,7 @@ end
 
 subplot(223),
 contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),xyzsol(:,:,round(size(Z,3)/2)),20),axis('square')
+title('Cross Section of Estimated Error','FontSize',12)
 subplot(224)
 daspect([1 1 1]);
 axis([xmin xmax ymin ymax zmin zmax])

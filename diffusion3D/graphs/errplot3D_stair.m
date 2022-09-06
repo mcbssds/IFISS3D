@@ -79,6 +79,7 @@ xyzsol = permute(xyzsol,[3 2 1]);
 
 subplot(223),
 contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),xyzsol(:,:,round(size(Z,3)/2)),20),axis('square')
+title('Cross Section of Estimated Error','FontSize',12)
 subplot(224)
 daspect([1 1 1]);
 axis([-1 1 -1 1 -1 1])

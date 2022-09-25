@@ -3,7 +3,7 @@ function stair_domain
 %   stair_domain;
 % 
 % grid defining data is saved to the file: stair_grid.mat
-% IFISS function: DJS; 29 July 2022.
+% IFISS scriptfile: DJS; 29 July 2022.
 % Copyright (c) 2022 G. Papanikos,  C.E. Powell, D.J. Silvester
 
 Dmax = 1;

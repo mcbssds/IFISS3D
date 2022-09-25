@@ -11,14 +11,14 @@ function errplot3D(sol3D,eldata3D,ev,xyz,x,y,z,fig)
 %          z            vector of z-axis interpolation points
 %          fig          figure number
 %
-% IFISS function: GP; 9 June 2022.
+% IFISS function: GP; 9 June 2022: DJS, 25 September 2022
 % Copyright (c)  2022  G.Papanikos,  C.E. Powell, D.J. Silvester
 
 fprintf('Plotting solution and estimated errors... ')
 
 [X,Y,Z]=meshgrid(x,y,z);
-
-sol3D = reshape(sol3D,[size(x,1),size(y,1),size(z,1)]);
+sol3D = griddata(xyz(:,1),xyz(:,2),xyz(:,3),sol3D,X,Y,Z);
+%sol3D = reshape(sol3D,[size(x,1),size(y,1),size(z,1)]); %<---- old code
 xmin = min(x(:)); xmax =  max(x(:)); xmean = mean(x(:)); 
 ymin = min(y(:)); ymax =  max(y(:)); ymean =  mean(y(:));
 zmin = min(z(:)); zmax =  max(z(:)); zmean =  mean(z(:));

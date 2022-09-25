@@ -1,5 +1,5 @@
 function plot3Dsol(sol3D,x,y,z,fig)
-%PLOT3DSOL plots solution on cube domain
+%PLOT3DSOL plots solution on cube domain (without gridd interpolation)
 %   plot3Dsol(sol3D,x,y,z,fig);
 %   inputs:
 %          sol3D        nodal solution vector 
@@ -8,7 +8,7 @@ function plot3Dsol(sol3D,x,y,z,fig)
 %          z            vector of z-axis interpolation points
 %          fig          figure number
 %
-% IFISS function: GP; 9 June 2022.
+% IFISS function: GP; 9 June 2022: DJS, 25 September 2022
 % Copyright (c)  2022  G.Papanikos,  C.E. Powell, D.J. Silvester
 fprintf('Plotting solution...\n')
 
@@ -22,7 +22,7 @@ sol3D = reshape(sol3D,[size(x,1),size(y,1),size(z,1)]);
 % create axes and set up initial properties
 figure(fig)
 subplot(121),contour(X(:,:,round(size(X,3)/2)),Y(:,:,round(size(Y,3)/2)),sol3D(:,:,round(size(Z,3)/2)),20),axis('square')
-axis('off'), squarex, title('Cross Section of Finite Element Solution (z=0)','FontSize',12)
+axis('off'), squarex, title('Cross Section of Finite Element Solution','FontSize',12)
 
 subplot(122),
 daspect([1 1 1]);

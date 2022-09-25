@@ -9,7 +9,7 @@ function [hx,hy,hz,efx,ebound3D] = facegen(xyz,ev,domain)
 %          hx,hy,hz   elementwise face areas
 %          efx        element face index vector
 %          ebound3D   boundary nodes
-% IFISS function: GP 4th August 2022;
+% IFISS function: GP 4 August 2022; DJS 25 September 2022
 % Copyright (c)   G.Papanikos, C.E. Powell, D.J. Silvester
 
 nvtx=length(xyz(:,1));
@@ -84,10 +84,7 @@ hz=zl_v(:,5)-zl_v(:,1);
 
 fprintf('checking face numbering and computing face areas ... ')
 % centroid coordinates
-for ielem=1:nel
-    xc(ielem)=mean(x(ev(ielem,1:8))); yc(ielem)=mean(y(ev(ielem,1:8)));
-    zc(ielem)=mean(z(ev(ielem,1:8)));
-end
+xc=mean(x(ev(1:nel,1:8))); yc=mean(y(ev(1:nel,1:8)));  zc=mean(z(ev(1:nel,1:8)));
 xyzp=[xc',yc',zc'];
 %
 % remove zero indices corresponding to boundary faces

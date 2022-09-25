@@ -21,14 +21,13 @@ Grid parameter? enter 2 for 48x48x32 grid (default 1)
 
 computed expand ratio is     1.0997 
 Setting up Q1 diffusion matrices...  done
-System saved in borehole_diff.mat ...
 Choose between iterative or direct solver 0/1 (default 0)
      0
 
 
 Solving linear system using iterative solver...  
 MINRES iteration ...convergence in  66 iterations
-Galerkin system solved in 5.254e-01 seconds
+Galerkin system solved in 5.129e-01 seconds
 
 Choose a specific error estimation space
      1.  Q2(h)
@@ -36,17 +35,16 @@ Choose a specific error estimation space
      3.  Q1(h/2)
      4.  reduced Q1(h/2)
 default is reduced Q2 approximation
-     3
+     2
 
 include boundary correction yes/no 1/0 (default 0)
      0
 
 FAST a posteriori error estimation for Q1 element 
 checking face numbering and computing face areas ... done 
-computing Q1 error estimator...  
-Q1(h/2) estimate |  res_face = 7.0992e-03
-error estimation took 7.508e-01 seconds
-Simplistic estimate energy error is 1.6824e-01 
+computing Q2(r) error estimate ...  
+error estimation took 2.414e-01 seconds
+Simplistic estimate energy error is 5.8774e-02 
 plotting solution and estimated errors... done
 
 %-------------------- probe the solution 

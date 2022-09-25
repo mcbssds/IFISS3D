@@ -12,13 +12,13 @@ function plot3Dsol_borehole(sol3D,xyz,x,y,z,bd,fig)
 %          bd           borehole semi-width
 %          fig          figure number
 %
-% IFISS function: GP; 9 June 2022.
+% IFISS function: GP; 9 June 2022: DJS, 25 September 2022
 % Copyright (c) 2022 G.Papanikos, C.E. Powell, D.J. Silvester
 
 fprintf('plotting solution... ')
 
 [X,Y,Z]=meshgrid(x,y,z);
-sol3D = griddata(xyz(:,1),xyz(:,2),xyz(:,3),sol3D,Y,Z,X);
+sol3D = griddata(xyz(:,1),xyz(:,2),xyz(:,3),sol3D,X,Z,Y);
 
 xmin = min(x(:)); xmax =  max(x(:)); xmean = mean(x(:)); 
 ymin = min(y(:)); ymax =  max(y(:)); ymean =  mean(y(:));

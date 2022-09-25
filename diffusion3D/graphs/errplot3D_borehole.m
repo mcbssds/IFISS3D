@@ -12,13 +12,13 @@ function errplot3D_borehole(sol3D,eldata3D,ev,xyz,x,y,z,bd,fig)
 %          bd           borehole semi-width
 %          fig          figure number
 %
-% IFISS function: GP; 9 June 2022.
+% IFISS function: GP; 9 June 2022: DJS, 25 September 2022
 % Copyright (c)  2022  G.Papanikos,  C.E. Powell, D.J. Silvester
 
 fprintf('plotting solution and estimated errors... ')
 
 [X,Y,Z]=meshgrid(x,y,z);
-sol3D = griddata(xyz(:,1),xyz(:,2),xyz(:,3),sol3D,Y,Z,X);
+sol3D = griddata(xyz(:,1),xyz(:,2),xyz(:,3),sol3D,X,Z,Y);
 
 xmin = min(x(:)); xmax =  max(x(:)); xmean = mean(x(:)); 
 ymin = min(y(:)); ymax =  max(y(:)); ymean =  mean(y(:));
@@ -39,8 +39,8 @@ subplot(222),
 daspect([1 1 1]);
 axis([xmin xmax ymin ymax zmin zmax])
 xlabel('x') % x-axis label
-ylabel('z') % z-axis label
-zlabel('y') % y-axis label
+ylabel('z') % y-axis label
+zlabel('y') % z-axis label
 hold on
 hSlice = slice(x,y,z,sol3D,xmean,ymean,zmean);
 set(hSlice,'EdgeColor','none','FaceColor','interp');
@@ -72,7 +72,7 @@ x=0.5*(x(1:end-1)+x(2:end));
 y=0.5*(y(1:end-1)+y(2:end));
 z=0.5*(z(1:end-1)+z(2:end));
 [X,Y,Z]=meshgrid(x,y,z);
-xyzsol = griddata(xc(:,1),xc(:,2),zc(:,3),eldata3D,Y,Z,X);
+xyzsol = griddata(xc(:,1),xc(:,2),zc(:,3),eldata3D,X,Z,Y);
 
 for i=1:size(xyzsol,3)
     [II,JJ] = find(X(:,:,i)>=-bd & X(:,:,i)<=bd & Y(:,:,i)>=-bd & Y(:,:,i)<=bd & Z(:,:,i)>0 & Z(:,:,i)<=1);

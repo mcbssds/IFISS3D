@@ -1,0 +1,17 @@
+/Users/user/desktop/ifiss3.6/diffusion3D
+ls -ltr
+total 48
+-rw-r--r--@  1 mcbssds  staff  1036 10 Aug 18:53 gausspoints_threed.m
+-rw-r--r--@  1 mcbssds  staff   843 10 Aug 18:53 helpme_diff3D.m
+-rw-------@  1 mcbssds  staff  1419 18 Aug 13:48 batchmode3D.m
+-rw-------@  1 mcbssds  staff   566 19 Aug 10:26 install_pc3D.m
+drwxr-xr-x  20 mcbssds  staff   640  4 Sep 14:40 approximation
+drwxr-xr-x  12 mcbssds  staff   384  4 Sep 14:52 solvers
+drwxr-xr-x   8 mcbssds  staff   256 25 Sep 12:40 grids
+drwxr-xr-x  16 mcbssds  staff   512 25 Sep 17:00 test_problems
+drwxr-xr-x  11 mcbssds  staff   352 25 Sep 19:51 graphs
+-rw-r--r--@  1 mcbssds  staff   436 25 Sep 19:57 specific_rhs3D.m
+-rw-r--r--@  1 mcbssds  staff   433 25 Sep 19:57 specific_bc3D.m
+drwx------@  9 mcbssds  staff   288 25 Sep 20:13 batchfiles3D
+
+

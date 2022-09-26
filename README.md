@@ -1,14 +1,15 @@
 # IFISS3D
-Extension of IFISS software package to <b> three dimensional approximation</b>.
-
-
-The m-files in this directory are associated with the preprint: <br>
+The <b> IFISS3D toolbox</b> extends the IFISS finite element software package for MATLAB to <b> three dimensional</b> spatial domains and is
+associated with the following preprint: <br>
 <ul> 
 <li> Georgios Papanikos, Catherine E. Powell, David J. Silvester, <b> IFISS3D: A computational laboratory for investigating finite element approximation in three dimensions. </b>
   </ul> 
 
-To install IFISS3D the gzipped file must be unzipped into the top-level directory of the
-IFISS package. The installation of the IFISS package is documented at
+
+To install IFISS3D the gzipped file must be unzipped and the folder <b> diffusion3D </b> placed into the top-level directory of the
+IFISS package. 
+
+The installation of the IFISS package is documented at
 https://manchester.ac.uk/ifiss/download.html
 
 If installing IFISS3D on a windows machine then you will also need to type <br>
@@ -17,11 +18,11 @@ at the prompt, before running the software for the first time. After installatio
 $>>$ helpme_diff3D <br>
 to get started.
 
-The <b> test problem </b> diary files are the following: <br>
+Result for test problems can be reproduced by following the instructions in the following diary files: <br>
 <ul>
 <li> testproblem1.txt <br>
 <li> testproblem2.txt <br>
-<li> testproblem2.txt <br>
+<li> testproblem3.txt <br>
 </ul>
 
 To cite the code (current version), please use:

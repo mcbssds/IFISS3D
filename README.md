@@ -18,12 +18,7 @@ at the prompt, before running the software for the first time. After installatio
 $>>$ helpme_diff3D <br>
 to get started.
 
-Result for test problems can be reproduced by following the instructions in the following diary files: <br>
-<ul>
-<li> testproblem1.txt <br>
-<li> testproblem2.txt <br>
-<li> testproblem3.txt <br>
-</ul>
+Result for test problems can be reproduced by following the instructions in the diary files testproblem1.txt, testproblem2.txt and testproblem3.txt.
 
 To cite the code (current version), please use:
 

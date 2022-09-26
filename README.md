@@ -23,3 +23,9 @@ The <b> test problem </b> diary files are the following: <br>
 <li> testproblem2.txt <br>
 <li> testproblem2.txt <br>
 </ul>
+
+To cite the code (current version), please use:
+
+<ul>
+<li> Georgios Papanikos, Catherine E. Powell and David J. Silvester, Incompressible Flow and Iterative Solver 3D Software (IFISS3D), version1.0. https://github.com/mcbssds/IFISS3D.
+</ul>

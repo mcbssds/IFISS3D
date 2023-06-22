@@ -3,6 +3,7 @@ The <b> IFISS3D toolbox</b> extends the IFISS finite element software package fo
 associated with the following preprint: <br>
 <ul> 
 <li> Georgios Papanikos, Catherine E. Powell, David J. Silvester, <b> IFISS3D: A computational laboratory for investigating finite element approximation in three dimensions. </b>
+https://doi.org/10.1145/3604934
   </ul> 
 
 
@@ -13,9 +14,9 @@ The installation of the IFISS package is documented at
 https://manchester.ac.uk/ifiss/download.html
 
 If installing IFISS3D on a windows machine then you will also need to type <br>
-$>>$ install_pc3D <br>
+$>$ install_pc3D <br>
 at the prompt, before running the software for the first time. After installation, type <br> 
-$>>$ helpme_diff3D <br>
+$>$ helpme_diff3D <br>
 to get started.
 
 Result for test problems can be reproduced by following the instructions in the diary files testproblem1.txt, testproblem2.txt and testproblem3.txt.
